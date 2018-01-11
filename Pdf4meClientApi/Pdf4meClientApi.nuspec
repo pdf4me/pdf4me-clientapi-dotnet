@@ -7,11 +7,12 @@
     <authors>$author$</authors>
     <owners>$author$</owners>
     <iconUrl>https://dev-dev.pdf4me.com/Content/images/favicons/favicon.ico</iconUrl>
+    <projectUrl>https://dev-dev.pdf4me.com</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Package updated.</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>Pdf4me Client Api</tags>
+    <tags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document</tags>
   </metadata>
   <files>
     <file src="bin\Debug\Pdf4me.Client.pdb" target="lib\net452" />
