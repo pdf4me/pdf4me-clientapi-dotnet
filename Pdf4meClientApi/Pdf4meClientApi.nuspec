@@ -17,7 +17,7 @@
   <files>
     <file src="bin\Debug\Pdf4me.Client.pdb" target="lib\net452" />
     
-    
+     
     <file src="bin\Debug\Pdf4me.Client.dll" target="lib\net461" />
     <file src="bin\Debug\Pdf4me.Client.pdb" target="lib\net461" />
     <file src="bin\Debug\Pdf4me.Client.xml" target="lib\net461" />
