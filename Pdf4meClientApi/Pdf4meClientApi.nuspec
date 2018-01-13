@@ -12,10 +12,16 @@
     <description>$description$</description>
     <releaseNotes>Package updated.</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document</tags>
+    <tags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document cleanse c# csharp .net </tags>
   </metadata>
   <files>
+    <file src="bin\Debug\Pdf4me.Client.dll" target="lib\net45" />
+    <file src="bin\Debug\Pdf4me.Client.pdb" target="lib\net45" />
+    <file src="bin\Debug\Pdf4me.Client.xml" target="lib\net45" />
+
+    <file src="bin\Debug\Pdf4me.Client.dll" target="lib\net452" />
     <file src="bin\Debug\Pdf4me.Client.pdb" target="lib\net452" />
+    <file src="bin\Debug\Pdf4me.Client.xml" target="lib\net452" />
     
      
     <file src="bin\Debug\Pdf4me.Client.dll" target="lib\net461" />
