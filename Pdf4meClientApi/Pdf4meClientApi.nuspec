@@ -10,7 +10,7 @@
     <projectUrl>https://dev-dev.pdf4me.com</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>Package updated.</releaseNotes>
+    <releaseNotes>Support aditioal .net frameworks, 4.5</releaseNotes>
     <copyright>Copyright 2018</copyright>
     <tags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document cleanse c# csharp .net </tags>
   </metadata>
