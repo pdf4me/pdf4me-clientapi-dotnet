@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Pdf4me.Client")]
-[assembly: AssemblyDescription("Pdf4me Client Api Library which provides an easy way to work with the Pdf4me Api.")]
+[assembly: AssemblyDescription("The Pdf4me Client API is a .NET library which connects to its highly scalable SaaS cloud service with many functionalities to solve your document and PDF requirements. The SaaS api provides expert functionality to convert, optimize, compress, produce, merge, split, ocr, enrich, archive, print documents and PDFs.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Pdf4me")]
 [assembly: AssemblyProduct("Pdf4meClientApi")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("0.3.6")]
+[assembly: AssemblyVersion("0.3.7")]
 //[assembly: AssemblyFileVersion("1.0.1.*")]

@@ -5081,9 +5081,8 @@ namespace Pdf4me.Client
         /// ComprAttemptMRC
         /// Other values are ignored. During optimization, all set compression types are tried and the one resulting in
         /// the least memory footprint is taken.</summary>
-        [Newtonsoft.Json.JsonProperty("continuousCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public OptimizeActionContinuousCompressions? ContinuousCompressions { get; set; }
+        [Newtonsoft.Json.JsonProperty("continuousCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public System.Collections.ObjectModel.ObservableCollection<Anonymous2> ContinuousCompressions { get; set; }
 
         /// <summary>Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access.
         /// A linearized document has a slightly larger file size than a non-linearized file and provides the following main features:
@@ -5112,7 +5111,7 @@ namespace Pdf4me.Client
         /// Other values are ignored.
         /// During optimization, all set compression types are tried and the one resulting in the least memory footprint is taken.</summary>
         [Newtonsoft.Json.JsonProperty("indexedCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public System.Collections.ObjectModel.ObservableCollection<Anonymous2> IndexedCompressions { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<Anonymous3> IndexedCompressions { get; set; }
 
         /// <summary>This option enables or disables dithering when down-sampling bi-tonal images.
         /// The only values supported are eDitherNone and eDitherFloydSteinberg.
@@ -5168,7 +5167,7 @@ namespace Pdf4me.Client
         /// annotations.Multiple values of TPDFStripType can be combined with the
         /// bitwise or operator.</summary>
         [Newtonsoft.Json.JsonProperty("strip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public System.Collections.ObjectModel.ObservableCollection<Anonymous3> Strip { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<Anonymous4> Strip { get; set; }
 
         /// <summary>Set a key-value pair in the document info dictionary. Values of predefined keys are also stored in the XMP metadata.
         /// Popular entries specified in the PDF Reference 1.7 and accepted by most PDF viewers are "Title", "Author",
@@ -5357,7 +5356,7 @@ namespace Pdf4me.Client
         public int? HightPoint { get; set; }
 
         [Newtonsoft.Json.JsonProperty("renderOptions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public System.Collections.ObjectModel.ObservableCollection<Anonymous4> RenderOptions { get; set; }
+        public System.Collections.ObjectModel.ObservableCollection<Anonymous5> RenderOptions { get; set; }
 
         [Newtonsoft.Json.JsonProperty("rotateMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -6262,7 +6261,7 @@ namespace Pdf4me.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum OptimizeActionContinuousCompressions
+    public enum Anonymous2
     {
         [System.Runtime.Serialization.EnumMember(Value = "None")]
         None = 0,
@@ -6303,7 +6302,7 @@ namespace Pdf4me.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum Anonymous2
+    public enum Anonymous3
     {
         [System.Runtime.Serialization.EnumMember(Value = "None")]
         None = 0,
@@ -6370,7 +6369,7 @@ namespace Pdf4me.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum Anonymous3
+    public enum Anonymous4
     {
         [System.Runtime.Serialization.EnumMember(Value = "Threads")]
         Threads = 0,
@@ -6537,7 +6536,7 @@ namespace Pdf4me.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum Anonymous4
+    public enum Anonymous5
     {
         [System.Runtime.Serialization.EnumMember(Value = "NoAntialiasing")]
         NoAntialiasing = 0,

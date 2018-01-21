@@ -12,7 +12,7 @@
     <description>$description$</description>
     <releaseNotes>Additional Methods</releaseNotes>
     <copyright>Copyright 2018</copyright>
-    <tags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document cleanse c# csharp .net </tags>
+    <tags>PDF PDF/A Expert Pdf4me Api scaleable cloud SaaS scan OCR compress merge split optimize convert document cleanse print enrich attachment autonomous service job c# csharp .net </tags>
   </metadata>
   <files>
     <file src="bin\Debug\Pdf4me.Client.dll" target="lib\net45" />
