@@ -2798,22 +2798,22 @@ namespace Pdf4me.Client
             }
         }
 
-        /// <summary>GetThumbnails</summary>
+        /// <summary>CreateImages</summary>
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<GetThumbnailRes> GetThumbnailsAsync(GetThumbnail req)
+        public System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req)
         {
-            return GetThumbnailsAsync(req, System.Threading.CancellationToken.None);
+            return CreateImagesAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>GetThumbnails</summary>
+        /// <summary>CreateImages</summary>
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<GetThumbnailRes> GetThumbnailsAsync(GetThumbnail req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/GetThumbnails");
+            urlBuilder_.Append("Pdf/CreateImages");
 
             var client_ = _httpClient;
             try
@@ -2844,10 +2844,10 @@ namespace Pdf4me.Client
                         if (status_ == "200")
                         {
                             var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(GetThumbnailRes);
+                            var result_ = default(CreateImagesRes);
                             try
                             {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<GetThumbnailRes>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImagesRes>(responseData_, _settings.Value);
                                 return result_;
                             }
                             catch (System.Exception exception_)
@@ -2877,7 +2877,7 @@ namespace Pdf4me.Client
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", status_, responseData_, headers_, null);
                         }
 
-                        return default(GetThumbnailRes);
+                        return default(CreateImagesRes);
                     }
                     finally
                     {
@@ -3091,9 +3091,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Pdf4me Exception gives more information of what is the error.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Pdf4meException
     {
+        /// <summary>Human Readable Message of the error</summary>
         [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ErrorMessage { get; set; }
 
@@ -3190,6 +3192,9 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("thumbnail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] Thumbnail { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<Page> Pages { get; set; }
+
         [Newtonsoft.Json.JsonProperty("thumbnails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<byte[]> Thumbnails { get; set; }
 
@@ -3227,6 +3232,35 @@ namespace Pdf4me.Client
         public static Pdf4meDocument FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meDocument>(data);
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class Page
+    {
+        [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? DocumentId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? PageId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pageNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? PageNumber { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("rotate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Rotate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public byte[] Thumbnail { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static Page FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Page>(data);
         }
     }
 
@@ -3373,12 +3407,15 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>PDF-A Request to create PDF-A compatible document.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ProduceDocuments
     {
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -3396,18 +3433,23 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Document
     {
+        /// <summary>JobId of Documents WorkingSet</summary>
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
 
+        /// <summary>DocumentId</summary>
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? DocumentId { get; set; }
 
+        /// <summary>Give filename inlcuding filetype</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
 
+        /// <summary>Returns the Status of the Document</summary>
         [Newtonsoft.Json.JsonProperty("docStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocStatus { get; set; }
 
+        /// <summary>Description of pages</summary>
         [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Page> Pages { get; set; }
 
@@ -3431,9 +3473,11 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Notification
     {
+        /// <summary>Run execution in asynchronous way, get notified over Online WebHook</summary>
         [Newtonsoft.Json.JsonProperty("getNotification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? GetNotification { get; set; }
 
+        /// <summary>Will be used for Online WebHook</summary>
         [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ConnectionId { get; set; }
 
@@ -3445,35 +3489,6 @@ namespace Pdf4me.Client
         public static Notification FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Notification>(data);
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Page
-    {
-        [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? DocumentId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? PageId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pageNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PageNumber { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("rotate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Rotate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("thumbnail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public byte[] Thumbnail { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static Page FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Page>(data);
         }
     }
 
@@ -3504,9 +3519,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ProduceDocumentsRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -3597,18 +3614,23 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>ArchiveConfig</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ArchiveConfig
     {
+        /// <summary>Give the documents metadata for archiving.</summary>
         [Newtonsoft.Json.JsonProperty("archiveMetadata", Required = Newtonsoft.Json.Required.Always)]
         public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> ArchiveMetadata { get; set; } = new System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString>();
 
+        /// <summary>Place a signature stamp on to the document.</summary>
         [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StampAction StampAction { get; set; }
 
+        /// <summary>Give your Signature Configure to get the electronical Identity.</summary>
         [Newtonsoft.Json.JsonProperty("signatureConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object SignatureConfig { get; set; }
 
+        /// <summary>To guarantee the time of change use a Time Stamp Service.</summary>
         [Newtonsoft.Json.JsonProperty("useTSA", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? UseTSA { get; set; }
 
@@ -3679,7 +3701,7 @@ namespace Pdf4me.Client
         public double? Alpha { get; set; }
 
         /// <summary>Modify scale of stamp. Allowed values for ‹scale_set› are:
-        /// - relToA4: Scale the stamp relative to the page size. For example, make stamp half as large on a A5 and
+        ///  - relToA4: Scale the stamp relative to the page size. For example, make stamp half as large on a A5 and
         /// twice as large on a A3 page as specified.</summary>
         [Newtonsoft.Json.JsonProperty("scale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -3991,15 +4013,18 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Run Job</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class RunJobRes
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobId { get; set; }
 
+        /// <summary>List of Document Result</summary>
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4145,12 +4170,15 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class OptimizeRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4165,9 +4193,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Converted Result</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ConvertToPdfRes
     {
+        /// <summary>Converted Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4182,9 +4212,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class StampRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4216,12 +4248,15 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CodeSampleRes
     {
+        /// <summary>Code Document</summary>
         [Newtonsoft.Json.JsonProperty("code", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Code { get; set; }
 
+        /// <summary>Code Sample Action Names</summary>
         [Newtonsoft.Json.JsonProperty("sampleActionNames", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<string> SampleActionNames { get; set; }
 
@@ -4268,30 +4303,39 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class SignUpUser
     {
+        /// <summary>Loged in User Id</summary>
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? UserId { get; set; }
 
+        /// <summary>Azure Acitve Directory Id</summary>
         [Newtonsoft.Json.JsonProperty("subjectId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SubjectId { get; set; }
 
+        /// <summary>Providers identity Id</summary>
         [Newtonsoft.Json.JsonProperty("providerIdentityId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ProviderIdentityId { get; set; }
 
+        /// <summary>Provider which does the Authentication</summary>
         [Newtonsoft.Json.JsonProperty("provider", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Provider { get; set; }
 
+        /// <summary>ExtUserId, external userid , like NameIdentifier</summary>
         [Newtonsoft.Json.JsonProperty("extUserId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExtUserId { get; set; }
 
+        /// <summary>Email of signup user</summary>
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
 
+        /// <summary>Email of LastName user</summary>
         [Newtonsoft.Json.JsonProperty("lastName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string LastName { get; set; }
 
+        /// <summary>Email of FirstName user</summary>
         [Newtonsoft.Json.JsonProperty("firstName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FirstName { get; set; }
 
+        /// <summary>ServiceKey</summary>
         [Newtonsoft.Json.JsonProperty("serviceKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ServiceKey { get; set; }
 
@@ -4309,6 +4353,7 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class SignUpUserRes
     {
+        /// <summary>Successfully signed up new user</summary>
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Success { get; set; }
 
@@ -4326,21 +4371,27 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class UpdatePaymentMethod
     {
+        /// <summary>Payment Provder to pay from</summary>
         [Newtonsoft.Json.JsonProperty("paymentProvider", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentProvider { get; set; }
 
+        /// <summary>For Credit Card Update from Stripe, do an update for the StripeToken</summary>
         [Newtonsoft.Json.JsonProperty("stripeToken", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StripeToken { get; set; }
 
+        /// <summary>Payment Profile choosen</summary>
         [Newtonsoft.Json.JsonProperty("paymentProfile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentProfile { get; set; }
 
+        /// <summary>For Credit Card Update from Stripe, do an update for the StripeToken</summary>
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? UserId { get; set; }
 
+        /// <summary>Email from User for payment</summary>
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
 
+        /// <summary>Strip CustomerId</summary>
         [Newtonsoft.Json.JsonProperty("stripCustomerId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StripCustomerId { get; set; }
 
@@ -4358,6 +4409,7 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class UpdatePaymentMethodRes
     {
+        /// <summary>Update of PaymentMethod successfully</summary>
         [Newtonsoft.Json.JsonProperty("updateSuccess", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? UpdateSuccess { get; set; }
 
@@ -4375,15 +4427,19 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CreateApiKey
     {
+        /// <summary>Loged in User Id</summary>
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? UserId { get; set; }
 
+        /// <summary>ExtUserId , nameidentifier</summary>
         [Newtonsoft.Json.JsonProperty("extUserId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ExtUserId { get; set; }
 
+        /// <summary>Email</summary>
         [Newtonsoft.Json.JsonProperty("email", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Email { get; set; }
 
+        /// <summary>ApiClientId</summary>
         [Newtonsoft.Json.JsonProperty("apiClientId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ApiClientId { get; set; }
 
@@ -4401,9 +4457,11 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CreateApiKeyRes
     {
+        /// <summary>Created Api ClientId</summary>
         [Newtonsoft.Json.JsonProperty("apiClientId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ApiClientId { get; set; }
 
+        /// <summary>Key for ClientId, only visible once</summary>
         [Newtonsoft.Json.JsonProperty("apiKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ApiKey { get; set; }
 
@@ -4421,15 +4479,19 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ApiUsageRes
     {
+        /// <summary>Api usage since last payment.</summary>
         [Newtonsoft.Json.JsonProperty("apiUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? ApiUsage { get; set; }
 
+        /// <summary>Total Usage payed.</summary>
         [Newtonsoft.Json.JsonProperty("payedUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? PayedUsage { get; set; }
 
+        /// <summary>Date of last payment</summary>
         [Newtonsoft.Json.JsonProperty("lastPayment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? LastPayment { get; set; }
 
+        /// <summary>Profile of selected payment</summary>
         [Newtonsoft.Json.JsonProperty("paymentProfile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentProfile { get; set; }
 
@@ -4444,15 +4506,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Scan MRC Request to scan document as MRC.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ScanMrc
     {
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>MrcAction configuration</summary>
         [Newtonsoft.Json.JsonProperty("mrcAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public MrcAction MrcAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4567,9 +4633,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>MRC document</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ScanMrcRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4584,16 +4652,20 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class RecognizeBusinessCard
     {
+        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>Give an image stamp</summary>
         [Newtonsoft.Json.JsonProperty("bCardOutputType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public RecognizeBusinessCardBCardOutputType? BCardOutputType { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4608,9 +4680,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class RecognizeBusinessCardRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4625,15 +4699,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class RecognizeDocument
     {
+        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>Give an image stamp</summary>
         [Newtonsoft.Json.JsonProperty("ocrAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OcrAction OcrAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4672,9 +4750,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class RecognizeDocumentRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4689,15 +4769,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Stamp
     {
+        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>Give an image stamp</summary>
         [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StampAction StampAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4712,15 +4796,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>extract Resources</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ExtractResources
     {
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>MrcAction configuration</summary>
         [Newtonsoft.Json.JsonProperty("extractResourcesAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ExtractResourcesAction ExtractResourcesAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4738,8 +4826,8 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ExtractResourcesAction
     {
-        /// <summary>Get or set whether to extract embedded fonts. Depending on the font type, the extracted font has one of the
-        /// following three formats: fnt‹objno›.ttf or fnt‹objno›.pfb or fnt‹objno›.cff, where ‹objno› is the
+        /// <summary> Get or set whether to extract embedded fonts. Depending on the font type, the extracted font has one of the
+        ///  following three formats: fnt‹objno›.ttf or fnt‹objno›.pfb or fnt‹objno›.cff, where ‹objno› is the
         /// number of the PDF object of the font.</summary>
         [Newtonsoft.Json.JsonProperty("extractFonts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ExtractFonts { get; set; }
@@ -4768,9 +4856,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>MRC document</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ExtractResourcesRes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4785,15 +4875,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>PDF-A Request to create PDF-A compatible document.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CreatePdfA
     {
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>PdfAAction configuration</summary>
         [Newtonsoft.Json.JsonProperty("pdfAAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PdfAAction PdfAAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4808,26 +4902,26 @@ namespace Pdf4me.Client
         }
     }
 
-    /// <summary>The CreatePdfA accepts files from many different applications and automatically
-    /// converts them into PDF/A. The level of conformity can be set to level A, U, or B. ICC color profiles for
-    /// device-dependent color profiles and font types are embedded in the document.There is an option to provide
-    /// the entire character set for fonts (no subsetting) to facilitate editing at a later stage. Missing fonts
-    /// are reproduced as close to the original as possible via font recognition. Metadata can be generated
-    /// automatically or added from external sources. The tool also detects and automatically repairs problems
-    /// typical of the PDF format.A digital signature can be applied and a conformity check carried out at the
+    /// <summary>The CreatePdfA accepts files from many different applications and automatically 
+    /// converts them into PDF/A. The level of conformity can be set to level A, U, or B. ICC color profiles for 
+    /// device-dependent color profiles and font types are embedded in the document.There is an option to provide 
+    /// the entire character set for fonts (no subsetting) to facilitate editing at a later stage. Missing fonts 
+    /// are reproduced as close to the original as possible via font recognition. Metadata can be generated 
+    /// automatically or added from external sources. The tool also detects and automatically repairs problems 
+    /// typical of the PDF format.A digital signature can be applied and a conformity check carried out at the 
     /// end of the process.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class PdfAAction
     {
-        /// <summary>By default, fonts that are embedded are automatically subset to minimize the file size.
-        /// If for any reason, e.g. postprocessing, fonts shall not be subset, set the property
-        /// SubsetFonts to false. Whether fonts are subset or not is irrelevant with respect to
+        /// <summary>By default, fonts that are embedded are automatically subset to minimize the file size. 
+        /// If for any reason, e.g. postprocessing, fonts shall not be subset, set the property 
+        /// SubsetFonts to false. Whether fonts are subset or not is irrelevant with respect to 
         /// the compliance with PDF/A. (Relevant is only that all used glyphs are contained in the font program.)
-        /// Additionals Fonts can be given in this FontsToSubset List</summary>
+        ///  Additionals Fonts can be given in this FontsToSubset List</summary>
         [Newtonsoft.Json.JsonProperty("fontsToSubset", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<PdfFont> FontsToSubset { get; set; }
 
-        /// <summary>Other listed entries (e.g. ePDF10, ePDF11, .. .ePDF17, ePDFUnk) are not supported as output compliance
+        /// <summary>Other listed entries (e.g. ePDF10, ePDF11, .. .ePDF17, ePDFUnk) are not supported as output compliance 
         /// level.
         /// Some files cannot be converted to the compliance requested. This will be
         /// detected and up- (AllowUpgrade) or downgrade (AllowDowngrade) the compliance automatically.</summary>
@@ -4843,20 +4937,20 @@ namespace Pdf4me.Client
         /// - Downgrade to level U (PDF/A-2 and PDF/A-3) or B(PDF/A-1): Level A requires logical structure information and
         /// “tagging” information, so if a file contains no such information, its level is downgraded.
         /// <para>
-        ///   Logical structure information in a PDF defines the structure of content, such as titles, paragraphs, figures, reading order, tables or articles.Logical structure elements can be “tagged” with descriptions or alternative text.
-        ///   “Tagging” allows the contents of an image to be described to the visually impaired.
-        ///   It is not possible for Pdf/A converter to add meaningful tagging information. Adding
-        ///   tagging information without prior knowledge about the input file’s structure and content is neither possible nor
-        ///   allowed by the PDF/A standard. For that reason, the conformance level is automatically downgraded to level B or U.
-        ///   Example: Downgrade PDF/A-1a to PDF/A-1b.
+        /// Logical structure information in a PDF defines the structure of content, such as titles, paragraphs, figures, reading order, tables or articles.Logical structure elements can be “tagged” with descriptions or alternative text.
+        /// “Tagging” allows the contents of an image to be described to the visually impaired.
+        /// It is not possible for Pdf/A converter to add meaningful tagging information. Adding
+        /// tagging information without prior knowledge about the input file’s structure and content is neither possible nor
+        /// allowed by the PDF/A standard. For that reason, the conformance level is automatically downgraded to level B or U.
+        /// Example: Downgrade PDF/A-1a to PDF/A-1b.
         /// </para><para>
-        ///   If set to False and an input file cannot be converted to the requested standard, e.g.because of missing “tagging”
-        ///   information, the conversion is aborted and the ErrorCode set to PDF_E_DOWNGRADE.
+        /// If set to False and an input file cannot be converted to the requested standard, e.g.because of missing “tagging”
+        /// information, the conversion is aborted and the ErrorCode set to PDF_E_DOWNGRADE.
         /// </para></summary>
         [Newtonsoft.Json.JsonProperty("allowDowngrade", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? AllowDowngrade { get; set; }
 
-        /// <summary>If set to True, automatic upgrade of the PDF/A version is allowed. If the target standard is PDF/A-1 and a file
+        /// <summary> If set to True, automatic upgrade of the PDF/A version is allowed. If the target standard is PDF/A-1 and a file
         /// contains elements that cannot be converted to PDF/A-1, the target standard is upgraded to PDF/A-2. This avoids
         /// significant visual differences in the output file.
         /// For example, the following elements may lead to an automatic upgrade:
@@ -4866,33 +4960,33 @@ namespace Pdf4me.Client
         /// - Embedded OpenType font files
         /// - Predefined CMap encodings in Type0 fonts
         /// 
-        /// If set to False, the compliance is not upgraded.Depeding on the value of the ConversionErrorMask the
+        ///  If set to False, the compliance is not upgraded.Depeding on the value of the ConversionErrorMask the
         /// conversion this will fail with a conversion error PDF_E_CONVERSION</summary>
         [Newtonsoft.Json.JsonProperty("allowUpgrade", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? AllowUpgrade { get; set; }
 
         /// <summary><para>
-        ///           Set or get the path to the ICC profile for the output intent.
-        ///         </para>
+        ///             Set or get the path to the ICC profile for the output intent.
+        ///             </para>
         /// <para>
-        ///           The given profile is embedded only if the input file does not contain a PDF/A output intent already
-        ///         </para></summary>
+        ///             The given profile is embedded only if the input file does not contain a PDF/A output intent already
+        ///             </para></summary>
         [Newtonsoft.Json.JsonProperty("outputIntentProfile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PdfAActionOutputIntentProfile? OutputIntentProfile { get; set; }
 
         /// <summary><para>
-        ///           Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access.
-        ///           A linearized document has a slightly larger file size than a non-linearized file and provides the following main features:
-        ///           - When a document is opened in a PDF viewer of a web browser, the first page can be viewed without downloading the entire
-        ///           PDF file.In contrast, a non-linearized PDF file must be downloaded completely before the firstpage can be displayed.
-        ///           - When another page is requested by the user, that page is displayed as quickly as possible and incrementally as
-        ///           data arrives, without downloading the entire PDF file.
-        ///         </para>
+        ///             Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access.
+        ///             A linearized document has a slightly larger file size than a non-linearized file and provides the following main features:
+        ///             - When a document is opened in a PDF viewer of a web browser, the first page can be viewed without downloading the entire 
+        ///             PDF file.In contrast, a non-linearized PDF file must be downloaded completely before the firstpage can be displayed.
+        ///             - When another page is requested by the user, that page is displayed as quickly as possible and incrementally as
+        ///             data arrives, without downloading the entire PDF file.
+        ///             </para>
         /// <para>
-        ///           Signed files cannot be linearizes.So this property must be set to False if
-        ///           a digital signature is applied.
-        ///         </para></summary>
+        ///             Signed files cannot be linearizes.So this property must be set to False if
+        ///             a digital signature is applied.
+        ///             </para></summary>
         [Newtonsoft.Json.JsonProperty("linearize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Linearize { get; set; }
 
@@ -4927,9 +5021,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CreatePdfARes
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -4944,15 +5040,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Optimize
     {
+        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>Give an image stamp</summary>
         [Newtonsoft.Json.JsonProperty("optimizeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OptimizeAction OptimizeAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -4983,34 +5083,43 @@ namespace Pdf4me.Client
         public bool? UseProfile { get; set; }
 
         /// <summary>Get or set whether redundant objects should be removed. If this property is
-        /// set to True, duplicate objects are removed in order to reduce the file size.</summary>
+        /// set to True, duplicate objects are removed in order to reduce the file size.
+        /// 
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("removeRedundantObjects", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? RemoveRedundantObjects { get; set; }
 
         /// <summary>This property influences two optimizations related to subsetted fonts:
         /// - Subset embedded fonts.
         /// - Merge embedded font programs of different subsets of the same font, granted they can be merged.
+        ///  <para>
         /// Sub-setting refers to removing those glyphs in a font that are not actually
-        /// used in any text contained in the PDF.</summary>
+        /// used in any text contained in the PDF.
+        ///  </para>{default: false}</summary>
         [Newtonsoft.Json.JsonProperty("subsetFonts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? SubsetFonts { get; set; }
 
         /// <summary>Get or set whether resources should be optimized. If set, unused resources
         /// such as images, fonts, and color spaces are removed.Also content streams
-        /// are re-built.</summary>
+        /// are re-built.
+        /// 
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("optimizeResources", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? OptimizeResources { get; set; }
 
         /// <summary>If this option is set, then re-compression of images is forced if an image in the
         /// input PDF has a compression type that differs from the compression types
         /// given in ContinuousCompressions, BitonalCompressions, or IndexedCompressions. Use this option if you want to allow only the given
-        /// compression types for images in the output PDF.</summary>
+        /// compression types for images in the output PDF.
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("forceCompressionTypes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ForceCompressionTypes { get; set; }
 
         /// <summary>If set, all images are always recompressed.If not set (default), images are only
         /// recompressed if the resulting image is smaller than the original, i.e.requires
-        /// less bytes to store in the file.</summary>
+        /// less bytes to store in the file.
+        /// 
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("forceRecompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ForceRecompression { get; set; }
 
@@ -5025,7 +5134,9 @@ namespace Pdf4me.Client
         /// - An image in which all the pixels have the same color is down-sampled to one pixel.
         /// Furthermore, images’ masks and soft masks are optimized as follows:
         /// - A soft mask that contains only black and white pixels is converted to a mask.
-        /// - A (soft) mask that is opaque is removed.</summary>
+        /// - A (soft) mask that is opaque is removed.
+        /// 
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("reduceColorComplexity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ReduceColorComplexity { get; set; }
 
@@ -5046,57 +5157,64 @@ namespace Pdf4me.Client
         /// ComprAttemptSource
         /// ComprAttemptJBIG2
         /// Other values are ignored.
+        ///  <para>
         /// During optimization, all set compression types are tried and the one resulting in the least memory footprint is taken.
         /// Typically, CCITT Group 4 or JBIG2 is used for bi-tonal compression. Due to the simpler algorithm CCITT Group 4 has
         /// the advantage of being faster. JBIG2 can achieve compression ratios that are up to twice as high as CCITT Group 4
-        /// at the cost of longer computation time.</summary>
+        /// at the cost of longer computation time.
+        ///  </para>{default: ComprAttemptNone}</summary>
         [Newtonsoft.Json.JsonProperty("bitonalCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous> BitonalCompressions { get; set; }
 
         /// <summary>Get or set the target resolution in dots per inch (DPI) after re-sampling images
-        /// for bi-tonal images.See also ResolutionDPI.</summary>
+        /// for bi-tonal images.See also ResolutionDPI.
+        /// 
+        /// {default: 200}</summary>
         [Newtonsoft.Json.JsonProperty("bitonalResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? BitonalResolutionDPI { get; set; }
 
         /// <summary>Get or set the threshold resolution in dots per inch (DPI) to selectively activate
-        /// re-sampling for bi-tonal images.The value -1 deactivates re-sampling for bitonal images. See also ThresholdDPI.</summary>
+        /// re-sampling for bi-tonal images.The value -1 deactivates re-sampling for bitonal images. See also ThresholdDPI.
+        /// 
+        /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("bitonalThresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? BitonalThresholdDPI { get; set; }
 
-        /// <summary>Get or set the option to clip images. When enabled, then invisible parts of images are clipped (cropped).
-        /// While this does not affect visual parts of images, it may have a minor visual impact because clipped
-        /// images are re-compressed. Pre-blended images are not clipped. Enabling this property will also
-        /// enable the OptimizeResources property.</summary>
+        /// <summary>Get or set the option to clip images. When enabled, then invisible parts of images are clipped (cropped). 
+        /// While this does not affect visual parts of images, it may have a minor visual impact because clipped 
+        /// images are re-compressed. Pre-blended images are not clipped. Enabling this property will also 
+        /// enable the OptimizeResources property.
+        ///             
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("clipImages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ClipImages { get; set; }
 
         /// <summary>Get or set the compression types to be tried for continuous images, i.e. RGB, CMYK, and grayscale images.
-        /// See also TPDFComprAttempt. Several values can be combined with bitwise or operators.The following values are allowed:
-        /// ComprAttemptNone
-        /// ComprAttemptRaw
-        /// ComprAttemptJPEG
-        /// ComprAttemptFlate
-        /// ComprAttemptJPEG2000
-        /// ComprAttemptSource
-        /// ComprAttemptMRC
-        /// Other values are ignored. During optimization, all set compression types are tried and the one resulting in
-        /// the least memory footprint is taken.</summary>
+        /// See also TPDFComprAttempt. Several values can be combined with bitwise or operators.
+        /// Other values are ignored. During optimization, all set compression types are tried and the one resulting in 
+        /// the least memory footprint is taken.
+        /// 
+        /// {default: ComprAttemptNone}</summary>
         [Newtonsoft.Json.JsonProperty("continuousCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous2> ContinuousCompressions { get; set; }
 
-        /// <summary>Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access.
-        /// A linearized document has a slightly larger file size than a non-linearized file and provides the following main features:
-        /// - When a document is opened in a PDF viewer of a web browser, the first page can be viewed without downloading the entire
+        /// <summary>Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access. 
+        /// A linearized document has a slightly larger file size than a non-linearized file and provides the following main features: 
+        /// - When a document is opened in a PDF viewer of a web browser, the first page can be viewed without downloading the entire 
         /// PDF file.In contrast, a non-linearized PDF file must be downloaded completely before the first page can be displayed.
-        /// - When another page is requested by the user, that page is displayed as quickly as possible and incrementally as
+        /// - When another page is requested by the user, that page is displayed as quickly as possible and incrementally as 
         /// data arrives, without downloading the entire PDF file.
-        /// Signed files cannot be linearizes. So this property must be set to False if a digital signature is applied.</summary>
+        ///  <para>
+        /// Signed files cannot be linearizes. So this property must be set to False if a digital signature is applied.
+        ///  </para>{default: false}</summary>
         [Newtonsoft.Json.JsonProperty("linearize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Linearize { get; set; }
 
-        /// <summary>Get or set the quality index of lossy compression types. This value ranges
+        /// <summary>Get or set the quality index of lossy compression types. This value ranges 
         /// from 1 to 100 and is applied to JPEG and JPEG2000 compression.For
-        /// JPEG2000, a quality index of 100 means lossless compression.JPEG compression is always lossy.</summary>
+        /// JPEG2000, a quality index of 100 means lossless compression.JPEG compression is always lossy.
+        /// 
+        /// {default: 75}</summary>
         [Newtonsoft.Json.JsonProperty("imageQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ImageQuality { get; set; }
 
@@ -5107,41 +5225,53 @@ namespace Pdf4me.Client
         /// - ComprAttemptRaw
         /// - ComprAttemptFlate
         /// - ComprAttemptLZW
-        /// ComprAttemptSource
+        /// - ComprAttemptSource
         /// Other values are ignored.
-        /// During optimization, all set compression types are tried and the one resulting in the least memory footprint is taken.</summary>
+        ///  <para>
+        /// During optimization, all set compression types are tried and the one resulting in the least memory footprint is taken.
+        ///  </para>{default: ComprAttemptFlate}</summary>
         [Newtonsoft.Json.JsonProperty("indexedCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous3> IndexedCompressions { get; set; }
 
         /// <summary>This option enables or disables dithering when down-sampling bi-tonal images.
         /// The only values supported are eDitherNone and eDitherFloydSteinberg.
         /// Some bi-tonal images try to evoke the impression of different levels of gray
-        /// by randomly setting pixels to black.If dithering is applied during downsampling
-        /// then the gray levels of such images are preserved better.If dithering is switched
-        /// off then lines (e.g.text glyphs) are preserved better.</summary>
+        ///  by randomly setting pixels to black.If dithering is applied during downsampling 
+        ///  then the gray levels of such images are preserved better.If dithering is switched 
+        ///  off then lines (e.g.text glyphs) are preserved better.
+        ///  
+        ///  {default: DitherNone}</summary>
         [Newtonsoft.Json.JsonProperty("ditheringMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OptimizeActionDitheringMode? DitheringMode { get; set; }
 
         /// <summary>Get or set the target resolution in dots per inch (DPI) after re-sampling images
-        /// for color images.See also ResolutionDPI.</summary>
+        /// for color images.See also ResolutionDPI.
+        /// 
+        /// {default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("colorResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ColorResolutionDPI { get; set; }
 
         /// <summary>Get or set the threshold resolution in dots per inch (DPI) to selectively activate
         /// re-sampling for color images.The value -1 deactivates re-sampling for color
-        /// images. See also ThresholdDPI.</summary>
+        /// images. See also ThresholdDPI.
+        /// 
+        /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("colorThresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ColorThresholdDPI { get; set; }
 
         /// <summary>Get or set target resolution in dots per inch (DPI) after re-sampling images
-        /// for monochrome images.See also ResolutionDPI.</summary>
+        /// for monochrome images.See also ResolutionDPI.
+        /// 
+        /// {default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("monochromeResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? MonochromeResolutionDPI { get; set; }
 
         /// <summary>Get or set the threshold resolution in dots per inch (DPI) to selectively activate
         /// re-sampling for monochrome images.The value -1 deactivates re-sampling
-        /// for monochrome images. See also ThresholdDPI.</summary>
+        /// for monochrome images. See also ThresholdDPI.
+        /// 
+        /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("monochromeThresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? MonochromeThresholdDPI { get; set; }
 
@@ -5150,29 +5280,35 @@ namespace Pdf4me.Client
         /// A typical value for the resolution when optimizing for the web is 150 DPI.For
         /// printing typically no re-sampling is applied(see property ThresholdDPI).
         /// Pre-blended images, images with a color key mask, mask, and soft mask images are not re-sampled.
-        /// When getting ResolutionDPI, the property returns the target resolution in DPI for color images.</summary>
+        /// When getting ResolutionDPI, the property returns the target resolution in DPI for color images.
+        /// 
+        /// {default: Different defaults apply to different image types}</summary>
         [Newtonsoft.Json.JsonProperty("resolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ResolutionDPI { get; set; }
 
         /// <summary>Set the threshold in DPI (dots per inch) to selectively activate re-sampling.
         /// Only images with a resolution above the threshold DPI will be re-sampled.
         /// This property affects all three image compression types(BitonalThresholdDPI, ColorThresholdDPI, MonochromeThresholdDPI). The
-        /// value -1 deactivates re-sampling.</summary>
+        /// value -1 deactivates re-sampling.
+        /// 
+        /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("thresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ThresholdDPI { get; set; }
 
-        /// <summary>Get or set the stripping mode. This mode can be configured to remove unneeded data of a PDF document such as Threads, Metadata, the PieceInfo,
+        /// <summary> Get or set the stripping mode. This mode can be configured to remove unneeded data of a PDF document such as Threads, Metadata, the PieceInfo,
         /// the StructTreeRoot entry, embedded Thumbs and the SpiderInfo entry.Also
         /// this mode is used to indicate whether to flatten form fields, links, and other
         /// annotations.Multiple values of TPDFStripType can be combined with the
-        /// bitwise or operator.</summary>
+        /// bitwise or operator.
+        /// 
+        ///  {default: StripThreads}</summary>
         [Newtonsoft.Json.JsonProperty("strip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous4> Strip { get; set; }
 
-        /// <summary>Set a key-value pair in the document info dictionary. Values of predefined keys are also stored in the XMP metadata.
+        /// <summary> Set a key-value pair in the document info dictionary. Values of predefined keys are also stored in the XMP metadata.
         /// Popular entries specified in the PDF Reference 1.7 and accepted by most PDF viewers are "Title", "Author",
         /// "Subject", "Creator" (sometimes referred to as Application), and "Producer" (sometimes referred to as
-        /// PDF Creator).</summary>
+        ///  PDF Creator).</summary>
         [Newtonsoft.Json.JsonProperty("infoEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> InfoEntries { get; set; }
 
@@ -5187,10 +5323,9 @@ namespace Pdf4me.Client
         /// but their visual appearances(parts (b)) are flattened.I.e.the latter are retained and drawn as non-editable graphic
         /// onto the page.
         /// <para>
-        ///   Note: The resulting PDF can be misleading as it visually appears to be signed,
-        ///   but it has no digital signature and hence, a viewer application does not report any
-        ///   broken signature.In most cases, such a behavior is undesirable
-        /// </para></summary>
+        /// Note: The resulting PDF can be misleading as it visually appears to be signed,
+        /// but it has no digital signature and hence, a viewer application does not report any
+        /// broken signature.In most cases, such a behavior is undesirable</para></summary>
         [Newtonsoft.Json.JsonProperty("flattenSignatureFields", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FlattenSignatureFields { get; set; }
 
@@ -5211,7 +5346,7 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class MrcParameters
     {
-        /// <summary>Get or set the compression type for MRC foreground and background layers.
+        /// <summary> Get or set the compression type for MRC foreground and background layers.
         /// See TPDFCompression for possible values.See also Mixed Raster Content
         /// (MRC) Optimization for Images.</summary>
         [Newtonsoft.Json.JsonProperty("mrcLayerCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5239,7 +5374,7 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public MrcParametersMrcMaskCompression? MrcMaskCompression { get; set; }
 
-        /// <summary>Get or set the compression type for MRC cut-out pictures.See TPDFCompression for
+        /// <summary>Get or set the compression type for MRC cut-out pictures.See TPDFCompression for 
         /// possible values.See also Mixed Raster Content (MRC) Optimization for Images.</summary>
         [Newtonsoft.Json.JsonProperty("mrcPictCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -5262,15 +5397,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Convert any document to a PDF</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ConvertToPdf
     {
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>Conversion configuration</summary>
         [Newtonsoft.Json.JsonProperty("convertToPdfAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ConvertToPdfAction ConvertToPdfAction { get; set; }
 
@@ -5302,15 +5441,19 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Thumbnails document</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class GetThumbnail
+    public partial class CreateImages
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>MrcAction configuration</summary>
         [Newtonsoft.Json.JsonProperty("imageAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ImageAction ImageAction { get; set; }
 
+        /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
@@ -5319,27 +5462,41 @@ namespace Pdf4me.Client
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
 
-        public static GetThumbnail FromJson(string data)
+        public static CreateImages FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetThumbnail>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImages>(data);
         }
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ImageAction
     {
+        /// <summary>Set the Pages wo apply the convertion.
+        /// 
+        /// {default: PageSelection.All}</summary>
         [Newtonsoft.Json.JsonProperty("pageSelection", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PageSelection PageSelection { get; set; }
 
+        /// <summary>Set or get the center mode. When set to True, the document is horizontally and vertically centered on the page.
+        /// When set to False, the document is printed to the upper left corner of the page.
+        /// 
+        /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("center", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Center { get; set; }
 
         [Newtonsoft.Json.JsonProperty("fitPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FitPage { get; set; }
 
+        /// <summary>Get or set the color depth. Bi-tonal: 1, gray scale: 8, RGB true color: 24, CMYK: 32.
+        /// 
+        /// {default: 24}</summary>
         [Newtonsoft.Json.JsonProperty("bitsPerPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? BitsPerPixel { get; set; }
 
+        /// <summary>Set the threshold for converting from gray to bi-tonal when Dithering is eDitherNone. Value must be in
+        /// the range of 0 to 255.
+        /// 
+        /// {default: 181}</summary>
         [Newtonsoft.Json.JsonProperty("bilevelThreshold", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? BilevelThreshold { get; set; }
 
@@ -5355,30 +5512,62 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("hightPoint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? HightPoint { get; set; }
 
+        /// <summary>Set a specific rendering option.</summary>
         [Newtonsoft.Json.JsonProperty("renderOptions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous5> RenderOptions { get; set; }
 
+        /// <summary>Set the rotation mode of the page.
+        /// 
+        /// Attribute: Set the rotation to the viewing rotation attribute of the PDF page, i.e. rendering the
+        /// page with the same rotation as it is displayed in a PDF viewer.
+        /// 
+        /// {default: Attribute}</summary>
         [Newtonsoft.Json.JsonProperty("rotateMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionRotateMode? RotateMode { get; set; }
 
+        /// <summary>If True a uniform up- or down-scaling is applied, i.e. the output image has the same ratio of width to height as the
+        /// input file and its size will fit into the defined dimensions, given by SetBitmapDimensions.
+        /// 
+        /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("preserveAspectRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? PreserveAspectRatio { get; set; }
 
+        /// <summary>Set the quality index of lossy compression types. This value ranges from 1 to 100 and is applied to JPEG and
+        /// JPEG2000 compression.For JPEG2000, a quality index of 100 means lossless compression.JPEG compression is
+        /// always lossy.
+        /// 
+        /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("imageQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ImageQuality { get; set; }
 
+        /// <summary>Set the Color Management System (CMS) Engine. 
+        /// 
+        /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("cmsEngine", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionCmsEngine? CmsEngine { get; set; }
 
+        /// <summary>Set the Color Management System (CMS) Engine. 
+        /// 
+        /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("customCMSConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomCMSConfig CustomCMSConfig { get; set; }
 
+        /// <summary>      Set the dithering algorithm.Dithering refers to the procedure of simulating colors or grayscales.This is mainly
+        /// useful for low color depth (e.g.black and white or indexed) images.
+        /// The supported values for TPDFDithering are listed in the corresponding enumeration.For more information see
+        /// chapter Dithering
+        ///  {default: DitherFloydSteinberg}</summary>
         [Newtonsoft.Json.JsonProperty("dithering", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionDithering? Dithering { get; set; }
 
+        /// <summary>Get or set the resolution of the image in DPI (dots per inch).
+        /// Set Both the resolutions for the x- and y-axis are set to the same value.
+        /// <para>
+        /// Setting DPI is redundant to setting the specialized properties XDPI and YDPI.
+        /// </para>{default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("dpi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Dpi { get; set; }
 
@@ -5389,14 +5578,24 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("filterRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? FilterRatio { get; set; }
 
+        /// <summary>Set output Type for image file.</summary>
         [Newtonsoft.Json.JsonProperty("imageExtension", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionImageExtension? ImageExtension { get; set; }
 
+        /// <summary>Set color space of the output image, see enumeration TPDFColorSpace.
+        /// For black white bi-tonal images, a gray color space must be selected
+        /// 
+        /// {default: ColorRGB}</summary>
         [Newtonsoft.Json.JsonProperty("colorSpace", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionColorSpace? ColorSpace { get; set; }
 
+        /// <summary>Get or set the compression type of TIFF images. For any other image format, the compression is automatically
+        /// defined by the file extension(the file name).
+        /// The supported values for TPDFCompression are listed in the corresponding enumeration.
+        ///             
+        /// {default: ComprLZW}</summary>
         [Newtonsoft.Json.JsonProperty("compression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionCompression? Compression { get; set; }
@@ -5518,9 +5717,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Get Thumbnails</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class GetThumbnailRes
+    public partial class CreateImagesRes
     {
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -5529,9 +5730,9 @@ namespace Pdf4me.Client
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
 
-        public static GetThumbnailRes FromJson(string data)
+        public static CreateImagesRes FromJson(string data)
         {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetThumbnailRes>(data);
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImagesRes>(data);
         }
     }
 
