@@ -865,6 +865,99 @@ namespace Pdf4me.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
+        /// <summary>CreateThumbnail</summary>
+        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<CreateThumbnailRes> CreateThumbnailAsync(CreateThumbnail req)
+        {
+            return CreateThumbnailAsync(req, System.Threading.CancellationToken.None);
+        }
+
+        /// <summary>CreateThumbnail</summary>
+        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        public async System.Threading.Tasks.Task<CreateThumbnailRes> CreateThumbnailAsync(CreateThumbnail req, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("Light/CreateThumbnail");
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        foreach (var item_ in response_.Content.Headers)
+                            headers_[item_.Key] = item_.Value;
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(CreateThumbnailRes);
+                            try
+                            {
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateThumbnailRes>(responseData_, _settings.Value);
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
+                            {
+                                throw new Pdf4meApiException("Could not deserialize the response body.", status_, responseData_, headers_, exception_);
+                            }
+                        }
+                        else
+                        if (status_ == "500")
+                        {
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
+                            try
+                            {
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
+                            }
+                            catch (System.Exception exception_)
+                            {
+                                throw new Pdf4meApiException("Could not deserialize the response body.", status_, responseData_, headers_, exception_);
+                            }
+                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", status_, responseData_, headers_, result_, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", status_, responseData_, headers_, null);
+                        }
+
+                        return default(CreateThumbnailRes);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
         /// <summary>Extract</summary>
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -4448,6 +4541,113 @@ namespace Pdf4me.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class CreateThumbnail
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ThumbnailAction ThumbnailAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static CreateThumbnail FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateThumbnail>(data);
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class ThumbnailAction
+    {
+        [Newtonsoft.Json.JsonProperty("pageSelection", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PageSelection PageSelection { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("fitPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? FitPage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("bitsPerPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? BitsPerPixel { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("widthPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? WidthPixel { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("hightPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? HightPixel { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("preserveAspectRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? PreserveAspectRatio { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("imageQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? ImageQuality { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("dpi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? Dpi { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("imageExtension", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ThumbnailActionImageExtension? ImageExtension { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static ThumbnailAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ThumbnailAction>(data);
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class PageSelection
+    {
+        [Newtonsoft.Json.JsonProperty("pageNrs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<int> PageNrs { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pageIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<System.Guid> PageIds { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public PageSelectionPageSequence? PageSequence { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static PageSelection FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<PageSelection>(data);
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class CreateThumbnailRes
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static CreateThumbnailRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateThumbnailRes>(data);
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Extract
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6046,27 +6246,6 @@ namespace Pdf4me.Client
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class PageSelection
-    {
-        [Newtonsoft.Json.JsonProperty("pageNrs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<int> PageNrs { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public PageSelectionPageSequence? PageSequence { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static PageSelection FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<PageSelection>(data);
-        }
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CustomCMSConfig
     {
         [Newtonsoft.Json.JsonProperty("white", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -6636,6 +6815,73 @@ namespace Pdf4me.Client
 
         [System.Runtime.Serialization.EnumMember(Value = "Extract")]
         Extract = 13,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public enum ThumbnailActionImageExtension
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = "bmp")]
+        Bmp = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = "gif")]
+        Gif = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jb2")]
+        Jb2 = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jpg")]
+        Jpg = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jpeg")]
+        Jpeg = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jp2")]
+        Jp2 = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jpf")]
+        Jpf = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jpx")]
+        Jpx = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = "png")]
+        Png = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = "tif")]
+        Tif = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = "tiff")]
+        Tiff = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
+    public enum PageSelectionPageSequence
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "All")]
+        All = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = "First")]
+        First = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = "Last")]
+        Last = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = "Odd")]
+        Odd = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = "Even")]
+        Even = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = "NotFirst")]
+        NotFirst = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = "NotLast")]
+        NotLast = 6,
 
     }
 
@@ -7411,32 +7657,6 @@ namespace Pdf4me.Client
 
         [System.Runtime.Serialization.EnumMember(Value = "Default")]
         Default = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum PageSelectionPageSequence
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "All")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "First")]
-        First = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "Last")]
-        Last = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = "Odd")]
-        Odd = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = "Even")]
-        Even = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = "NotFirst")]
-        NotFirst = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = "NotLast")]
-        NotLast = 6,
 
     }
 
