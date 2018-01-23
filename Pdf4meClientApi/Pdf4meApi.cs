@@ -2380,7 +2380,7 @@ namespace Pdf4me.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <summary>ScanMrc</summary>
+        /// <summary>ScanMrc*</summary>
         /// <returns>ScanMrc</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ScanMrcRes> ScanMrcAsync(ScanMrc req)
@@ -2388,7 +2388,7 @@ namespace Pdf4me.Client
             return ScanMrcAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>ScanMrc</summary>
+        /// <summary>ScanMrc*</summary>
         /// <returns>ScanMrc</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3077,7 +3077,6 @@ namespace Pdf4me.Client
             }
         }
 
-        /// <summary>ConvertToPdf</summary>
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(ConvertToPdf req)
@@ -3085,7 +3084,6 @@ namespace Pdf4me.Client
             return ConvertToPdfAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>ConvertToPdf</summary>
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3170,7 +3168,6 @@ namespace Pdf4me.Client
             }
         }
 
-        /// <summary>CreateImages</summary>
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req)
@@ -3178,7 +3175,6 @@ namespace Pdf4me.Client
             return CreateImagesAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>CreateImages</summary>
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3805,18 +3801,23 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Document
     {
+        /// <summary>JobId of Documents WorkingSet</summary>
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
 
+        /// <summary>DocumentId</summary>
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? DocumentId { get; set; }
 
+        /// <summary>Give filename inlcuding filetype</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
 
+        /// <summary>Returns the Status of the Document</summary>
         [Newtonsoft.Json.JsonProperty("docStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocStatus { get; set; }
 
+        /// <summary>Description of pages</summary>
         [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Page> Pages { get; set; }
 
@@ -4540,12 +4541,15 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Thumbnails document</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CreateThumbnail
     {
+        /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
+        /// <summary>MrcAction configuration</summary>
         [Newtonsoft.Json.JsonProperty("thumbnailAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ThumbnailAction ThumbnailAction { get; set; }
 
@@ -4567,14 +4571,15 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ThumbnailAction
     {
+        /// <summary>Set the Pages wo apply the convertion.</summary>
         [Newtonsoft.Json.JsonProperty("pageSelection", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PageSelection PageSelection { get; set; }
 
+        /// <summary>Set the fit page mode. If set to True, the page is scaled to fit the image (in either width or height). If set to
+        ///  False, the page is rendered with its true size.
+        /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("fitPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FitPage { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("bitsPerPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? BitsPerPixel { get; set; }
 
         [Newtonsoft.Json.JsonProperty("widthPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? WidthPixel { get; set; }
@@ -4582,15 +4587,30 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("hightPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? HightPixel { get; set; }
 
+        /// <summary>If True a uniform up- or down-scaling is applied, i.e. the output image has the same ratio of width to height as the
+        /// input file and its size will fit into the defined dimensions, given by SetBitmapDimensions.
+        /// 
+        /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("preserveAspectRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? PreserveAspectRatio { get; set; }
 
+        /// <summary>Set the quality index of lossy compression types. This value ranges from 1 to 100 and is applied to JPEG and
+        /// JPEG2000 compression.For JPEG2000, a quality index of 100 means lossless compression.JPEG compression is
+        /// always lossy.
+        /// 
+        /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("imageQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ImageQuality { get; set; }
 
+        /// <summary>Get or set the resolution of the image in DPI (dots per inch).
+        /// Set Both the resolutions for the x- and y-axis are set to the same value.
+        /// <para>
+        /// Setting DPI is redundant to setting the specialized properties XDPI and YDPI.
+        /// </para>{default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("dpi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Dpi { get; set; }
 
+        /// <summary>Set output Type for image file.</summary>
         [Newtonsoft.Json.JsonProperty("imageExtension", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ThumbnailActionImageExtension? ImageExtension { get; set; }
@@ -4609,12 +4629,17 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class PageSelection
     {
+        /// <summary>Give a list of PageNrs to apply the action.<br />
+        /// PageNrs overruels PageIds and PageSequence</summary>
         [Newtonsoft.Json.JsonProperty("pageNrs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<int> PageNrs { get; set; }
 
+        /// <summary>Give a List of PagesIds to apply the action.<br />
+        /// PageIds overrules the PageSequence</summary>
         [Newtonsoft.Json.JsonProperty("pageIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<System.Guid> PageIds { get; set; }
 
+        /// <summary>{default: PageSelection.All}</summary>
         [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PageSelectionPageSequence? PageSequence { get; set; }
@@ -4630,9 +4655,11 @@ namespace Pdf4me.Client
         }
     }
 
+    /// <summary>Get Thumbnails</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class CreateThumbnailRes
     {
+        /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
@@ -5462,20 +5489,24 @@ namespace Pdf4me.Client
     {
         /// <summary> Get or set whether to extract embedded fonts. Depending on the font type, the extracted font has one of the
         ///  following three formats: fnt‹objno›.ttf or fnt‹objno›.pfb or fnt‹objno›.cff, where ‹objno› is the
-        /// number of the PDF object of the font.</summary>
+        /// number of the PDF object of the font.
+        ///  {default:  false}</summary>
         [Newtonsoft.Json.JsonProperty("extractFonts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ExtractFonts { get; set; }
 
         /// <summary>Get or set whether to extract images.Depending on the compression, the extracted image has one of the following
-        /// formats: img‹objno›.tif or img‹objno›.jpg, where objno is the number of the PDF object of the image.</summary>
+        /// formats: img‹objno›.tif or img‹objno›.jpg, where objno is the number of the PDF object of the image.
+        /// {default:  false}</summary>
         [Newtonsoft.Json.JsonProperty("extractImages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ExtractImages { get; set; }
 
-        /// <summary>List all fonts included in the document and write them as a list to a text file</summary>
+        /// <summary>List all fonts included in the document and write them as a list to a text file
+        /// {default:  false}</summary>
         [Newtonsoft.Json.JsonProperty("listFonts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ListFonts { get; set; }
 
-        /// <summary>List all images included in the document and write them as a list to a text file.</summary>
+        /// <summary>List all images included in the document and write them as a list to a text file.
+        /// {default:  false}</summary>
         [Newtonsoft.Json.JsonProperty("listImages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ListImages { get; set; }
 
@@ -5963,6 +5994,8 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("flattenSignatureFields", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FlattenSignatureFields { get; set; }
 
+        /// <summary>For certain types of scanned documents, MRC (mixed raster content) optimization can have a significant impact on
+        /// file size while still preserve the visual appearance of the document.</summary>
         [Newtonsoft.Json.JsonProperty("mrcParameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public MrcParameters MrcParameters { get; set; }
 
@@ -5982,7 +6015,8 @@ namespace Pdf4me.Client
     {
         /// <summary> Get or set the compression type for MRC foreground and background layers.
         /// See TPDFCompression for possible values.See also Mixed Raster Content
-        /// (MRC) Optimization for Images.</summary>
+        /// (MRC) Optimization for Images.
+        ///  {default: ComprJPEG2000}</summary>
         [Newtonsoft.Json.JsonProperty("mrcLayerCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public MrcParametersMrcLayerCompression? MrcLayerCompression { get; set; }
@@ -5990,33 +6024,31 @@ namespace Pdf4me.Client
         /// <summary>Get or set the image quality for MRC foreground and background layers when
         /// using a lossy compression type.This is a value between 0 and 100.
         /// See also Supported Image Compression Types, Relevant Factors for the File
-        /// Size, and Mixed Raster Content(MRC) Optimization for Images.</summary>
+        /// Size, and Mixed Raster Content(MRC) Optimization for Images.
+        /// {default: 10}</summary>
         [Newtonsoft.Json.JsonProperty("mrcLayerQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? MrcLayerQuality { get; set; }
 
         /// <summary>Get or set the target resolution in DPI for down-sampling MRC foreground
         /// and background layers.If set to -1 then no down-sampling is performed.
         /// See also Provided Features for Optimizing Images and Mixed Raster Content
-        /// (MRC) Optimization for Images.</summary>
+        /// (MRC) Optimization for Images.
+        /// {default: 70}</summary>
         [Newtonsoft.Json.JsonProperty("mrcLayerResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? MrcLayerResolutionDPI { get; set; }
 
-        /// <summary>Get or set the compression type for MRC masks.See TPDFCompression
-        /// for possible values. See also Mixed Raster Content (MRC) Optimization for
-        /// Images.</summary>
         [Newtonsoft.Json.JsonProperty("mrcMaskCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public MrcParametersMrcMaskCompression? MrcMaskCompression { get; set; }
 
-        /// <summary>Get or set the compression type for MRC cut-out pictures.See TPDFCompression for 
-        /// possible values.See also Mixed Raster Content (MRC) Optimization for Images.</summary>
         [Newtonsoft.Json.JsonProperty("mrcPictCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public MrcParametersMrcPictCompression? MrcPictCompression { get; set; }
 
         /// <summary>Get or set the option to recognize photographic regions when doing MRC.
         /// When set to False then Phase 1: Cutting out Pictures is omitted, i.e., no regions of photographic content are identified.See also Mixed Raster Content
-        /// (MRC) Optimization for Images.</summary>
+        /// (MRC) Optimization for Images.
+        /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("mrcRecognizePictures", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? MrcRecognizePictures { get; set; }
 
