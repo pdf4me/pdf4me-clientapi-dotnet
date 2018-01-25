@@ -2566,22 +2566,22 @@ namespace Pdf4me.Client
             }
         }
 
-        /// <summary>Document</summary>
+        /// <summary>RecognizeDocument</summary>
         /// <returns>Recognize any document</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<RecognizeDocumentRes> DocumentAsync(RecognizeDocument req)
+        public System.Threading.Tasks.Task<RecognizeDocumentRes> RecognizeDocumentAsync(RecognizeDocument req)
         {
-            return DocumentAsync(req, System.Threading.CancellationToken.None);
+            return RecognizeDocumentAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>Document</summary>
+        /// <summary>RecognizeDocument</summary>
         /// <returns>Recognize any document</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<RecognizeDocumentRes> DocumentAsync(RecognizeDocument req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<RecognizeDocumentRes> RecognizeDocumentAsync(RecognizeDocument req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Ocr/Document");
+            urlBuilder_.Append("Ocr/RecognizeDocument");
 
             var client_ = _httpClient;
             try
@@ -2798,7 +2798,7 @@ namespace Pdf4me.Client
             }
         }
 
-        /// <summary>ExtractResources</summary>
+        /// <summary>ExtractResources*</summary>
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ExtractResourcesRes> ExtractResourcesAsync(ExtractResources req)
@@ -2806,7 +2806,7 @@ namespace Pdf4me.Client
             return ExtractResourcesAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <summary>ExtractResources</summary>
+        /// <summary>ExtractResources*</summary>
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4762,6 +4762,12 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("splitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? SplitAfterPage { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("splitSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<int> SplitSequence { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("recurringSplitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? RecurringSplitAfterPage { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -5390,6 +5396,9 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.19.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class OcrAction
     {
+        [Newtonsoft.Json.JsonProperty("stapel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Stapel { get; set; }
+
         [Newtonsoft.Json.JsonProperty("businesssCardReco", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? BusinesssCardReco { get; set; }
 
@@ -5418,6 +5427,9 @@ namespace Pdf4me.Client
         /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("structuredDataJson", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string StructuredDataJson { get; set; }
 
         public string ToJson()
         {
@@ -6150,6 +6162,9 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("center", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Center { get; set; }
 
+        /// <summary>set the fit page mode. If set to True, the page is scaled to fit the image (in either width or height). If set to
+        /// False, the page is rendered with its true size.
+        /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("fitPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FitPage { get; set; }
 
@@ -6220,27 +6235,47 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("customCMSConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomCMSConfig CustomCMSConfig { get; set; }
 
-        /// <summary>      Set the dithering algorithm.Dithering refers to the procedure of simulating colors or grayscales.This is mainly
+        /// <summary>Set the dithering algorithm.Dithering refers to the procedure of simulating colors or grayscales.This is mainly
         /// useful for low color depth (e.g.black and white or indexed) images.
-        /// The supported values for TPDFDithering are listed in the corresponding enumeration.For more information see
-        /// chapter Dithering
-        ///  {default: DitherFloydSteinberg}</summary>
+        /// The supported values for TPDFDithering are listed in the corresponding enumeration.
+        /// {default: DitherFloydSteinberg}</summary>
         [Newtonsoft.Json.JsonProperty("dithering", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionDithering? Dithering { get; set; }
 
-        /// <summary>Get or set the resolution of the image in DPI (dots per inch).
-        /// Set Both the resolutions for the x- and y-axis are set to the same value.
-        /// <para>
-        /// Setting DPI is redundant to setting the specialized properties XDPI and YDPI.
-        /// </para>{default: 150}</summary>
+        /// <summary><p>
+        ///             Get or set the resolution of the image in DPI (dots per inch).
+        ///             Set Both the resolutions for the x- and y-axis are set to the same value.
+        ///             </p>
+        /// <p>
+        ///             Setting DPI is redundant to setting the specialized properties XDPI and YDPI.
+        ///             </p>
+        /// {default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("dpi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Dpi { get; set; }
 
+        /// <summary>Set the bit fill order.  MSB (Most significant bit) or LSB (Least significant bit) first.
+        /// 
+        /// {default: MostSignificantBit}</summary>
         [Newtonsoft.Json.JsonProperty("fillOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionFillOrder? FillOrder { get; set; }
 
+        /// <summary><p>
+        ///             This property is used to enable and parameterize super-sampling, a technique to initially render the image at a
+        ///             higher resolution and then sample it down to the target resolution.As a result of that process the final image
+        ///             appears smoother, i.e.anti-aliased.
+        ///             </p>
+        /// <p>
+        ///             Applying super-sampling improves the image quality when rendering at low target resolutions(72 DPI or less); the
+        ///             higher the target resolution the less the visual impact.
+        ///             This property requires memory and CPU time quadratically to the ratio, therefore only small values, such as 2 or 3
+        ///             should be used.
+        ///             </p>
+        /// <p>
+        ///             If a too high value (in combination with the original image size) is set, it is ignored.
+        ///             </p>
+        /// {default: 1}</summary>
         [Newtonsoft.Json.JsonProperty("filterRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? FilterRatio { get; set; }
 
