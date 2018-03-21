@@ -67,6 +67,14 @@ namespace Pdf4me.Client
             }
         }
 
+        public PdfSimpleClient FastPdfClient
+        {
+            get
+            {
+                return new PdfSimpleClient(PdfClient);
+            }
+        }
+
         public PdfClient PdfClient
         {
             get
