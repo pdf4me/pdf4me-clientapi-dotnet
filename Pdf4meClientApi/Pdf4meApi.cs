@@ -959,7 +959,7 @@ namespace Pdf4me.Client
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", status_, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", status_, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", status_, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2813,11 +2813,11 @@ namespace Pdf4me.Client
     {
         /// <summary>JobId of Documents WorkingSet</summary>
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobId { get; set; }
+        public string JobId { get; set; }
 
         /// <summary>DocumentId</summary>
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? DocumentId { get; set; }
+        public string DocumentId { get; set; }
 
         /// <summary>Give filename inlcuding filetype</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -2922,10 +2922,10 @@ namespace Pdf4me.Client
     public partial class Page
     {
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? DocumentId { get; set; }
+        public string DocumentId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("pageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? PageId { get; set; }
+        public string PageId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("pageNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? PageNumber { get; set; }
@@ -2937,7 +2937,7 @@ namespace Pdf4me.Client
         public byte[] Thumbnail { get; set; }
 
         [Newtonsoft.Json.JsonProperty("sourceDocumentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? SourceDocumentId { get; set; }
+        public string SourceDocumentId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("sourcePageNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? SourcePageNumber { get; set; }
