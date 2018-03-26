@@ -11,10 +11,10 @@ using System.Threading.Tasks;
 
 namespace Pdf4me.Client
 {
-    public class Pdf4meClient
+    public class Pdf4me
     {
 
-        public static readonly Pdf4meClient Instance = new Pdf4meClient();
+        public static readonly Pdf4me Instance = new Pdf4me();
 
         string _api = "https://api-dev.pdf4me.com";
         string _authString = "https://login.microsoftonline.com/devynooxlive.onmicrosoft.com";
@@ -22,14 +22,14 @@ namespace Pdf4me.Client
         string _key = "";
         string _token ="";
 
-        static Pdf4meClient()
+        static Pdf4me()
         {
 
 
         }
 
         // Instance constructor is private to enforce singleton semantics
-        private Pdf4meClient() : base()
+        private Pdf4me() : base()
         {
             //_clientId = ConfigurationManager.AppSettings["Pdf4meClientId"];
             //_key = ConfigurationManager.AppSettings["Pdf4meSecret"];
@@ -67,13 +67,22 @@ namespace Pdf4me.Client
             }
         }
 
-        public PdfSimpleClient FastPdfClient
+        public OptimizeClient OptimizeClient
         {
             get
             {
-                return new PdfSimpleClient(PdfClient);
+                return new OptimizeClient(PdfClient);
             }
         }
+
+        public StampClient StampClient
+        {
+            get
+            {
+                return new StampClient(PdfClient);
+            }
+        }
+
 
         public PdfClient PdfClient
         {

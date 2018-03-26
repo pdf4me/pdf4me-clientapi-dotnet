@@ -8,7 +8,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pdf4me
+namespace Pdf4me.Client
 {
     public static class Extension
     {
@@ -25,7 +25,7 @@ namespace Pdf4me
 
             using (var ms = new MemoryStream(file))
             {
-                HttpClient client = Pdf4meClient.Instance.getApi();
+                HttpClient client = Pdf4me.Instance.getApi();
                 
                 content.Add(new StreamContent(ms), "file", fileName);
                 

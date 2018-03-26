@@ -98,7 +98,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions.cs" />
-    <Compile Include="PdfSimpleClient.cs" />
+    <Compile Include="MergeClient.cs" />
+    <Compile Include="StampClient.cs" />
+    <Compile Include="OptimizeClient.cs" />
     <Compile Include="Pdf4meApi.cs" />
     <Compile Include="Pdf4me.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

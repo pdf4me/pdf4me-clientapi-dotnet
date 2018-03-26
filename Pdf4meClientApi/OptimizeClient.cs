@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Pdf4me.Client
 {
-    public class PdfSimpleClient
+    public class OptimizeClient
     {
 
         private PdfClient _pdfClient;
 
-        public PdfSimpleClient(PdfClient pdfClient)
+        public OptimizeClient(PdfClient pdfClient)
         {
             _pdfClient = pdfClient;
         }
