@@ -1,6 +1,4 @@
-﻿using Pdf4me;
-using Pdf4me.Client;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pdf4me.Client
+namespace Pdf4meClient
 {
     public static class Extension
     {

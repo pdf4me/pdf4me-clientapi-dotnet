@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pdf4me.Client
+namespace Pdf4meClient
 {
     public class OptimizeClient
     {

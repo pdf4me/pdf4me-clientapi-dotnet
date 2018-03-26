@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pdf4me.Client
+namespace Pdf4meClient
 {
     public class MergeClient
     {
@@ -19,7 +19,7 @@ namespace Pdf4me.Client
         public async Task<byte[]> MergeAsync(byte[] doc1, byte[] doc2)
         {
 
-            var req = new Merge()
+            var req = new Pdf4meClient.Merge()
             {
                 Documents = new System.Collections.ObjectModel.ObservableCollection<Document>() {
 

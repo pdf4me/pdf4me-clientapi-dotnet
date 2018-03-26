@@ -9,7 +9,7 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pdf4me.Client
+namespace Pdf4meClient
 {
     public class Pdf4me
     {
