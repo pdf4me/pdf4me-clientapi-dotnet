@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace Pdf4meClient
 {
-    public class StampClient
+    public partial class StampClient
     {
-
-        private PdfClient _pdfClient;
-
-        public StampClient(PdfClient pdfClient)
-        {
-            _pdfClient = pdfClient;
-        }
 
         public async Task<byte[]> StampAsync(string text, string pages, StampActionAlignX alignX, StampActionAlignY alignY, byte[] document)
         {
@@ -41,7 +34,7 @@ namespace Pdf4meClient
                 }
             };
 
-            var res = await _pdfClient.StampAsync(req);
+            var res = await StampAsync(req);
 
             if (res != null && res.Document != null)
             {

@@ -71,7 +71,7 @@ namespace Pdf4meClient
         {
             get
             {
-                return new OptimizeClient(PdfClient);
+                return new OptimizeClient(getApi());
             }
         }
 
@@ -79,26 +79,34 @@ namespace Pdf4meClient
         {
             get
             {
-                return new StampClient(PdfClient);
+                return new StampClient(getApi());
             }
         }
 
-
-        public PdfClient PdfClient
+        public ImageClient ImageClient
         {
             get
             {
-                return new PdfClient(getApi());
+                return new ImageClient(getApi());
             }
         }
 
-        public LightClient LightClient
-        {
-            get
-            {
-                return new LightClient(getApi());
-            }
-        }
+        //public PdfClient PdfClient
+        //{
+        //    get
+        //    {
+        //        return new PdfClient(getApi());
+        //    }
+        //}
+
+
+        //public LightClient LightClient
+        //{
+        //    get
+        //    {
+        //        return new LightClient(getApi());
+        //    }
+        //}
 
         public OcrClient OcrClient
         {

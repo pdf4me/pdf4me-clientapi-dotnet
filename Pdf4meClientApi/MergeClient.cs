@@ -6,15 +6,8 @@ using System.Threading.Tasks;
 
 namespace Pdf4meClient
 {
-    public class MergeClient
+    public partial class MergeClient
     {
-
-        private PdfClient _pdfClient;
-
-        public MergeClient(PdfClient pdfClient)
-        {
-            _pdfClient = pdfClient;
-        }
 
         public async Task<byte[]> MergeAsync(byte[] doc1, byte[] doc2)
         {
@@ -35,7 +28,7 @@ namespace Pdf4meClient
                
             };
 
-            var res = await _pdfClient.MergeAsync(req);
+            var res = await MergeAsync(req);
 
             if (res != null && res.Document != null)
             {

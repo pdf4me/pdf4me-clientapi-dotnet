@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Pdf4meClient;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,16 +9,9 @@ using System.Threading.Tasks;
 
 namespace Pdf4meClient
 {
-    public class OptimizeClient
+    public partial class OptimizeClient
     {
-
-        private PdfClient _pdfClient;
-
-        public OptimizeClient(PdfClient pdfClient)
-        {
-            _pdfClient = pdfClient;
-        }
-
+        
         public static async Task<byte[]> OptimizeAsync(OptimizeActionProfile profile, byte[] file, string fileName)
         {
 
@@ -61,8 +55,7 @@ namespace Pdf4meClient
 
 
         }
-
-
+        
 
         public async Task<byte[]> OptimizeAsync( OptimizeActionProfile profile, byte[] document)
         {
@@ -80,7 +73,7 @@ namespace Pdf4meClient
                 }
             };
 
-            var res = await _pdfClient.OptimizeAsync(req);
+            var res = await OptimizeAsync(req);
 
             if (res != null && res.Document != null)
             {
