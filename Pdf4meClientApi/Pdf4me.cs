@@ -20,7 +20,7 @@ namespace Pdf4meClient
         string _authString = "https://login.microsoftonline.com/devynooxlive.onmicrosoft.com";
         string _clientId = "";
         string _key = "";
-        string _token ="";
+        string _token = "";
 
         static Pdf4me()
         {
@@ -55,7 +55,7 @@ namespace Pdf4meClient
         {
             get
             {
-                return new DocumentClient( getApi());
+                return new DocumentClient(getApi());
             }
         }
 
@@ -63,7 +63,7 @@ namespace Pdf4meClient
         {
             get
             {
-                return new ManagementClient( getApi());
+                return new ManagementClient(getApi());
             }
         }
 
@@ -124,6 +124,46 @@ namespace Pdf4meClient
             }
         }
 
+        public MergeClient MergeClient
+        {
+            get
+            {
+                return new MergeClient(getApi());
+            }
+        }
+
+        public ConvertClient ConvertClient
+        {
+            get
+            {
+                return new ConvertClient(getApi());
+            }
+        }
+
+        public ExtractClient ExtractClient
+        {
+            get
+            {
+                return new ExtractClient(getApi());
+            }
+        }
+
+        public PdfAClient PdfAClient
+        {
+            get
+            {
+                return new PdfAClient(getApi());
+            }
+        }
+
+        public SplitClient SplitClient
+        {
+            get
+            {
+                return new SplitClient(getApi());
+            }
+        }
+
         public HttpClient getApi()
         {
 
@@ -160,7 +200,7 @@ namespace Pdf4meClient
 
             }
             else
-            {                
+            {
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 client = new HttpClient();
@@ -203,7 +243,7 @@ namespace Pdf4meClient
 
 
             return token;
-            
+
         }
 
 
