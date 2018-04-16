@@ -6,39 +6,39 @@
 
 namespace Pdf4meClient
 {
-    #pragma warning disable // Disable all warnings
+#pragma warning disable // Disable all warnings
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class ConvertClient 
+    public partial class ConvertClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public ConvertClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertFileToPdfAsync(object file)
         {
             return ConvertFileToPdfAsync(file, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -48,7 +48,7 @@ namespace Pdf4meClient
             urlBuilder_.Append("Convert/ConvertFileToPdf?");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -57,12 +57,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -72,34 +72,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ConvertToPdfRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ConvertToPdfRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -108,10 +108,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ConvertToPdfRes);
                     }
                     finally
@@ -125,14 +125,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(ConvertToPdf req)
         {
             return ConvertToPdfAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -140,7 +140,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Convert/ConvertToPdf");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -151,12 +151,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -166,34 +166,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ConvertToPdfRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ConvertToPdfRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -202,10 +202,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ConvertToPdfRes);
                     }
                     finally
@@ -219,7 +219,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -230,7 +230,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -241,42 +241,42 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class DocumentClient 
+    public partial class DocumentClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public DocumentClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <summary>GetDocuments</summary>
         /// <returns>GetDocuments Result</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -284,7 +284,7 @@ namespace Pdf4meClient
         {
             return GetDocumentsAsync(jobId, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>GetDocuments</summary>
         /// <returns>GetDocuments Result</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -293,12 +293,12 @@ namespace Pdf4meClient
         {
             if (jobId == null)
                 throw new System.ArgumentNullException("jobId");
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Document/GetDocuments?");
             urlBuilder_.Append("jobId=").Append(System.Uri.EscapeDataString(ConvertToString(jobId, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -306,12 +306,12 @@ namespace Pdf4meClient
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -321,34 +321,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(GetDocumentRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(GetDocumentRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -357,10 +357,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(GetDocumentRes);
                     }
                     finally
@@ -374,7 +374,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>GetDocument</summary>
         /// <returns>GetDocument Result</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -382,7 +382,7 @@ namespace Pdf4meClient
         {
             return GetDocumentAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>GetDocument</summary>
         /// <returns>GetDocument Result</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -391,7 +391,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Document/GetDocument");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -402,12 +402,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -417,34 +417,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(GetDocumentRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(GetDocumentRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -453,10 +453,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(GetDocumentRes);
                     }
                     finally
@@ -470,7 +470,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>DropDocument</summary>
         /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -478,7 +478,7 @@ namespace Pdf4meClient
         {
             return DropDocumentAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>DropDocument</summary>
         /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -487,7 +487,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Document/DropDocument");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -498,12 +498,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -513,34 +513,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(DropDocumentRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(DropDocumentRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<DropDocumentRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -549,10 +549,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(DropDocumentRes);
                     }
                     finally
@@ -566,7 +566,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>ProduceDocuments</summary>
         /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -574,7 +574,7 @@ namespace Pdf4meClient
         {
             return ProduceDocumentsAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>ProduceDocuments</summary>
         /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -583,7 +583,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Document/ProduceDocuments");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -594,12 +594,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -609,34 +609,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ProduceDocumentsRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ProduceDocumentsRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ProduceDocumentsRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -645,10 +645,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ProduceDocumentsRes);
                     }
                     finally
@@ -662,7 +662,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -673,7 +673,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -684,49 +684,49 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class ExtractClient 
+    public partial class ExtractClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public ExtractClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ExtractRes> ExtractPagesAsync(string pageNrs, object file)
         {
             return ExtractPagesAsync(pageNrs, file, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -737,7 +737,7 @@ namespace Pdf4meClient
             if (pageNrs != null) urlBuilder_.Append("pageNrs=").Append(System.Uri.EscapeDataString(ConvertToString(pageNrs, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -746,12 +746,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -761,34 +761,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ExtractRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ExtractRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ExtractRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -797,10 +797,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ExtractRes);
                     }
                     finally
@@ -814,14 +814,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ExtractRes> ExtractAsync(Extract req)
         {
             return ExtractAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -829,7 +829,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Extract/Extract");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -840,12 +840,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -855,34 +855,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ExtractRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ExtractRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ExtractRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -891,10 +891,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ExtractRes);
                     }
                     finally
@@ -908,7 +908,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -919,7 +919,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -930,49 +930,49 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class ImageClient 
+    public partial class ImageClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public ImageClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CreateThumbnailRes> CreateThumbnailAsync(int width, string pageNr, string imageFormat, object file)
         {
             return CreateThumbnailAsync(width, pageNr, imageFormat, file, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an extracted PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -980,7 +980,7 @@ namespace Pdf4meClient
         {
             if (width == null)
                 throw new System.ArgumentNullException("width");
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Image/CreateThumbnail?");
             urlBuilder_.Append("width=").Append(System.Uri.EscapeDataString(ConvertToString(width, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -988,7 +988,7 @@ namespace Pdf4meClient
             if (imageFormat != null) urlBuilder_.Append("imageFormat=").Append(System.Uri.EscapeDataString(ConvertToString(imageFormat, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -997,12 +997,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1012,34 +1012,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(CreateThumbnailRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(CreateThumbnailRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateThumbnailRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1048,10 +1048,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(CreateThumbnailRes);
                     }
                     finally
@@ -1065,14 +1065,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req)
         {
             return CreateImagesAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -1080,7 +1080,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Image/CreateImages");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -1091,12 +1091,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1106,34 +1106,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(CreateImagesRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(CreateImagesRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImagesRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1142,10 +1142,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(CreateImagesRes);
                     }
                     finally
@@ -1159,7 +1159,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -1170,7 +1170,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -1181,42 +1181,42 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class JobClient 
+    public partial class JobClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public JobClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <summary>CreateArchiveJobConfig</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1224,7 +1224,7 @@ namespace Pdf4meClient
         {
             return CreateArchiveJobConfigAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>CreateArchiveJobConfig</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1233,7 +1233,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/CreateArchiveJobConfig");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -1244,12 +1244,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1259,34 +1259,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ArchiveJobReq); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ArchiveJobReq);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ArchiveJobReq>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1295,10 +1295,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ArchiveJobReq);
                     }
                     finally
@@ -1312,7 +1312,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>RunJob</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1320,7 +1320,7 @@ namespace Pdf4meClient
         {
             return RunJobAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>RunJob</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1329,7 +1329,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/RunJob");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -1340,12 +1340,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1355,34 +1355,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(RunJobRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(RunJobRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<RunJobRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1391,10 +1391,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(RunJobRes);
                     }
                     finally
@@ -1408,7 +1408,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>SaveJobConfig</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1416,7 +1416,7 @@ namespace Pdf4meClient
         {
             return SaveJobConfigAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>SaveJobConfig</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1425,7 +1425,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/SaveJobConfig");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -1436,12 +1436,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1451,34 +1451,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(JobConfigRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(JobConfigRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<JobConfigRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1487,10 +1487,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(JobConfigRes);
                     }
                     finally
@@ -1504,7 +1504,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>JobConfigs</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1512,7 +1512,7 @@ namespace Pdf4meClient
         {
             return JobConfigsAsync(System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>JobConfigs</summary>
         /// <returns>Result contains an exucution JobConfig Id</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -1521,7 +1521,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/JobConfigs");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -1529,12 +1529,12 @@ namespace Pdf4meClient
                 {
                     request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -1544,34 +1544,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(System.Collections.ObjectModel.ObservableCollection<JobConfig>); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(System.Collections.ObjectModel.ObservableCollection<JobConfig>);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.ObjectModel.ObservableCollection<JobConfig>>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -1580,10 +1580,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(System.Collections.ObjectModel.ObservableCollection<JobConfig>);
                     }
                     finally
@@ -1597,7 +1597,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -1608,7 +1608,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -1619,787 +1619,42 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class LightClient 
+    public partial class ManagementClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
-        public LightClient(System.Net.Http.HttpClient httpClient)
-        {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
-            {
-                var settings = new Newtonsoft.Json.JsonSerializerSettings();
-                UpdateJsonSerializerSettings(settings);
-                return settings;
-            });
-        }
-    
-        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
-        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
-        /// <returns>Result contains an extracted PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<CreateThumbnailRes> CreateThumbnailAsync(int width, string pageNr, string imageFormat, object file)
-        {
-            return CreateThumbnailAsync(width, pageNr, imageFormat, file, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains an extracted PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<CreateThumbnailRes> CreateThumbnailAsync(int width, string pageNr, string imageFormat, object file, System.Threading.CancellationToken cancellationToken)
-        {
-            if (width == null)
-                throw new System.ArgumentNullException("width");
-    
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/CreateThumbnail?");
-            urlBuilder_.Append("width=").Append(System.Uri.EscapeDataString(ConvertToString(width, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (pageNr != null) urlBuilder_.Append("pageNr=").Append(System.Uri.EscapeDataString(ConvertToString(pageNr, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (imageFormat != null) urlBuilder_.Append("imageFormat=").Append(System.Uri.EscapeDataString(ConvertToString(imageFormat, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(CreateThumbnailRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateThumbnailRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(CreateThumbnailRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains an extracted PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ExtractRes> ExtractAsync(string pageNrs, object file)
-        {
-            return ExtractAsync(pageNrs, file, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains an extracted PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ExtractRes> ExtractAsync(string pageNrs, object file, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/Extract?");
-            if (pageNrs != null) urlBuilder_.Append("pageNrs=").Append(System.Uri.EscapeDataString(ConvertToString(pageNrs, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ExtractRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ExtractRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(ExtractRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains a splited PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<SplitRes> SplitAsync(int pageNr, object file)
-        {
-            return SplitAsync(pageNr, file, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains a splited PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<SplitRes> SplitAsync(int pageNr, object file, System.Threading.CancellationToken cancellationToken)
-        {
-            if (pageNr == null)
-                throw new System.ArgumentNullException("pageNr");
-    
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/Split?");
-            urlBuilder_.Append("pageNr=").Append(System.Uri.EscapeDataString(ConvertToString(pageNr, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(SplitRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(SplitRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains a merged PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<MergeRes> MergeAsync(object file1, object file2)
-        {
-            return MergeAsync(file1, file2, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains a merged PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<MergeRes> MergeAsync(object file1, object file2, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/Merge?");
-            if (file1 != null) urlBuilder_.Append("file1=").Append(System.Uri.EscapeDataString(ConvertToString(file1, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (file2 != null) urlBuilder_.Append("file2=").Append(System.Uri.EscapeDataString(ConvertToString(file2, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(MergeRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<MergeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(MergeRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Profile profile, object file)
-        {
-            return OptimizeAsync(profile, file, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Profile profile, object file, System.Threading.CancellationToken cancellationToken)
-        {
-            if (profile == null)
-                throw new System.ArgumentNullException("profile");
-    
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/Optimize?");
-            urlBuilder_.Append("profile=").Append(System.Uri.EscapeDataString(ConvertToString(profile, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(OptimizeRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(OptimizeRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <summary>ConvertToPdf</summary>
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(object file)
-        {
-            return ConvertToPdfAsync(file, System.Threading.CancellationToken.None);
-        }
-    
-        /// <summary>ConvertToPdf</summary>
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(object file, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/ConvertToPdf?");
-            if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ConvertToPdfRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(ConvertToPdfRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <summary>Stamp</summary>
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<StampRes> StampAsync(string text, string pages, AlignX alignX, AlignY alignY, object file)
-        {
-            return StampAsync(text, pages, alignX, alignY, file, System.Threading.CancellationToken.None);
-        }
-    
-        /// <summary>Stamp</summary>
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<StampRes> StampAsync(string text, string pages, AlignX alignX, AlignY alignY, object file, System.Threading.CancellationToken cancellationToken)
-        {
-            if (alignX == null)
-                throw new System.ArgumentNullException("alignX");
-    
-            if (alignY == null)
-                throw new System.ArgumentNullException("alignY");
-    
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Light/Stamp?");
-            if (text != null) urlBuilder_.Append("text=").Append(System.Uri.EscapeDataString(ConvertToString(text, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (pages != null) urlBuilder_.Append("pages=").Append(System.Uri.EscapeDataString(ConvertToString(pages, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Append("alignX=").Append(System.Uri.EscapeDataString(ConvertToString(alignX, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Append("alignY=").Append(System.Uri.EscapeDataString(ConvertToString(alignY, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            urlBuilder_.Length--;
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(StampRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<StampRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(StampRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
-        {
-            if (value is System.Enum)
-            {
-                string name = System.Enum.GetName(value.GetType(), value);
-                if (name != null)
-                {
-                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
-                    if (field != null)
-                    {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
-                            as System.Runtime.Serialization.EnumMemberAttribute;
-                        if (attribute != null)
-                        {
-                            return attribute.Value;
-                        }
-                    }
-                }
-            }
-            else if (value is byte[])
-            {
-                return System.Convert.ToBase64String((byte[]) value);
-            }
-            else if (value.GetType().IsArray)
-            {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
-                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
-            }
-        
-            return System.Convert.ToString(value, cultureInfo);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class ManagementClient 
-    {
-        private System.Net.Http.HttpClient _httpClient;
-        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public ManagementClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <summary>Version</summary>
         /// <returns>Version</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -2407,7 +1662,7 @@ namespace Pdf4meClient
         {
             return VersionAsync(System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>Version</summary>
         /// <returns>Version</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -2416,7 +1671,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Management/Version");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -2425,12 +1680,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2440,34 +1695,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(VersionRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(VersionRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<VersionRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2476,10 +1731,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(VersionRes);
                     }
                     finally
@@ -2493,7 +1748,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <summary>ApiUsage</summary>
         /// <returns>ApiUsage to give overview of payment profile and number of api calls.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -2501,7 +1756,7 @@ namespace Pdf4meClient
         {
             return ApiUsageAsync(System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>ApiUsage</summary>
         /// <returns>ApiUsage to give overview of payment profile and number of api calls.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -2510,7 +1765,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Management/ApiUsage");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -2519,12 +1774,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2534,34 +1789,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ApiUsageRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(ApiUsageRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ApiUsageRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2570,10 +1825,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(ApiUsageRes);
                     }
                     finally
@@ -2587,7 +1842,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -2598,7 +1853,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -2609,49 +1864,49 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class MergeClient 
+    public partial class MergeClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public MergeClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains a merged PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<MergeRes> Merge2PdfsAsync(object file1, object file2)
         {
             return Merge2PdfsAsync(file1, file2, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains a merged PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2662,7 +1917,7 @@ namespace Pdf4meClient
             if (file1 != null) urlBuilder_.Append("file1=").Append(System.Uri.EscapeDataString(ConvertToString(file1, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file2 != null) urlBuilder_.Append("file2=").Append(System.Uri.EscapeDataString(ConvertToString(file2, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -2671,12 +1926,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2686,34 +1941,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(MergeRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(MergeRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<MergeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2722,10 +1977,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(MergeRes);
                     }
                     finally
@@ -2739,14 +1994,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains a merged PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<MergeRes> MergeAsync(Merge req)
         {
             return MergeAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains a merged PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -2754,7 +2009,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Merge/Merge");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -2765,12 +2020,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2780,34 +2035,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(MergeRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(MergeRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<MergeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2816,10 +2071,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(MergeRes);
                     }
                     finally
@@ -2833,7 +2088,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -2844,7 +2099,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -2855,42 +2110,42 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class OcrClient 
+    public partial class OcrClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public OcrClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <summary>RecognizeDocument</summary>
         /// <returns>Recognize any document</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -2898,7 +2153,7 @@ namespace Pdf4meClient
         {
             return RecognizeDocumentAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <summary>RecognizeDocument</summary>
         /// <returns>Recognize any document</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
@@ -2907,7 +2162,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Ocr/RecognizeDocument");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -2918,12 +2173,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -2933,34 +2188,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(RecognizeDocumentRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(RecognizeDocumentRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<RecognizeDocumentRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -2969,10 +2224,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(RecognizeDocumentRes);
                     }
                     finally
@@ -2986,7 +2241,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -2997,7 +2252,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -3008,63 +2263,63 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class OptimizeClient 
+    public partial class OptimizeClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public OptimizeClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<OptimizeRes> OptimizeByProfileAsync(Profile2 profile, object file)
+        public System.Threading.Tasks.Task<OptimizeRes> OptimizeByProfileAsync(Profile profile, object file)
         {
             return OptimizeByProfileAsync(profile, file, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<OptimizeRes> OptimizeByProfileAsync(Profile2 profile, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<OptimizeRes> OptimizeByProfileAsync(Profile profile, object file, System.Threading.CancellationToken cancellationToken)
         {
             if (profile == null)
                 throw new System.ArgumentNullException("profile");
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Optimize/OptimizeByProfile?");
             urlBuilder_.Append("profile=").Append(System.Uri.EscapeDataString(ConvertToString(profile, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -3073,12 +2328,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -3088,34 +2343,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(OptimizeRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(OptimizeRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -3124,10 +2379,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(OptimizeRes);
                     }
                     finally
@@ -3141,14 +2396,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Optimize req)
         {
             return OptimizeAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -3156,7 +2411,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Optimize/Optimize");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -3167,12 +2422,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -3182,34 +2437,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(OptimizeRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(OptimizeRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -3218,10 +2473,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(OptimizeRes);
                     }
                     finally
@@ -3235,7 +2490,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -3246,7 +2501,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -3257,864 +2512,49 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class PdfClient 
+    public partial class PdfAClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
-        public PdfClient(System.Net.Http.HttpClient httpClient)
-        {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
-            {
-                var settings = new Newtonsoft.Json.JsonSerializerSettings();
-                UpdateJsonSerializerSettings(settings);
-                return settings;
-            });
-        }
-    
-        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
-        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
-        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
-        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
-        /// <returns>Result contains a merged PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<MergeRes> MergeAsync(Merge req)
-        {
-            return MergeAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains a merged PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<MergeRes> MergeAsync(Merge req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/Merge");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(MergeRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<MergeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(MergeRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains a splited PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<SplitRes> SplitAsync(Split req)
-        {
-            return SplitAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains a splited PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<SplitRes> SplitAsync(Split req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/Split");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(SplitRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(SplitRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains an extracted PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ExtractRes> ExtractAsync(Extract req)
-        {
-            return ExtractAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains an extracted PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ExtractRes> ExtractAsync(Extract req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/Extract");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ExtractRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ExtractRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(ExtractRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <summary>Stamp</summary>
-        /// <returns>Result contains stamped document</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<StampRes> StampAsync(Stamp req)
-        {
-            return StampAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <summary>Stamp</summary>
-        /// <returns>Result contains stamped document</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<StampRes> StampAsync(Stamp req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/Stamp");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(StampRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<StampRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(StampRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <summary>CreatePdfA</summary>
-        /// <returns>Result contains a PDF-A compatible document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<CreatePdfARes> CreatePdfAAsync(CreatePdfA req)
-        {
-            return CreatePdfAAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <summary>CreatePdfA</summary>
-        /// <returns>Result contains a PDF-A compatible document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<CreatePdfARes> CreatePdfAAsync(CreatePdfA req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/CreatePdfA");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(CreatePdfARes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreatePdfARes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(CreatePdfARes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <summary>Optimize</summary>
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Optimize req)
-        {
-            return OptimizeAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <summary>Optimize</summary>
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Optimize req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/Optimize");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(OptimizeRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(OptimizeRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(ConvertToPdf req)
-        {
-            return ConvertToPdfAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains an optimized PDF document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(ConvertToPdf req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/ConvertToPdf");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(ConvertToPdfRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(ConvertToPdfRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        /// <returns>Result contains a PDF-A compatible document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req)
-        {
-            return CreateImagesAsync(req, System.Threading.CancellationToken.None);
-        }
-    
-        /// <returns>Result contains a PDF-A compatible document.</returns>
-        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req, System.Threading.CancellationToken cancellationToken)
-        {
-            var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("Pdf/CreateImages");
-    
-            var client_ = _httpClient;
-            try
-            {
-                using (var request_ = new System.Net.Http.HttpRequestMessage())
-                {
-                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
-                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
-                    request_.Content = content_;
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
-                    PrepareRequest(client_, request_, urlBuilder_);
-                    var url_ = urlBuilder_.ToString();
-                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
-                    PrepareRequest(client_, request_, url_);
-    
-                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
-                    try
-                    {
-                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
-                        if (response_.Content != null && response_.Content.Headers != null)
-                        {
-                            foreach (var item_ in response_.Content.Headers)
-                                headers_[item_.Key] = item_.Value;
-                        }
-    
-                        ProcessResponse(client_, response_);
-    
-                        var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(CreateImagesRes); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImagesRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                        }
-                        else
-                        if (status_ == "500") 
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
-                            try
-                            {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
-                            {
-                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
-                            }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
-                        }
-                        else
-                        if (status_ != "200" && status_ != "204")
-                        {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
-                        }
-            
-                        return default(CreateImagesRes);
-                    }
-                    finally
-                    {
-                        if (response_ != null)
-                            response_.Dispose();
-                    }
-                }
-            }
-            finally
-            {
-            }
-        }
-    
-        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
-        {
-            if (value is System.Enum)
-            {
-                string name = System.Enum.GetName(value.GetType(), value);
-                if (name != null)
-                {
-                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
-                    if (field != null)
-                    {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
-                            as System.Runtime.Serialization.EnumMemberAttribute;
-                        if (attribute != null)
-                        {
-                            return attribute.Value;
-                        }
-                    }
-                }
-            }
-            else if (value is byte[])
-            {
-                return System.Convert.ToBase64String((byte[]) value);
-            }
-            else if (value.GetType().IsArray)
-            {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
-                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
-            }
-        
-            return System.Convert.ToString(value, cultureInfo);
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class PdfAClient 
-    {
-        private System.Net.Http.HttpClient _httpClient;
-        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public PdfAClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CreatePdfARes> CreatePdfAAsync(CreatePdfA req)
         {
             return CreatePdfAAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains a PDF-A compatible document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4122,7 +2562,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("PdfA/CreatePdfA");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -4133,12 +2573,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -4148,34 +2588,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(CreatePdfARes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(CreatePdfARes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<CreatePdfARes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -4184,10 +2624,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(CreatePdfARes);
                     }
                     finally
@@ -4201,7 +2641,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -4212,7 +2652,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -4223,49 +2663,49 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class SplitClient 
+    public partial class SplitClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public SplitClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains a splited PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<SplitRes> SplitByPageNrAsync(int pageNr, object file)
         {
             return SplitByPageNrAsync(pageNr, file, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains a splited PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4273,13 +2713,13 @@ namespace Pdf4meClient
         {
             if (pageNr == null)
                 throw new System.ArgumentNullException("pageNr");
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Split/SplitByPageNr?");
             urlBuilder_.Append("pageNr=").Append(System.Uri.EscapeDataString(ConvertToString(pageNr, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -4288,12 +2728,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -4303,34 +2743,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(SplitRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(SplitRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -4339,10 +2779,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(SplitRes);
                     }
                     finally
@@ -4356,14 +2796,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains a splited PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<SplitRes> SplitAsync(Split req)
         {
             return SplitAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains a splited PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4371,7 +2811,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Split/Split");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -4382,12 +2822,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -4397,34 +2837,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(SplitRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(SplitRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -4433,10 +2873,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(SplitRes);
                     }
                     finally
@@ -4450,7 +2890,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -4461,7 +2901,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -4472,60 +2912,60 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
-    public partial class StampClient 
+    public partial class StampClient
     {
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
-    
+
         public StampClient(System.Net.Http.HttpClient httpClient)
         {
-            _httpClient = httpClient; 
-            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() => 
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
             {
                 var settings = new Newtonsoft.Json.JsonSerializerSettings();
                 UpdateJsonSerializerSettings(settings);
                 return settings;
             });
         }
-    
+
         protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
-    
+
         partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
-    
+
         /// <returns>Result contains an stamped PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<StampRes> TextStampAsync(string text, string pages, AlignX2 alignX, AlignY2 alignY, object file)
+        public System.Threading.Tasks.Task<StampRes> TextStampAsync(string text, string pages, AlignX alignX, AlignY alignY, object file)
         {
             return TextStampAsync(text, pages, alignX, alignY, file, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains an stamped PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<StampRes> TextStampAsync(string text, string pages, AlignX2 alignX, AlignY2 alignY, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<StampRes> TextStampAsync(string text, string pages, AlignX alignX, AlignY alignY, object file, System.Threading.CancellationToken cancellationToken)
         {
             if (alignX == null)
                 throw new System.ArgumentNullException("alignX");
-    
+
             if (alignY == null)
                 throw new System.ArgumentNullException("alignY");
-    
+
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Stamp/TextStamp?");
             if (text != null) urlBuilder_.Append("text=").Append(System.Uri.EscapeDataString(ConvertToString(text, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
@@ -4534,7 +2974,7 @@ namespace Pdf4meClient
             urlBuilder_.Append("alignY=").Append(System.Uri.EscapeDataString(ConvertToString(alignY, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
-    
+
             var client_ = _httpClient;
             try
             {
@@ -4543,12 +2983,12 @@ namespace Pdf4meClient
                     request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -4558,34 +2998,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(StampRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(StampRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<StampRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -4594,10 +3034,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(StampRes);
                     }
                     finally
@@ -4611,14 +3051,14 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         /// <returns>Result contains stamped document</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<StampRes> StampAsync(Stamp req)
         {
             return StampAsync(req, System.Threading.CancellationToken.None);
         }
-    
+
         /// <returns>Result contains stamped document</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
@@ -4626,7 +3066,7 @@ namespace Pdf4meClient
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Stamp/Stamp");
-    
+
             var client_ = _httpClient;
             try
             {
@@ -4637,12 +3077,12 @@ namespace Pdf4meClient
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
                     request_.Headers.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-    
+
                     PrepareRequest(client_, request_, urlBuilder_);
                     var url_ = urlBuilder_.ToString();
                     request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
                     PrepareRequest(client_, request_, url_);
-    
+
                     var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
                     try
                     {
@@ -4652,34 +3092,34 @@ namespace Pdf4meClient
                             foreach (var item_ in response_.Content.Headers)
                                 headers_[item_.Key] = item_.Value;
                         }
-    
+
                         ProcessResponse(client_, response_);
-    
+
                         var status_ = ((int)response_.StatusCode).ToString();
-                        if (status_ == "200") 
+                        if (status_ == "200")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(StampRes); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(StampRes);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<StampRes>(responseData_, _settings.Value);
-                                return result_; 
-                            } 
-                            catch (System.Exception exception_) 
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
                         }
                         else
-                        if (status_ == "500") 
+                        if (status_ == "500")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
-                            var result_ = default(Pdf4meException); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
                             try
                             {
                                 result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
-                            } 
-                            catch (System.Exception exception_) 
+                            }
+                            catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
@@ -4688,10 +3128,10 @@ namespace Pdf4meClient
                         else
                         if (status_ != "200" && status_ != "204")
                         {
-                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false); 
+                            var responseData_ = await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
-            
+
                         return default(StampRes);
                     }
                     finally
@@ -4705,7 +3145,7 @@ namespace Pdf4meClient
             {
             }
         }
-    
+
         private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
         {
             if (value is System.Enum)
@@ -4716,7 +3156,7 @@ namespace Pdf4meClient
                     var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
                     if (field != null)
                     {
-                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute)) 
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
                             as System.Runtime.Serialization.EnumMemberAttribute;
                         if (attribute != null)
                         {
@@ -4727,741 +3167,741 @@ namespace Pdf4meClient
             }
             else if (value is byte[])
             {
-                return System.Convert.ToBase64String((byte[]) value);
+                return System.Convert.ToBase64String((byte[])value);
             }
             else if (value.GetType().IsArray)
             {
-                var array = System.Linq.Enumerable.OfType<object>((System.Array) value);
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
                 return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
             }
-        
+
             return System.Convert.ToString(value, cultureInfo);
         }
     }
-    
-    
+
+
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class IFormFile 
+    public partial class IFormFile
     {
         [Newtonsoft.Json.JsonProperty("contentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContentType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("contentDisposition", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ContentDisposition { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("headers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.Dictionary<string, System.Collections.ObjectModel.ObservableCollection<string>> Headers { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("length", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? Length { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FileName { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static IFormFile FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<IFormFile>(data);
         }
-    
+
     }
-    
+
     /// <summary>Converted Result</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ConvertToPdfRes 
+    public partial class ConvertToPdfRes
     {
         /// <summary>Converted Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ConvertToPdfRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Document 
+    public partial class Document
     {
         /// <summary>JobId of Documents WorkingSet</summary>
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string JobId { get; set; }
-    
+
         /// <summary>DocumentId</summary>
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocumentId { get; set; }
-    
+
         /// <summary>Give filename inlcuding filetype</summary>
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
+
         /// <summary>Returns the Status of the Document</summary>
         [Newtonsoft.Json.JsonProperty("docStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocStatus { get; set; }
-    
+
         /// <summary>Description of pages</summary>
         [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Page> Pages { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] DocData { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata DocMetadata { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docLogs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<DocLog> DocLogs { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Document FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Document>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Page 
+    public partial class Page
     {
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocumentId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pageId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PageId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pageNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? PageNumber { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rotate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Rotate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("thumbnail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] Thumbnail { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sourceDocumentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string SourceDocumentId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sourcePageNumber", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? SourcePageNumber { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Page FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Page>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class DocMetadata 
+    public partial class DocMetadata
     {
         [Newtonsoft.Json.JsonProperty("title", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Title { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Subject { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pageCount", Required = Newtonsoft.Json.Required.Always)]
         public long PageCount { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("size", Required = Newtonsoft.Json.Required.Always)]
         public long Size { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("isEncrypted", Required = Newtonsoft.Json.Required.Always)]
         public bool IsEncrypted { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pdfCompliance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PdfCompliance { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("isSigned", Required = Newtonsoft.Json.Required.Always)]
         public bool IsSigned { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("uploadedMimeType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UploadedMimeType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("uploadedFileSize", Required = Newtonsoft.Json.Required.Always)]
         public long UploadedFileSize { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static DocMetadata FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<DocMetadata>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class DocLog 
+    public partial class DocLog
     {
         [Newtonsoft.Json.JsonProperty("messageType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string MessageType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("message", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Message { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("timestamp", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? Timestamp { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docLogLevel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public DocLogLevel? DocLogLevel { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("durationMilliseconds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? DurationMilliseconds { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static DocLog FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<DocLog>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Notification 
+    public partial class Notification
     {
         /// <summary>Run execution in asynchronous way, get notified over Online WebHook</summary>
         [Newtonsoft.Json.JsonProperty("getNotification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? GetNotification { get; set; }
-    
+
         /// <summary>Will be used for Online WebHook</summary>
         [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ConnectionId { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Notification FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Notification>(data);
         }
-    
+
     }
-    
+
     /// <summary>Pdf4me Exception gives more information of what is the error.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Pdf4meException 
+    public partial class Pdf4meException
     {
         /// <summary>Human Readable Message of the error</summary>
         [Newtonsoft.Json.JsonProperty("errorMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ErrorMessage { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Pdf4meException FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(data);
         }
-    
+
     }
-    
+
     /// <summary>Convert any document to a PDF</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ConvertToPdf 
+    public partial class ConvertToPdf
     {
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
+
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
+
         /// <summary>Conversion configuration</summary>
         [Newtonsoft.Json.JsonProperty("convertToPdfAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ConvertToPdfAction ConvertToPdfAction { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ConvertToPdf FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdf>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ConvertToPdfAction 
+    public partial class ConvertToPdfAction
     {
         [Newtonsoft.Json.JsonProperty("options", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Options { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ConvertToPdfAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfAction>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class GetDocumentListRes 
+    public partial class GetDocumentListRes
     {
         [Newtonsoft.Json.JsonProperty("documentList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> DocumentList { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docLogs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<DocLog> DocLogs { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pricing", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Pricing Pricing { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Success { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("errorMsg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ErrorMsg { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("exception", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object Exception { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static GetDocumentListRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentListRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Pricing 
+    public partial class Pricing
     {
         [Newtonsoft.Json.JsonProperty("currency", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Currency { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("totalCost", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? TotalCost { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pageCnt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? PageCnt { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentCnt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? DocumentCnt { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pricingTypeRequired", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PricingTypeRequired? PricingTypeRequired { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pricingTypeOfUser", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PricingTypeOfUser? PricingTypeOfUser { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Pricing FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Pricing>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class GetDocumentRes 
+    public partial class GetDocumentRes
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Pdf4meDocument Document { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docLogs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<DocLog> DocLogs { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pricing", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Pricing Pricing { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> DocumentList { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Success { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("errorMsg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ErrorMsg { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("exception", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object Exception { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static GetDocumentRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Pdf4meDocument 
+    public partial class Pdf4meDocument
     {
         [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public Pdf4meDocumentDocumentType? DocumentType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("blobRef", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BlobRef { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("refDocumentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? RefDocumentId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("refDocAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object RefDocAction { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? DocumentId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? UserId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("ratio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Ratio { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docStatus", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public Pdf4meDocumentDocStatus? DocStatus { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("inExecution", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? InExecution { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("order", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Order { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("showDoc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ShowDoc { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] DocData { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("thumbnail", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] Thumbnail { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Page> Pages { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("thumbnails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<byte[]> Thumbnails { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docLogs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<DocLog> DocLogs { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata DocMetadata { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("originalDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata OriginalDocMetadata { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("storageProviderBroker", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public Pdf4meDocumentStorageProviderBroker? StorageProviderBroker { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("storageProvider", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public Pdf4meDocumentStorageProvider? StorageProvider { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("storageAccountId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StorageAccountId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("storageProviderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StorageProviderId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("storageProviderFolderId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StorageProviderFolderId { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Pdf4meDocument FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meDocument>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class GetDocumentReq 
+    public partial class GetDocumentReq
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? DocumentId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("thumbnailsOnly", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ThumbnailsOnly { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocumentType { get; set; }
-    
+
         /// <summary>Run the action asynchronously, get notified for any status changes.</summary>
         [Newtonsoft.Json.JsonProperty("getNotified", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? GetNotified { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ConnectionId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("userFingerprint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public UserFingerprint UserFingerprint { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static GetDocumentReq FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentReq>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class UserFingerprint 
+    public partial class UserFingerprint
     {
         [Newtonsoft.Json.JsonProperty("ipAdress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string IpAdress { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("browser", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Browser { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static UserFingerprint FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<UserFingerprint>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class DropDocumentReq 
+    public partial class DropDocumentReq
     {
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? DocumentId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? UserId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("url", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Url { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] Document { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FileName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cloudStorageProvider", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public DropDocumentReqCloudStorageProvider? CloudStorageProvider { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cloudStorageFiles", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<string> CloudStorageFiles { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cloudStorageFilesDesc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CloudStorageFilesDesc { get; set; }
-    
+
         /// <summary>Run the action asynchronously, get notified for any status changes.</summary>
         [Newtonsoft.Json.JsonProperty("getNotified", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? GetNotified { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ConnectionId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("userFingerprint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public UserFingerprint UserFingerprint { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static DropDocumentReq FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<DropDocumentReq>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class DropDocumentRes 
+    public partial class DropDocumentRes
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documentList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> DocumentList { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("docLogs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<DocLog> DocLogs { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pricing", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Pricing Pricing { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("success", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Success { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("errorMsg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ErrorMsg { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("exception", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object Exception { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static DropDocumentRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<DropDocumentRes>(data);
         }
-    
+
     }
-    
+
     /// <summary>Produce a Documents with the given Document Content and its actions</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ProduceDocuments 
+    public partial class ProduceDocuments
     {
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
-    
+
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
-    
+
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("ocrAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OcrAction OcrAction { get; set; }
-    
+
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("pdfAAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PdfAAction PdfAAction { get; set; }
-    
+
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("optimizeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OptimizeAction OptimizeAction { get; set; }
-    
+
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("produceOutput", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ProduceOutput ProduceOutput { get; set; }
-    
+
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ProduceDocuments FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ProduceDocuments>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class OcrAction 
+    public partial class OcrAction
     {
         [Newtonsoft.Json.JsonProperty("stapel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Stapel { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("businesssCardReco", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? BusinesssCardReco { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fullTextSearch", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FullTextSearch { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("outputType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OcrActionOutputType? OutputType { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static OcrAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OcrAction>(data);
         }
-    
+
     }
-    
+
     /// <summary>The CreatePdfA accepts files from many different applications and automatically 
     /// converts them into PDF/A. The level of conformity can be set to level A, U, or B. ICC color profiles for 
     /// device-dependent color profiles and font types are embedded in the document.There is an option to provide 
@@ -5471,7 +3911,7 @@ namespace Pdf4meClient
     /// typical of the PDF format.A digital signature can be applied and a conformity check carried out at the 
     /// end of the process.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class PdfAAction 
+    public partial class PdfAAction
     {
         /// <summary>By default, fonts that are embedded are automatically subset to minimize the file size. 
         /// If for any reason, e.g. postprocessing, fonts shall not be subset, set the property 
@@ -5480,7 +3920,7 @@ namespace Pdf4meClient
         ///  Additionals Fonts can be given in this FontsToSubset List</summary>
         [Newtonsoft.Json.JsonProperty("fontsToSubset", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<PdfFont> FontsToSubset { get; set; }
-    
+
         /// <summary>Other listed entries (e.g. ePDF10, ePDF11, .. .ePDF17, ePDFUnk) are not supported as output compliance 
         /// level.
         /// Some files cannot be converted to the compliance requested. This will be
@@ -5488,7 +3928,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("compliance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PdfAActionCompliance? Compliance { get; set; }
-    
+
         /// <summary>If set to True, automatic downgrade of the PDF/A conformance level is allowed, e.g. from PDF/A-1a to PDF/A-1b.
         /// If this property is set to True, the level is downgraded under the following conditions:
         /// 
@@ -5509,7 +3949,7 @@ namespace Pdf4meClient
         /// </para></summary>
         [Newtonsoft.Json.JsonProperty("allowDowngrade", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? AllowDowngrade { get; set; }
-    
+
         /// <summary> If set to True, automatic upgrade of the PDF/A version is allowed. If the target standard is PDF/A-1 and a file
         /// contains elements that cannot be converted to PDF/A-1, the target standard is upgraded to PDF/A-2. This avoids
         /// significant visual differences in the output file.
@@ -5524,7 +3964,7 @@ namespace Pdf4meClient
         /// conversion this will fail with a conversion error PDF_E_CONVERSION</summary>
         [Newtonsoft.Json.JsonProperty("allowUpgrade", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? AllowUpgrade { get; set; }
-    
+
         /// <summary><para>
         ///             Set or get the path to the ICC profile for the output intent.
         ///             </para>
@@ -5534,7 +3974,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("outputIntentProfile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PdfAActionOutputIntentProfile? OutputIntentProfile { get; set; }
-    
+
         /// <summary><para>
         ///             Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access.
         ///             A linearized document has a slightly larger file size than a non-linearized file and provides the following main features:
@@ -5549,21 +3989,21 @@ namespace Pdf4meClient
         ///             </para></summary>
         [Newtonsoft.Json.JsonProperty("linearize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Linearize { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static PdfAAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PdfAAction>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class OptimizeAction 
+    public partial class OptimizeAction
     {
         /// <summary>With this property one of the predefined optimization profiles can be set. If a profile is set then all the properties
         /// listed in TPDFOptimizationProfile(table Profile Settings) are set to their respective values.Properties not
@@ -5573,17 +4013,17 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("profile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OptimizeActionProfile? Profile { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("useProfile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? UseProfile { get; set; }
-    
+
         /// <summary>Get or set whether redundant objects should be removed. If this property is
         /// set to True, duplicate objects are removed in order to reduce the file size.
         /// 
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("removeRedundantObjects", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? RemoveRedundantObjects { get; set; }
-    
+
         /// <summary>This property influences two optimizations related to subsetted fonts:
         /// - Subset embedded fonts.
         /// - Merge embedded font programs of different subsets of the same font, granted they can be merged.
@@ -5593,7 +4033,7 @@ namespace Pdf4meClient
         ///  </para>{default: false}</summary>
         [Newtonsoft.Json.JsonProperty("subsetFonts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? SubsetFonts { get; set; }
-    
+
         /// <summary>Get or set whether resources should be optimized. If set, unused resources
         /// such as images, fonts, and color spaces are removed.Also content streams
         /// are re-built.
@@ -5601,7 +4041,7 @@ namespace Pdf4meClient
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("optimizeResources", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? OptimizeResources { get; set; }
-    
+
         /// <summary>If this option is set, then re-compression of images is forced if an image in the
         /// input PDF has a compression type that differs from the compression types
         /// given in ContinuousCompressions, BitonalCompressions, or IndexedCompressions. Use this option if you want to allow only the given
@@ -5609,7 +4049,7 @@ namespace Pdf4meClient
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("forceCompressionTypes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ForceCompressionTypes { get; set; }
-    
+
         /// <summary>If set, all images are always recompressed.If not set (default), images are only
         /// recompressed if the resulting image is smaller than the original, i.e.requires
         /// less bytes to store in the file.
@@ -5617,7 +4057,7 @@ namespace Pdf4meClient
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("forceRecompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ForceRecompression { get; set; }
-    
+
         /// <summary>This property is used to enable color complexity reduction of images. (See
         /// also Provided Features for Optimizing Images.)
         /// If enabled then images with device color spaces(DeviceRGB, DeviceCMYK,
@@ -5634,13 +4074,13 @@ namespace Pdf4meClient
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("reduceColorComplexity", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ReduceColorComplexity { get; set; }
-    
+
         /// <summary>Merge embedded font programs. Font programs can be merged, if they
         /// originate from the same font, e.g.they are of the same type, have the same
         /// name and encoding.Merging of Type1(PostScript) and TrueType fonts is supported.</summary>
         [Newtonsoft.Json.JsonProperty("mergeEmbeddedFonts", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? MergeEmbeddedFonts { get; set; }
-    
+
         /// <summary>Get or set the compression types for bi-tonal images.
         /// Several values can be combined.The following values are allowed:
         /// ComprAttemptNone
@@ -5660,21 +4100,21 @@ namespace Pdf4meClient
         ///  </para>{default: ComprAttemptNone}</summary>
         [Newtonsoft.Json.JsonProperty("bitonalCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous> BitonalCompressions { get; set; }
-    
+
         /// <summary>Get or set the target resolution in dots per inch (DPI) after re-sampling images
         /// for bi-tonal images.See also ResolutionDPI.
         /// 
         /// {default: 200}</summary>
         [Newtonsoft.Json.JsonProperty("bitonalResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? BitonalResolutionDPI { get; set; }
-    
+
         /// <summary>Get or set the threshold resolution in dots per inch (DPI) to selectively activate
         /// re-sampling for bi-tonal images.The value -1 deactivates re-sampling for bitonal images. See also ThresholdDPI.
         /// 
         /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("bitonalThresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? BitonalThresholdDPI { get; set; }
-    
+
         /// <summary>Get or set the option to clip images. When enabled, then invisible parts of images are clipped (cropped). 
         /// While this does not affect visual parts of images, it may have a minor visual impact because clipped 
         /// images are re-compressed. Pre-blended images are not clipped. Enabling this property will also 
@@ -5683,7 +4123,7 @@ namespace Pdf4meClient
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("clipImages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? ClipImages { get; set; }
-    
+
         /// <summary>Get or set the compression types to be tried for continuous images, i.e. RGB, CMYK, and grayscale images.
         /// See also TPDFComprAttempt. Several values can be combined with bitwise or operators.
         /// Other values are ignored. During optimization, all set compression types are tried and the one resulting in 
@@ -5692,7 +4132,7 @@ namespace Pdf4meClient
         /// {default: ComprAttemptNone}</summary>
         [Newtonsoft.Json.JsonProperty("continuousCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous2> ContinuousCompressions { get; set; }
-    
+
         /// <summary>Get or set whether to linearize the PDF output file, i.e. optimize file for fast web access. 
         /// A linearized document has a slightly larger file size than a non-linearized file and provides the following main features: 
         /// - When a document is opened in a PDF viewer of a web browser, the first page can be viewed without downloading the entire 
@@ -5704,7 +4144,7 @@ namespace Pdf4meClient
         ///  </para>{default: false}</summary>
         [Newtonsoft.Json.JsonProperty("linearize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Linearize { get; set; }
-    
+
         /// <summary>Get or set the quality index of lossy compression types. This value ranges 
         /// from 1 to 100 and is applied to JPEG and JPEG2000 compression.For
         /// JPEG2000, a quality index of 100 means lossless compression.JPEG compression is always lossy.
@@ -5712,7 +4152,7 @@ namespace Pdf4meClient
         /// {default: 75}</summary>
         [Newtonsoft.Json.JsonProperty("imageQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ImageQuality { get; set; }
-    
+
         /// <summary>Get or set the compression types for images that have an indexed (“palette”)
         /// color space.See also TPDFComprAttempt.
         /// Several values can be combined with bitwise or operators.The following values are allowed:
@@ -5727,7 +4167,7 @@ namespace Pdf4meClient
         ///  </para>{default: ComprAttemptFlate}</summary>
         [Newtonsoft.Json.JsonProperty("indexedCompressions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous3> IndexedCompressions { get; set; }
-    
+
         /// <summary>This option enables or disables dithering when down-sampling bi-tonal images.
         /// The only values supported are eDitherNone and eDitherFloydSteinberg.
         /// Some bi-tonal images try to evoke the impression of different levels of gray
@@ -5739,14 +4179,14 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("ditheringMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OptimizeActionDitheringMode? DitheringMode { get; set; }
-    
+
         /// <summary>Get or set the target resolution in dots per inch (DPI) after re-sampling images
         /// for color images.See also ResolutionDPI.
         /// 
         /// {default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("colorResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ColorResolutionDPI { get; set; }
-    
+
         /// <summary>Get or set the threshold resolution in dots per inch (DPI) to selectively activate
         /// re-sampling for color images.The value -1 deactivates re-sampling for color
         /// images. See also ThresholdDPI.
@@ -5754,14 +4194,14 @@ namespace Pdf4meClient
         /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("colorThresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? ColorThresholdDPI { get; set; }
-    
+
         /// <summary>Get or set target resolution in dots per inch (DPI) after re-sampling images
         /// for monochrome images.See also ResolutionDPI.
         /// 
         /// {default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("monochromeResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? MonochromeResolutionDPI { get; set; }
-    
+
         /// <summary>Get or set the threshold resolution in dots per inch (DPI) to selectively activate
         /// re-sampling for monochrome images.The value -1 deactivates re-sampling
         /// for monochrome images. See also ThresholdDPI.
@@ -5769,7 +4209,7 @@ namespace Pdf4meClient
         /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("monochromeThresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? MonochromeThresholdDPI { get; set; }
-    
+
         /// <summary>Get or set the resolution in DPI (dots per inch) after re-sampling images.
         /// This property affects all three image compression types(BitonalResolutionDPI, ColorResolutionDPI, MonochromeResolutionDPI).
         /// A typical value for the resolution when optimizing for the web is 150 DPI.For
@@ -5780,7 +4220,7 @@ namespace Pdf4meClient
         /// {default: Different defaults apply to different image types}</summary>
         [Newtonsoft.Json.JsonProperty("resolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ResolutionDPI { get; set; }
-    
+
         /// <summary>Set the threshold in DPI (dots per inch) to selectively activate re-sampling.
         /// Only images with a resolution above the threshold DPI will be re-sampled.
         /// This property affects all three image compression types(BitonalThresholdDPI, ColorThresholdDPI, MonochromeThresholdDPI). The
@@ -5789,7 +4229,7 @@ namespace Pdf4meClient
         /// {default: -1}</summary>
         [Newtonsoft.Json.JsonProperty("thresholdDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ThresholdDPI { get; set; }
-    
+
         /// <summary> Get or set the stripping mode. This mode can be configured to remove unneeded data of a PDF document such as Threads, Metadata, the PieceInfo,
         /// the StructTreeRoot entry, embedded Thumbs and the SpiderInfo entry.Also
         /// this mode is used to indicate whether to flatten form fields, links, and other
@@ -5799,14 +4239,14 @@ namespace Pdf4meClient
         ///  {default: StripThreads}</summary>
         [Newtonsoft.Json.JsonProperty("strip", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous4> Strip { get; set; }
-    
+
         /// <summary> Set a key-value pair in the document info dictionary. Values of predefined keys are also stored in the XMP metadata.
         /// Popular entries specified in the PDF Reference 1.7 and accepted by most PDF viewers are "Title", "Author",
         /// "Subject", "Creator" (sometimes referred to as Application), and "Producer" (sometimes referred to as
         ///  PDF Creator).</summary>
         [Newtonsoft.Json.JsonProperty("infoEntries", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> InfoEntries { get; set; }
-    
+
         /// <summary>A signature in a PDF consist of two parts:
         /// a.The invisible digital signature in the PDF.
         /// b.The visual appearance that was attributed to the signature.
@@ -5823,319 +4263,260 @@ namespace Pdf4meClient
         /// broken signature.In most cases, such a behavior is undesirable</para></summary>
         [Newtonsoft.Json.JsonProperty("flattenSignatureFields", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FlattenSignatureFields { get; set; }
-    
-        /// <summary>For certain types of scanned documents, MRC (mixed raster content) optimization can have a significant impact on
-        /// file size while still preserve the visual appearance of the document.</summary>
-        [Newtonsoft.Json.JsonProperty("mrcParameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public MrcParameters MrcParameters { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static OptimizeAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeAction>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ProduceOutput 
+    public partial class ProduceOutput
     {
         [Newtonsoft.Json.JsonProperty("fileType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ProduceOutputFileType? FileType { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ProduceOutput FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ProduceOutput>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class PdfFont 
+    public partial class PdfFont
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fontContent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] FontContent { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static PdfFont FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PdfFont>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class KeyValuePairOfStringAndString 
+    public partial class KeyValuePairOfStringAndString
     {
         [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Key { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Value { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static KeyValuePairOfStringAndString FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndString>(data);
         }
-    
+
     }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class MrcParameters 
-    {
-        /// <summary> Get or set the compression type for MRC foreground and background layers.
-        /// See TPDFCompression for possible values.See also Mixed Raster Content
-        /// (MRC) Optimization for Images.
-        ///  {default: ComprJPEG2000}</summary>
-        [Newtonsoft.Json.JsonProperty("mrcLayerCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public MrcParametersMrcLayerCompression? MrcLayerCompression { get; set; }
-    
-        /// <summary>Get or set the image quality for MRC foreground and background layers when
-        /// using a lossy compression type.This is a value between 0 and 100.
-        /// See also Supported Image Compression Types, Relevant Factors for the File
-        /// Size, and Mixed Raster Content(MRC) Optimization for Images.
-        /// {default: 10}</summary>
-        [Newtonsoft.Json.JsonProperty("mrcLayerQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? MrcLayerQuality { get; set; }
-    
-        /// <summary>Get or set the target resolution in DPI for down-sampling MRC foreground
-        /// and background layers.If set to -1 then no down-sampling is performed.
-        /// See also Provided Features for Optimizing Images and Mixed Raster Content
-        /// (MRC) Optimization for Images.
-        /// {default: 70}</summary>
-        [Newtonsoft.Json.JsonProperty("mrcLayerResolutionDPI", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? MrcLayerResolutionDPI { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("mrcMaskCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public MrcParametersMrcMaskCompression? MrcMaskCompression { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("mrcPictCompression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public MrcParametersMrcPictCompression? MrcPictCompression { get; set; }
-    
-        /// <summary>Get or set the option to recognize photographic regions when doing MRC.
-        /// When set to False then Phase 1: Cutting out Pictures is omitted, i.e., no regions of photographic content are identified.See also Mixed Raster Content
-        /// (MRC) Optimization for Images.
-        /// {default: true}</summary>
-        [Newtonsoft.Json.JsonProperty("mrcRecognizePictures", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? MrcRecognizePictures { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static MrcParameters FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<MrcParameters>(data);
-        }
-    
-    }
-    
+
     /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ProduceDocumentsRes 
+    public partial class ProduceDocumentsRes
     {
         /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ProduceDocumentsRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ProduceDocumentsRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ExtractRes 
+    public partial class ExtractRes
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ExtractRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ExtractRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Extract 
+    public partial class Extract
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("extractAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ExtractAction ExtractAction { get; set; }
-    
+
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Extract FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Extract>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ExtractAction 
+    public partial class ExtractAction
     {
         [Newtonsoft.Json.JsonProperty("extractPages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<int> ExtractPages { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ExtractAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ExtractAction>(data);
         }
-    
+
     }
-    
+
     /// <summary>Get Thumbnails</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class CreateThumbnailRes 
+    public partial class CreateThumbnailRes
     {
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static CreateThumbnailRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateThumbnailRes>(data);
         }
-    
+
     }
-    
+
     /// <summary>Thumbnails document</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class CreateImages 
+    public partial class CreateImages
     {
         /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
+
         /// <summary>MrcAction configuration</summary>
         [Newtonsoft.Json.JsonProperty("imageAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ImageAction ImageAction { get; set; }
-    
+
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static CreateImages FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImages>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ImageAction 
+    public partial class ImageAction
     {
         /// <summary>Set the Pages wo apply the convertion.
         /// 
         /// {default: PageSelection.All}</summary>
         [Newtonsoft.Json.JsonProperty("pageSelection", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public PageSelection PageSelection { get; set; }
-    
+
         /// <summary>Set or get the center mode. When set to True, the document is horizontally and vertically centered on the page.
         /// When set to False, the document is printed to the upper left corner of the page.
         /// 
         /// {default: false}</summary>
         [Newtonsoft.Json.JsonProperty("center", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Center { get; set; }
-    
+
         /// <summary>set the fit page mode. If set to True, the page is scaled to fit the image (in either width or height). If set to
         /// False, the page is rendered with its true size.
         /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("fitPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FitPage { get; set; }
-    
+
         /// <summary>Get or set the color depth. Bi-tonal: 1, gray scale: 8, RGB true color: 24, CMYK: 32.
         /// 
         /// {default: 24}</summary>
         [Newtonsoft.Json.JsonProperty("bitsPerPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? BitsPerPixel { get; set; }
-    
+
         /// <summary>Set the threshold for converting from gray to bi-tonal when Dithering is eDitherNone. Value must be in
         /// the range of 0 to 255.
         /// 
         /// {default: 181}</summary>
         [Newtonsoft.Json.JsonProperty("bilevelThreshold", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? BilevelThreshold { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("widthPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? WidthPixel { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("hightPixel", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? HightPixel { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("widthPoint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? WidthPoint { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("hightPoint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? HightPoint { get; set; }
-    
+
         /// <summary>Set a specific rendering option.</summary>
         [Newtonsoft.Json.JsonProperty("renderOptions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore, ItemConverterType = typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public System.Collections.ObjectModel.ObservableCollection<Anonymous5> RenderOptions { get; set; }
-    
+
         /// <summary>Set the rotation mode of the page.
         /// 
         /// Attribute: Set the rotation to the viewing rotation attribute of the PDF page, i.e. rendering the
@@ -6145,14 +4526,14 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("rotateMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionRotateMode? RotateMode { get; set; }
-    
+
         /// <summary>If True a uniform up- or down-scaling is applied, i.e. the output image has the same ratio of width to height as the
         /// input file and its size will fit into the defined dimensions, given by SetBitmapDimensions.
         /// 
         /// {default: true}</summary>
         [Newtonsoft.Json.JsonProperty("preserveAspectRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? PreserveAspectRatio { get; set; }
-    
+
         /// <summary>Set the quality index of lossy compression types. This value ranges from 1 to 100 and is applied to JPEG and
         /// JPEG2000 compression.For JPEG2000, a quality index of 100 means lossless compression.JPEG compression is
         /// always lossy.
@@ -6160,20 +4541,20 @@ namespace Pdf4meClient
         /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("imageQuality", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? ImageQuality { get; set; }
-    
+
         /// <summary>Set the Color Management System (CMS) Engine. 
         /// 
         /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("cmsEngine", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionCmsEngine? CmsEngine { get; set; }
-    
+
         /// <summary>Set the Color Management System (CMS) Engine. 
         /// 
         /// {default: 80}</summary>
         [Newtonsoft.Json.JsonProperty("customCMSConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public CustomCMSConfig CustomCMSConfig { get; set; }
-    
+
         /// <summary>Set the dithering algorithm.Dithering refers to the procedure of simulating colors or grayscales.This is mainly
         /// useful for low color depth (e.g.black and white or indexed) images.
         /// The supported values for TPDFDithering are listed in the corresponding enumeration.
@@ -6181,7 +4562,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("dithering", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionDithering? Dithering { get; set; }
-    
+
         /// <summary><p>
         ///             Get or set the resolution of the image in DPI (dots per inch).
         ///             Set Both the resolutions for the x- and y-axis are set to the same value.
@@ -6192,14 +4573,14 @@ namespace Pdf4meClient
         /// {default: 150}</summary>
         [Newtonsoft.Json.JsonProperty("dpi", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Dpi { get; set; }
-    
+
         /// <summary>Set the bit fill order.  MSB (Most significant bit) or LSB (Least significant bit) first.
         /// 
         /// {default: MostSignificantBit}</summary>
         [Newtonsoft.Json.JsonProperty("fillOrder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionFillOrder? FillOrder { get; set; }
-    
+
         /// <summary><p>
         ///             This property is used to enable and parameterize super-sampling, a technique to initially render the image at a
         ///             higher resolution and then sample it down to the target resolution.As a result of that process the final image
@@ -6217,12 +4598,12 @@ namespace Pdf4meClient
         /// {default: 1}</summary>
         [Newtonsoft.Json.JsonProperty("filterRatio", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? FilterRatio { get; set; }
-    
+
         /// <summary>Set output Type for image file.</summary>
         [Newtonsoft.Json.JsonProperty("imageExtension", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionImageExtension? ImageExtension { get; set; }
-    
+
         /// <summary>Set color space of the output image, see enumeration TPDFColorSpace.
         /// For black white bi-tonal images, a gray color space must be selected
         /// 
@@ -6230,7 +4611,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("colorSpace", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionColorSpace? ColorSpace { get; set; }
-    
+
         /// <summary>Get or set the compression type of TIFF images. For any other image format, the compression is automatically
         /// defined by the file extension(the file name).
         /// The supported values for TPDFCompression are listed in the corresponding enumeration.
@@ -6239,2284 +4620,2089 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("compression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionCompression? Compression { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ImageAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ImageAction>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class PageSelection 
+    public partial class PageSelection
     {
         /// <summary>Give a list of PageNrs to apply the action.<br />
         /// PageNrs overruels PageIds and PageSequence</summary>
         [Newtonsoft.Json.JsonProperty("pageNrs", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<int> PageNrs { get; set; }
-    
+
         /// <summary>Give a List of PagesIds to apply the action.<br />
         /// PageIds overrules the PageSequence</summary>
         [Newtonsoft.Json.JsonProperty("pageIds", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<string> PageIds { get; set; }
-    
+
         /// <summary>{default: PageSelection.All}</summary>
         [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public PageSelectionPageSequence? PageSequence { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static PageSelection FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PageSelection>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class CustomCMSConfig 
+    public partial class CustomCMSConfig
     {
         [Newtonsoft.Json.JsonProperty("white", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet White { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("c", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet C { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("m", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet M { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("y", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Y { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("k", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet K { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Cm { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Cy { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("ck", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Ck { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("my", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet My { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("mk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Mk { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("yk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Yk { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cmy", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Cmy { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cmk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Cmk { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cyk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Cyk { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("myk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Myk { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cmyk", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public RGBSet Cmyk { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static CustomCMSConfig FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CustomCMSConfig>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class RGBSet 
+    public partial class RGBSet
     {
         [Newtonsoft.Json.JsonProperty("red", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Red { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("green", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Green { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("blue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Blue { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static RGBSet FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<RGBSet>(data);
         }
-    
+
     }
-    
+
     /// <summary>Get Thumbnails</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class CreateImagesRes 
+    public partial class CreateImagesRes
     {
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static CreateImagesRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CreateImagesRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ArchiveJobReq 
+    public partial class ArchiveJobReq
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sourceFolder", Required = Newtonsoft.Json.Required.Always)]
         public StorageFolder SourceFolder { get; set; } = new StorageFolder();
-    
+
         [Newtonsoft.Json.JsonProperty("executionTrigger", Required = Newtonsoft.Json.Required.Always)]
         public ExecutionTrigger ExecutionTrigger { get; set; } = new ExecutionTrigger();
-    
+
         [Newtonsoft.Json.JsonProperty("archiveConfig", Required = Newtonsoft.Json.Required.Always)]
         public ArchiveConfig ArchiveConfig { get; set; } = new ArchiveConfig();
-    
+
         [Newtonsoft.Json.JsonProperty("targetFolder", Required = Newtonsoft.Json.Required.Always)]
         public StorageFolder TargetFolder { get; set; } = new StorageFolder();
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ArchiveJobReq FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ArchiveJobReq>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class StorageFolder 
+    public partial class StorageFolder
     {
         [Newtonsoft.Json.JsonProperty("storageType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public StorageFolderStorageType? StorageType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("folderName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FolderName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("host", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Host { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static StorageFolder FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<StorageFolder>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ExecutionTrigger 
+    public partial class ExecutionTrigger
     {
         [Newtonsoft.Json.JsonProperty("startTime", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? StartTime { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("cronTrigger", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CronTrigger { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("continues", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Continues { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ExecutionTrigger FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ExecutionTrigger>(data);
         }
-    
+
     }
-    
+
     /// <summary>ArchiveConfig</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ArchiveConfig 
+    public partial class ArchiveConfig
     {
         /// <summary>Give the documents metadata for archiving.</summary>
         [Newtonsoft.Json.JsonProperty("archiveMetadata", Required = Newtonsoft.Json.Required.Always)]
         public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> ArchiveMetadata { get; set; } = new System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString>();
-    
+
         /// <summary>Place a signature stamp on to the document.</summary>
         [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StampAction StampAction { get; set; }
-    
+
         /// <summary>Give your Signature Configure to get the electronical Identity.</summary>
         [Newtonsoft.Json.JsonProperty("signatureConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object SignatureConfig { get; set; }
-    
+
         /// <summary>To guarantee the time of change use a Time Stamp Service.</summary>
         [Newtonsoft.Json.JsonProperty("useTSA", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? UseTSA { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ArchiveConfig FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ArchiveConfig>(data);
         }
-    
+
     }
-    
+
     /// <summary>Define Stamp to place on Document</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class StampAction 
+    public partial class StampAction
     {
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PageSequence { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("relativePosX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? RelativePosX { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("relativePosY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? RelativePosY { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sizeX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? SizeX { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sizeY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? SizeY { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rotate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Rotate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("autoorientation", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Autoorientation { get; set; }
-    
+
         /// <summary>The opacity of the stamp as a whole. 1.0 for fully opaque, 0.0 for fully transparent.
         /// Default: 1.0
         /// The PDF/A-1 standard does not allow transparency.Therefore, for PDF/A-1 conforming input files you must
         /// not set alpha to a value other than 1.0</summary>
         [Newtonsoft.Json.JsonProperty("alpha", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public double? Alpha { get; set; }
-    
+
         /// <summary>Modify scale of stamp. Allowed values for ‹scale_set› are:
         ///  - relToA4: Scale the stamp relative to the page size. For example, make stamp half as large on a A5 and
         /// twice as large on a A3 page as specified.</summary>
         [Newtonsoft.Json.JsonProperty("scale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public StampActionScale? Scale { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("alignX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public StampActionAlignX? AlignX { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("alignY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public StampActionAlignY? AlignY { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("stampType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public StampActionStampType? StampType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("text", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Text Text { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Image Image { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static StampAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<StampAction>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Text 
+    public partial class Text
     {
         [Newtonsoft.Json.JsonProperty("format", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Format { get; set; }
-    
+
         /// <summary>The font size in points, e.g. 12. If set to 0, the size is chosen such that text fits stamp size (not allowed if operator is within transformation operator).</summary>
         [Newtonsoft.Json.JsonProperty("size", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Size { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("font", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Font { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color Color { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fontEncoding", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TextFontEncoding? FontEncoding { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public string Value { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("mode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TextMode? Mode { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rotate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Rotate Rotate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("translate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Translate Translate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("spanList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Span> SpanList { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Text FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Text>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Image 
+    public partial class Image
     {
         [Newtonsoft.Json.JsonProperty("rectangle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Rectangle Rectangle { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("imageData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] ImageData { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("imageType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ImageType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string FileName { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("compression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageCompression? Compression { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("rotate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Rotate Rotate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("translate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Translate Translate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Image FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Image>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Color 
+    public partial class Color
     {
         [Newtonsoft.Json.JsonProperty("red", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Red { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("green", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Green { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("blue", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Blue { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Color FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Color>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Rotate 
+    public partial class Rotate
     {
         [Newtonsoft.Json.JsonProperty("angle", Required = Newtonsoft.Json.Required.Always)]
         public double Angle { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("originX", Required = Newtonsoft.Json.Required.Always)]
         public int OriginX { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("originY", Required = Newtonsoft.Json.Required.Always)]
         public int OriginY { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Rotate FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Rotate>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Translate 
+    public partial class Translate
     {
         [Newtonsoft.Json.JsonProperty("offsetX", Required = Newtonsoft.Json.Required.Always)]
         public int OffsetX { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("offsetY", Required = Newtonsoft.Json.Required.Always)]
         public int OffsetY { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Translate FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Translate>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Transform 
+    public partial class Transform
     {
         [Newtonsoft.Json.JsonProperty("a", Required = Newtonsoft.Json.Required.Always)]
         public int A { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("b", Required = Newtonsoft.Json.Required.Always)]
         public int B { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("c", Required = Newtonsoft.Json.Required.Always)]
         public int C { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("d", Required = Newtonsoft.Json.Required.Always)]
         public int D { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("x", Required = Newtonsoft.Json.Required.Always)]
         public int X { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("y", Required = Newtonsoft.Json.Required.Always)]
         public int Y { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Transform FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Transform>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Span 
+    public partial class Span
     {
         [Newtonsoft.Json.JsonProperty("color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Color Color { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("decoration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SpanDecoration? Decoration { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Span FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Span>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Rectangle 
+    public partial class Rectangle
     {
         [Newtonsoft.Json.JsonProperty("x", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? X { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("y", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Y { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("width", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Width { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("hight", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? Hight { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Rectangle FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Rectangle>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ArchiveJobRes 
+    public partial class ArchiveJobRes
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("createdSuccessfully", Required = Newtonsoft.Json.Required.Always)]
         public bool CreatedSuccessfully { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ArchiveJobRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ArchiveJobRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Job 
+    public partial class Job
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobConfigId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Job FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Job>(data);
         }
-    
+
     }
-    
+
     /// <summary>Run Job</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class RunJobRes 
+    public partial class RunJobRes
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobId { get; set; }
-    
+
         /// <summary>List of Document Result</summary>
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
-    
+
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static RunJobRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<RunJobRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class JobConfig 
+    public partial class JobConfig
     {
         [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobConfigId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Always)]
         public bool Enabled { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("active", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Active { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("creationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? CreationDate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("modDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? ModDate { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         public string Name { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid UserId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("sourceFolder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StorageFolder SourceFolder { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("executionTrigger", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ExecutionTrigger ExecutionTrigger { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("actionFlow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ActionFlow ActionFlow { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("targetFolder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StorageFolder TargetFolder { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static JobConfig FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<JobConfig>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ActionFlow 
+    public partial class ActionFlow
     {
         [Newtonsoft.Json.JsonProperty("actions", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Pdf4meAction> Actions { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ActionFlow FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ActionFlow>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Pdf4meAction 
+    public partial class Pdf4meAction
     {
         [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ActionId { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("actionType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public Pdf4meActionActionType? ActionType { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("userAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UserAction { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("actionConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActionConfig { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("actionProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndObject> ActionProperties { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static Pdf4meAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meAction>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class KeyValuePairOfStringAndObject 
+    public partial class KeyValuePairOfStringAndObject
     {
         [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Key { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public object Value { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static KeyValuePairOfStringAndObject FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndObject>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class JobConfigRes 
+    public partial class JobConfigRes
     {
         [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobConfigId { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static JobConfigRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<JobConfigRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class SplitRes 
-    {
-        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static SplitRes FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class MergeRes 
-    {
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static MergeRes FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<MergeRes>(data);
-        }
-    
-    }
-    
-    /// <summary>Stamp Request with core data to stamp</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class OptimizeRes 
-    {
-        /// <summary>Stamped Document</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static OptimizeRes FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeRes>(data);
-        }
-    
-    }
-    
-    /// <summary>Stamp Request with core data to stamp</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class StampRes 
-    {
-        /// <summary>Stamped Document</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static StampRes FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<StampRes>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class VersionRes 
+    public partial class VersionRes
     {
         [Newtonsoft.Json.JsonProperty("version", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Version { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static VersionRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<VersionRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class ApiUsageRes 
+    public partial class ApiUsageRes
     {
         /// <summary>Api usage since last payment.</summary>
         [Newtonsoft.Json.JsonProperty("apiUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? ApiUsage { get; set; }
-    
+
         /// <summary>Total Usage payed.</summary>
         [Newtonsoft.Json.JsonProperty("payedUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public long? PayedUsage { get; set; }
-    
+
         /// <summary>Date of last payment</summary>
         [Newtonsoft.Json.JsonProperty("lastPayment", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? LastPayment { get; set; }
-    
+
         /// <summary>Profile of selected payment</summary>
         [Newtonsoft.Json.JsonProperty("paymentProfile", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PaymentProfile { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static ApiUsageRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ApiUsageRes>(data);
         }
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Merge 
+    public partial class MergeRes
     {
-        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("mergeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object MergeAction { get; set; }
-    
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-    
-        public string ToJson() 
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
+        public static MergeRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<MergeRes>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class Merge
+    {
+        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("mergeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public object MergeAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
         public static Merge FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Merge>(data);
         }
-    
+
     }
-    
+
     /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class RecognizeDocument 
+    public partial class RecognizeDocument
     {
         /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
+
         /// <summary>Give an image stamp</summary>
         [Newtonsoft.Json.JsonProperty("ocrAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public OcrAction OcrAction { get; set; }
-    
+
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static RecognizeDocument FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<RecognizeDocument>(data);
         }
-    
+
     }
-    
+
     /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class RecognizeDocumentRes 
+    public partial class RecognizeDocumentRes
     {
         /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
+
         [Newtonsoft.Json.JsonProperty("structuredDataJson", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StructuredDataJson { get; set; }
-    
-        public string ToJson() 
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
         public static RecognizeDocumentRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<RecognizeDocumentRes>(data);
         }
-    
+
     }
-    
+
     /// <summary>Stamp Request with core data to stamp</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Optimize 
-    {
-        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        /// <summary>Give an image stamp</summary>
-        [Newtonsoft.Json.JsonProperty("optimizeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public OptimizeAction OptimizeAction { get; set; }
-    
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static Optimize FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Optimize>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Split 
-    {
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("SplitAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public SplitAction SplitAction { get; set; }
-    
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static Split FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Split>(data);
-        }
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class SplitAction 
-    {
-        [Newtonsoft.Json.JsonProperty("splitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? SplitAfterPage { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("splitSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<int> SplitSequence { get; set; }
-    
-        [Newtonsoft.Json.JsonProperty("recurringSplitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? RecurringSplitAfterPage { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static SplitAction FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<SplitAction>(data);
-        }
-    
-    }
-    
-    /// <summary>Stamp Request with core data to stamp</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Stamp 
-    {
-        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        /// <summary>Give an image stamp</summary>
-        [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public StampAction StampAction { get; set; }
-    
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static Stamp FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Stamp>(data);
-        }
-    
-    }
-    
-    /// <summary>PDF-A Request to create PDF-A compatible document.</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class CreatePdfA 
-    {
-        /// <summary>Document containing the data</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Document Document { get; set; }
-    
-        /// <summary>PdfAAction configuration</summary>
-        [Newtonsoft.Json.JsonProperty("pdfAAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public PdfAAction PdfAAction { get; set; }
-    
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-    
-        public string ToJson() 
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-        
-        public static CreatePdfA FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<CreatePdfA>(data);
-        }
-    
-    }
-    
-    /// <summary>Stamp Request with core data to stamp</summary>
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class CreatePdfARes 
+    public partial class OptimizeRes
     {
         /// <summary>Stamped Document</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
-    
-        public string ToJson() 
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
         }
-        
+
+        public static OptimizeRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<OptimizeRes>(data);
+        }
+
+    }
+
+    /// <summary>Stamp Request with core data to stamp</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class Optimize
+    {
+        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        /// <summary>Give an image stamp</summary>
+        [Newtonsoft.Json.JsonProperty("optimizeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public OptimizeAction OptimizeAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static Optimize FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Optimize>(data);
+        }
+
+    }
+
+    /// <summary>PDF-A Request to create PDF-A compatible document.</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class CreatePdfA
+    {
+        /// <summary>Document containing the data</summary>
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        /// <summary>PdfAAction configuration</summary>
+        [Newtonsoft.Json.JsonProperty("pdfAAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public PdfAAction PdfAAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static CreatePdfA FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<CreatePdfA>(data);
+        }
+
+    }
+
+    /// <summary>Stamp Request with core data to stamp</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class CreatePdfARes
+    {
+        /// <summary>Stamped Document</summary>
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
         public static CreatePdfARes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<CreatePdfARes>(data);
         }
-    
+
     }
-    
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class SplitRes
+    {
+        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static SplitRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class Split
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("SplitAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SplitAction SplitAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static Split FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Split>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class SplitAction
+    {
+        [Newtonsoft.Json.JsonProperty("splitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? SplitAfterPage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("splitSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<int> SplitSequence { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("recurringSplitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? RecurringSplitAfterPage { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static SplitAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SplitAction>(data);
+        }
+
+    }
+
+    /// <summary>Stamp Request with core data to stamp</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class StampRes
+    {
+        /// <summary>Stamped Document</summary>
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static StampRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<StampRes>(data);
+        }
+
+    }
+
+    /// <summary>Stamp Request with core data to stamp</summary>
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class Stamp
+    {
+        /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        /// <summary>Give an image stamp</summary>
+        [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public StampAction StampAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static Stamp FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Stamp>(data);
+        }
+
+    }
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Profile
     {
         [System.Runtime.Serialization.EnumMember(Value = "default")]
         Default = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "web")]
         Web = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "print")]
         Print = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "max")]
         Max = 3,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum AlignX
     {
         [System.Runtime.Serialization.EnumMember(Value = "left")]
         Left = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "center")]
         Center = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "right")]
         Right = 2,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum AlignY
     {
         [System.Runtime.Serialization.EnumMember(Value = "top")]
         Top = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "middle")]
         Middle = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "bottom")]
         Bottom = 2,
-    
+
     }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum Profile2
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "default")]
-        Default = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "web")]
-        Web = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "print")]
-        Print = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "max")]
-        Max = 3,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum AlignX2
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "left")]
-        Left = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "center")]
-        Center = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "right")]
-        Right = 2,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum AlignY2
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "top")]
-        Top = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "middle")]
-        Middle = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "bottom")]
-        Bottom = 2,
-    
-    }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum DocLogLevel
     {
         [System.Runtime.Serialization.EnumMember(Value = "verbose")]
         Verbose = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "info")]
         Info = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "warning")]
         Warning = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "error")]
         Error = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "timing")]
         Timing = 4,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum PricingTypeRequired
     {
         [System.Runtime.Serialization.EnumMember(Value = "free")]
         Free = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "basic")]
         Basic = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "premium")]
         Premium = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "enterprise")]
         Enterprise = 3,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum PricingTypeOfUser
     {
         [System.Runtime.Serialization.EnumMember(Value = "free")]
         Free = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "basic")]
         Basic = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "premium")]
         Premium = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "enterprise")]
         Enterprise = 3,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Pdf4meDocumentDocumentType
     {
         [System.Runtime.Serialization.EnumMember(Value = "uploadDoc")]
         UploadDoc = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "converted")]
         Converted = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "stamped")]
         Stamped = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "ocr")]
         Ocr = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "split")]
         Split = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "optimize")]
         Optimize = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "merge")]
         Merge = 6,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Pdf4meDocumentDocStatus
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "error")]
         Error = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "finished")]
         Finished = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "uploaded")]
         Uploaded = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "loading")]
         Loading = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "loaded")]
         Loaded = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "converting")]
         Converting = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "converted")]
         Converted = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "optimizing")]
         Optimizing = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "optimized")]
         Optimized = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "doingOcr")]
         DoingOcr = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "ocred")]
         Ocred = 11,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "doingZip")]
         DoingZip = 12,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "stamping")]
         Stamping = 13,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "stamped")]
         Stamped = 14,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "processing")]
         Processing = 15,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Pdf4meDocumentStorageProviderBroker
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "kloudless")]
         Kloudless = 1,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Pdf4meDocumentStorageProvider
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "local")]
         Local = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "url")]
         Url = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "oneDrive")]
         OneDrive = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "dropbox")]
         Dropbox = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "googleDrive")]
         GoogleDrive = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "kloudless")]
         Kloudless = 6,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum DropDocumentReqCloudStorageProvider
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "local")]
         Local = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "url")]
         Url = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "oneDrive")]
         OneDrive = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "dropbox")]
         Dropbox = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "googleDrive")]
         GoogleDrive = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "kloudless")]
         Kloudless = 6,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum OcrActionOutputType
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "txt")]
         Txt = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "docx")]
         Docx = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "xlsx")]
         Xlsx = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pptx")]
         Pptx = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfSearchable")]
         PdfSearchable = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "xml")]
         Xml = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "rtf")]
         Rtf = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "rtt")]
         Rtt = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "vcf")]
         Vcf = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "json")]
         Json = 10,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum PdfAActionCompliance
     {
-        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
-        Unknown = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf10")]
-        Pdf10 = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf11")]
-        Pdf11 = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf12")]
-        Pdf12 = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf13")]
-        Pdf13 = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf14")]
-        Pdf14 = 5,
-    
         [System.Runtime.Serialization.EnumMember(Value = "pdfA1b")]
-        PdfA1b = 6,
-    
+        PdfA1b = 0,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA1a")]
-        PdfA1a = 7,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf15")]
-        Pdf15 = 8,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf16")]
-        Pdf16 = 9,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "pdf17")]
-        Pdf17 = 10,
-    
+        PdfA1a = 1,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA2b")]
-        PdfA2b = 11,
-    
+        PdfA2b = 2,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA2u")]
-        PdfA2u = 12,
-    
+        PdfA2u = 3,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA2a")]
-        PdfA2a = 13,
-    
+        PdfA2a = 4,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA3b")]
-        PdfA3b = 14,
-    
+        PdfA3b = 5,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA3u")]
-        PdfA3u = 15,
-    
+        PdfA3u = 6,
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA3a")]
-        PdfA3a = 16,
-    
+        PdfA3a = 7,
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum PdfAActionOutputIntentProfile
     {
         [System.Runtime.Serialization.EnumMember(Value = "notSet")]
         NotSet = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "sRGBColorSpace")]
         SRGBColorSpace = 1,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum OptimizeActionProfile
     {
         [System.Runtime.Serialization.EnumMember(Value = "default")]
         Default = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "web")]
         Web = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "print")]
         Print = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "max")]
         Max = 3,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Anonymous
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "raw")]
         Raw = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
         JPEG = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "flate")]
         Flate = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lZW")]
         LZW = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3")]
         Group3 = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
         Group3_2D = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group4")]
         Group4 = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
         JBIG2 = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
         JPEG2000 = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "mRC")]
         MRC = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "source")]
         Source = 11,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Anonymous2
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "raw")]
         Raw = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
         JPEG = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "flate")]
         Flate = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lZW")]
         LZW = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3")]
         Group3 = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
         Group3_2D = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group4")]
         Group4 = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
         JBIG2 = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
         JPEG2000 = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "mRC")]
         MRC = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "source")]
         Source = 11,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Anonymous3
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "raw")]
         Raw = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
         JPEG = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "flate")]
         Flate = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lZW")]
         LZW = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3")]
         Group3 = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
         Group3_2D = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group4")]
         Group4 = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
         JBIG2 = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
         JPEG2000 = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "mRC")]
         MRC = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "source")]
         Source = 11,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum OptimizeActionDitheringMode
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "floydSteinberg")]
         FloydSteinberg = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "halftone")]
         Halftone = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pattern")]
         Pattern = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "g3Optimized")]
         G3Optimized = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "g4Optimized")]
         G4Optimized = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "atkinson")]
         Atkinson = 6,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Anonymous4
     {
         [System.Runtime.Serialization.EnumMember(Value = "threads")]
         Threads = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "metadata")]
         Metadata = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pieceInfo")]
         PieceInfo = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "structTree")]
         StructTree = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "thumb")]
         Thumb = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "spider")]
         Spider = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "alternates")]
         Alternates = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "forms")]
         Forms = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "links")]
         Links = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "annots")]
         Annots = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "formsAnnots")]
         FormsAnnots = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "outputIntents")]
         OutputIntents = 11,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "all")]
         All = 12,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ProduceOutputFileType
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pdf")]
         Pdf = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "zip")]
         Zip = 2,
-    
+
     }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum MrcParametersMrcLayerCompression
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "raw")]
-        Raw = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
-        JPEG = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "flate")]
-        Flate = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "lZW")]
-        LZW = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group3")]
-        Group3 = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
-        Group3_2D = 5,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group4")]
-        Group4 = 6,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
-        JBIG2 = 7,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
-        JPEG2000 = 8,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "tIFFJPEG")]
-        TIFFJPEG = 9,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
-        Unknown = 10,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "default")]
-        Default = 11,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum MrcParametersMrcMaskCompression
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "raw")]
-        Raw = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
-        JPEG = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "flate")]
-        Flate = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "lZW")]
-        LZW = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group3")]
-        Group3 = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
-        Group3_2D = 5,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group4")]
-        Group4 = 6,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
-        JBIG2 = 7,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
-        JPEG2000 = 8,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "tIFFJPEG")]
-        TIFFJPEG = 9,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
-        Unknown = 10,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "default")]
-        Default = 11,
-    
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum MrcParametersMrcPictCompression
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "raw")]
-        Raw = 0,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
-        JPEG = 1,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "flate")]
-        Flate = 2,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "lZW")]
-        LZW = 3,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group3")]
-        Group3 = 4,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
-        Group3_2D = 5,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "group4")]
-        Group4 = 6,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
-        JBIG2 = 7,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
-        JPEG2000 = 8,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "tIFFJPEG")]
-        TIFFJPEG = 9,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
-        Unknown = 10,
-    
-        [System.Runtime.Serialization.EnumMember(Value = "default")]
-        Default = 11,
-    
-    }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Anonymous5
     {
         [System.Runtime.Serialization.EnumMember(Value = "noAntialiasing")]
         NoAntialiasing = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "noInterpolation")]
         NoInterpolation = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "noLowPassFilter")]
         NoLowPassFilter = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "noHinting")]
         NoHinting = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "printingMode")]
         PrintingMode = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "noBPC")]
         NoBPC = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "fitPaths")]
         FitPaths = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "useBoxFilter")]
         UseBoxFilter = 7,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionRotateMode
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "attribute")]
         Attribute = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "portrait")]
         Portrait = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "landscape")]
         Landscape = 3,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionCmsEngine
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "neugebauer")]
         Neugebauer = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lcms")]
         Lcms = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "customCMS")]
         CustomCMS = 3,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionDithering
     {
         [System.Runtime.Serialization.EnumMember(Value = "none")]
         None = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "floydSteinberg")]
         FloydSteinberg = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "halftone")]
         Halftone = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pattern")]
         Pattern = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "g3Optimized")]
         G3Optimized = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "g4Optimized")]
         G4Optimized = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "atkinson")]
         Atkinson = 6,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionFillOrder
     {
         [System.Runtime.Serialization.EnumMember(Value = "mSB")]
         MSB = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lSB")]
         LSB = 1,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionImageExtension
     {
         [System.Runtime.Serialization.EnumMember(Value = "unknown")]
         Unknown = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "bmp")]
         Bmp = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "gif")]
         Gif = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jb2")]
         Jb2 = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jpg")]
         Jpg = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jpeg")]
         Jpeg = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jp2")]
         Jp2 = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jpf")]
         Jpf = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jpx")]
         Jpx = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "png")]
         Png = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "tif")]
         Tif = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "tiff")]
         Tiff = 11,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionColorSpace
     {
         [System.Runtime.Serialization.EnumMember(Value = "gray")]
         Gray = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "grayA")]
         GrayA = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "rGB")]
         RGB = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "rGBA")]
         RGBA = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "cMYK")]
         CMYK = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "yCbCr")]
         YCbCr = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "yCbCrK")]
         YCbCrK = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "palette")]
         Palette = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lAB")]
         LAB = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "cMYK_Konly")]
         CMYK_Konly = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "cMYKA")]
         CMYKA = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "other")]
         Other = 11,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionCompression
     {
         [System.Runtime.Serialization.EnumMember(Value = "raw")]
         Raw = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
         JPEG = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "flate")]
         Flate = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "lZW")]
         LZW = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3")]
         Group3 = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group3_2D")]
         Group3_2D = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "group4")]
         Group4 = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jBIG2")]
         JBIG2 = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "jPEG2000")]
         JPEG2000 = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "tIFFJPEG")]
         TIFFJPEG = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "unknown")]
         Unknown = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "default")]
         Default = 11,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum PageSelectionPageSequence
     {
         [System.Runtime.Serialization.EnumMember(Value = "all")]
         All = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "first")]
         First = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "last")]
         Last = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "odd")]
         Odd = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "even")]
         Even = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "notFirst")]
         NotFirst = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "notLast")]
         NotLast = 6,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum StorageFolderStorageType
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "localSystem")]
         LocalSystem = 1,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum StampActionScale
     {
         [System.Runtime.Serialization.EnumMember(Value = "relToA4")]
         RelToA4 = 0,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum StampActionAlignX
     {
         [System.Runtime.Serialization.EnumMember(Value = "left")]
         Left = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "center")]
         Center = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "right")]
         Right = 2,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum StampActionAlignY
     {
         [System.Runtime.Serialization.EnumMember(Value = "top")]
         Top = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "middle")]
         Middle = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "bottom")]
         Bottom = 2,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum StampActionStampType
     {
         [System.Runtime.Serialization.EnumMember(Value = "annotation")]
         Annotation = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "foreground")]
         Foreground = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "background")]
         Background = 2,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum TextFontEncoding
     {
         [System.Runtime.Serialization.EnumMember(Value = "unicode")]
         Unicode = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "winAnsi")]
         WinAnsi = 1,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum TextMode
     {
         [System.Runtime.Serialization.EnumMember(Value = "fill")]
         Fill = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "stroke")]
         Stroke = 1,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageCompression
     {
         [System.Runtime.Serialization.EnumMember(Value = "cCITTFax")]
         CCITTFax = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "flate")]
         Flate = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "dCT")]
         DCT = 2,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum SpanDecoration
     {
         [System.Runtime.Serialization.EnumMember(Value = "underline")]
         Underline = 0,
-    
+
     }
-    
+
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum Pdf4meActionActionType
     {
         [System.Runtime.Serialization.EnumMember(Value = "undef")]
         Undef = 0,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "user")]
         User = 1,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "optimize")]
         Optimize = 2,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "pdfA")]
         PdfA = 3,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "ocrDocument")]
         OcrDocument = 4,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "ocrBusCard")]
         OcrBusCard = 5,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "convertToPdf")]
         ConvertToPdf = 6,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "stamp")]
         Stamp = 7,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "split")]
         Split = 8,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "merge")]
         Merge = 9,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "scanMrc")]
         ScanMrc = 10,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "createThumbnail")]
         CreateThumbnail = 11,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "createImage")]
         CreateImage = 12,
-    
+
         [System.Runtime.Serialization.EnumMember(Value = "extract")]
         Extract = 13,
-    
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "11.17.0.0 (NJsonSchema v9.10.42.0 (Newtonsoft.Json v9.0.0.0))")]
@@ -8528,11 +6714,11 @@ namespace Pdf4meClient
 
         public System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> Headers { get; private set; }
 
-        public Pdf4meApiException(string message, int statusCode, string response, System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException) 
+        public Pdf4meApiException(string message, int statusCode, string response, System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> headers, System.Exception innerException)
             : base(message, innerException)
         {
             StatusCode = statusCode;
-            Response = response; 
+            Response = response;
             Headers = headers;
         }
 
@@ -8547,7 +6733,7 @@ namespace Pdf4meClient
     {
         public TResult Result { get; private set; }
 
-        public Pdf4meApiException(string message, int statusCode, string response, System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException) 
+        public Pdf4meApiException(string message, int statusCode, string response, System.Collections.Generic.Dictionary<string, System.Collections.Generic.IEnumerable<string>> headers, TResult result, System.Exception innerException)
             : base(message, statusCode, response, headers, innerException)
         {
             Result = result;
