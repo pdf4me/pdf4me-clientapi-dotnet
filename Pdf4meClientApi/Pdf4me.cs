@@ -91,23 +91,6 @@ namespace Pdf4meClient
             }
         }
 
-        //public PdfClient PdfClient
-        //{
-        //    get
-        //    {
-        //        return new PdfClient(getApi());
-        //    }
-        //}
-
-
-        //public LightClient LightClient
-        //{
-        //    get
-        //    {
-        //        return new LightClient(getApi());
-        //    }
-        //}
-
         public OcrClient OcrClient
         {
             get
