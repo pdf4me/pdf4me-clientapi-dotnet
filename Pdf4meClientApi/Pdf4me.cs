@@ -170,6 +170,7 @@ namespace Pdf4meClient
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 client = new HttpClient();
+                client.Timeout = new TimeSpan(0, 5, 0);
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
                 //client.SetBearerToken(token);
 
@@ -187,6 +188,7 @@ namespace Pdf4meClient
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 client = new HttpClient();
+                client.Timeout = new TimeSpan(0, 5, 0);
                 client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _token);
                 //client.SetBearerToken(token);
 
