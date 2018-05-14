@@ -34,18 +34,19 @@ namespace Pdf4meClient
 
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertFileToPdfAsync(object file)
+        public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertFileToPdfAsync(string fileName, object file)
         {
-            return ConvertFileToPdfAsync(file, System.Threading.CancellationToken.None);
+            return ConvertFileToPdfAsync(fileName, file, System.Threading.CancellationToken.None);
         }
 
         /// <returns>Result contains an optimized PDF document.</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ConvertToPdfRes> ConvertFileToPdfAsync(object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ConvertToPdfRes> ConvertFileToPdfAsync(string fileName, object file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Convert/ConvertFileToPdf?");
+            if (fileName != null) urlBuilder_.Append("fileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             if (file != null) urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             urlBuilder_.Length--;
 
@@ -3559,8 +3560,16 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ConvertToPdfAction
     {
-        [Newtonsoft.Json.JsonProperty("options", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Options { get; set; }
+        [Newtonsoft.Json.JsonProperty("pdfConformance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ConvertToPdfActionPdfConformance? PdfConformance { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("conversionMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public ConvertToPdfActionConversionMode? ConversionMode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
 
         public string ToJson()
         {
@@ -3570,6 +3579,27 @@ namespace Pdf4meClient
         public static ConvertToPdfAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfAction>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class KeyValuePairOfStringAndString
+    {
+        [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Key { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Value { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static KeyValuePairOfStringAndString FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndString>(data);
         }
 
     }
@@ -3695,7 +3725,7 @@ namespace Pdf4meClient
         public System.Guid? RefDocumentId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("refDocAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object RefDocAction { get; set; }
+        public DocAction RefDocAction { get; set; }
 
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? DocumentId { get; set; }
@@ -3768,6 +3798,24 @@ namespace Pdf4meClient
         public static Pdf4meDocument FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meDocument>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class DocAction
+    {
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static DocAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<DocAction>(data);
         }
 
     }
@@ -3985,6 +4033,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OcrActionOutputType? OutputType { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -4084,6 +4135,9 @@ namespace Pdf4meClient
         ///             </para></summary>
         [Newtonsoft.Json.JsonProperty("linearize", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Linearize { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
 
         public string ToJson()
         {
@@ -4359,6 +4413,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("flattenSignatureFields", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? FlattenSignatureFields { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -4407,27 +4464,6 @@ namespace Pdf4meClient
         public static PdfFont FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<PdfFont>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class KeyValuePairOfStringAndString
-    {
-        [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Key { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Value { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static KeyValuePairOfStringAndString FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndString>(data);
         }
 
     }
@@ -4500,6 +4536,9 @@ namespace Pdf4meClient
     {
         [Newtonsoft.Json.JsonProperty("extractPages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<int> ExtractPages { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
 
         public string ToJson()
         {
@@ -4715,6 +4754,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("compression", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ImageActionCompression? Compression { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
 
         public string ToJson()
         {
@@ -4980,9 +5022,6 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class StampAction
     {
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
         [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PageSequence { get; set; }
 
@@ -5036,6 +5075,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("image", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Image Image { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -5083,9 +5125,6 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("spanList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<Span> SpanList { get; set; }
 
         public string ToJson()
         {
@@ -5237,28 +5276,6 @@ namespace Pdf4meClient
         public static Transform FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Transform>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Span
-    {
-        [Newtonsoft.Json.JsonProperty("color", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Color Color { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("decoration", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SpanDecoration? Decoration { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static Span FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Span>(data);
         }
 
     }
@@ -5572,7 +5589,7 @@ namespace Pdf4meClient
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
 
         [Newtonsoft.Json.JsonProperty("mergeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object MergeAction { get; set; }
+        public MergeAction MergeAction { get; set; }
 
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5586,6 +5603,24 @@ namespace Pdf4meClient
         public static Merge FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Merge>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class MergeAction
+    {
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static MergeAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<MergeAction>(data);
         }
 
     }
@@ -5796,6 +5831,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("recurringSplitAfterPage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? RecurringSplitAfterPage { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> CustomProperties { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -5947,6 +5985,34 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = "timing")]
         Timing = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public enum ConvertToPdfActionPdfConformance
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "pdf17")]
+        Pdf17 = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = "pdfA1")]
+        PdfA1 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = "pdfA2")]
+        PdfA2 = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = "pdfA3")]
+        PdfA3 = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
+    public enum ConvertToPdfActionConversionMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "fast")]
+        Fast = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = "detailed")]
+        Detailed = 1,
 
     }
 
@@ -6531,58 +6597,55 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionImageExtension
     {
-        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "bmp")]
-        Bmp = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "gif")]
-        Gif = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = "jb2")]
-        Jb2 = 3,
-
         [System.Runtime.Serialization.EnumMember(Value = "jpg")]
-        Jpg = 4,
+        Jpg = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = "jpeg")]
-        Jpeg = 5,
+        Jpeg = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = "bmp")]
+        Bmp = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = "gif")]
+        Gif = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = "jb2")]
+        Jb2 = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = "jp2")]
-        Jp2 = 6,
+        Jp2 = 5,
 
         [System.Runtime.Serialization.EnumMember(Value = "jpf")]
-        Jpf = 7,
+        Jpf = 6,
 
         [System.Runtime.Serialization.EnumMember(Value = "jpx")]
-        Jpx = 8,
+        Jpx = 7,
 
         [System.Runtime.Serialization.EnumMember(Value = "png")]
-        Png = 9,
+        Png = 8,
 
         [System.Runtime.Serialization.EnumMember(Value = "tif")]
-        Tif = 10,
+        Tif = 9,
 
         [System.Runtime.Serialization.EnumMember(Value = "tiff")]
-        Tiff = 11,
+        Tiff = 10,
 
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionColorSpace
     {
-        [System.Runtime.Serialization.EnumMember(Value = "gray")]
-        Gray = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "grayA")]
-        GrayA = 1,
-
         [System.Runtime.Serialization.EnumMember(Value = "rGB")]
-        RGB = 2,
+        RGB = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = "rGBA")]
-        RGBA = 3,
+        RGBA = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = "gray")]
+        Gray = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = "grayA")]
+        GrayA = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = "cMYK")]
         CMYK = 4,
@@ -6605,16 +6668,13 @@ namespace Pdf4meClient
         [System.Runtime.Serialization.EnumMember(Value = "cMYKA")]
         CMYKA = 10,
 
-        [System.Runtime.Serialization.EnumMember(Value = "other")]
-        Other = 11,
-
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
     public enum ImageActionCompression
     {
-        [System.Runtime.Serialization.EnumMember(Value = "raw")]
-        Raw = 0,
+        [System.Runtime.Serialization.EnumMember(Value = "lZW")]
+        LZW = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = "jPEG")]
         JPEG = 1,
@@ -6622,8 +6682,8 @@ namespace Pdf4meClient
         [System.Runtime.Serialization.EnumMember(Value = "flate")]
         Flate = 2,
 
-        [System.Runtime.Serialization.EnumMember(Value = "lZW")]
-        LZW = 3,
+        [System.Runtime.Serialization.EnumMember(Value = "raw")]
+        Raw = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = "group3")]
         Group3 = 4,
@@ -6642,12 +6702,6 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = "tIFFJPEG")]
         TIFFJPEG = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = "unknown")]
-        Unknown = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = "default")]
-        Default = 11,
 
     }
 
@@ -6771,14 +6825,6 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = "dCT")]
         DCT = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.42.0 (Newtonsoft.Json v9.0.0.0)")]
-    public enum SpanDecoration
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "underline")]
-        Underline = 0,
 
     }
 
