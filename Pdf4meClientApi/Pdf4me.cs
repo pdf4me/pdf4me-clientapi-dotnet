@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Pdf4me.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -67,21 +68,21 @@ namespace Pdf4meClient
             }
         }
 
-        public OptimizeClient OptimizeClient
-        {
-            get
-            {
-                return new OptimizeClient(getApi());
-            }
-        }
+        //public OptimizeClient OptimizeClient
+        //{
+        //    get
+        //    {
+        //        return new OptimizeClient(getApi());
+        //    }
+        //}
 
-        public StampClient StampClient
-        {
-            get
-            {
-                return new StampClient(getApi());
-            }
-        }
+        //public StampClient StampClient
+        //{
+        //    get
+        //    {
+        //        return new StampClient(getApi());
+        //    }
+        //}
 
         public ImageClient ImageClient
         {
@@ -107,13 +108,13 @@ namespace Pdf4meClient
             }
         }
 
-        public MergeClient MergeClient
-        {
-            get
-            {
-                return new MergeClient(getApi());
-            }
-        }
+        //public MergeClient MergeClient
+        //{
+        //    get
+        //    {
+        //        return new MergeClient(getApi());
+        //    }
+        //}
 
         public ConvertClient ConvertClient
         {

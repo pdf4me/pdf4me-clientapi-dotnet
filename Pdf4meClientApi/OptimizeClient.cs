@@ -1,4 +1,5 @@
-﻿using Pdf4meClient;
+﻿using Pdf4me.Client;
+using Pdf4meClient;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -57,31 +58,31 @@ namespace Pdf4meClient
         }
         
 
-        public async Task<byte[]> OptimizeAsync( OptimizeActionProfile profile, byte[] document)
-        {
+        //public async Task<byte[]> OptimizeAsync( OptimizeActionProfile profile, byte[] document)
+        //{
 
-            var req = new Optimize()
-            {
-                Document = new Document()
-                {
-                    DocData = document
-                },
-                OptimizeAction = new OptimizeAction()
-                {
-                    UseProfile = true,
-                    Profile = profile,
-                }
-            };
+        //    var req = new Optimize()
+        //    {
+        //        Document = new Document()
+        //        {
+        //            DocData = document
+        //        },
+        //        OptimizeAction = new OptimizeAction()
+        //        {
+        //            UseProfile = true,
+        //            Profile = profile,
+        //        }
+        //    };
 
-            var res = await OptimizeAsync(req);
+        //    var res = await OptimizeAsync(req);
 
-            if (res != null && res.Document != null)
-            {
-                return res.Document.DocData;
-            }
+        //    if (res != null && res.Document != null)
+        //    {
+        //        return res.Document.DocData;
+        //    }
 
-            return null;
-        }
+        //    return null;
+        //}
 
     }
 }
