@@ -52,37 +52,29 @@ namespace Pdf4meClient
             _token = token;
         }
 
-        public DocumentClient DocumentClient
+        public ConvertClient ConvertClient
+        {
+            get
+            {
+                return new ConvertClient(getApi());
+            }
+        }
+
+        /*public DocumentClient DocumentClient
         {
             get
             {
                 return new DocumentClient(getApi());
             }
-        }
+        }*/
 
-        public ManagementClient ManagementClient
+        public ExtractClient ExtractClient
         {
             get
             {
-                return new ManagementClient(getApi());
+                return new ExtractClient(getApi());
             }
         }
-
-        //public OptimizeClient OptimizeClient
-        //{
-        //    get
-        //    {
-        //        return new OptimizeClient(getApi());
-        //    }
-        //}
-
-        //public StampClient StampClient
-        //{
-        //    get
-        //    {
-        //        return new StampClient(getApi());
-        //    }
-        //}
 
         public ImageClient ImageClient
         {
@@ -92,43 +84,43 @@ namespace Pdf4meClient
             }
         }
 
-        public OcrClient OcrClient
-        {
-            get
-            {
-                return new OcrClient(getApi());
-            }
-        }
-
-        public JobClient JobClient
+        /*public JobClient JobClient
         {
             get
             {
                 return new JobClient(getApi());
             }
-        }
+        }*/
 
-        //public MergeClient MergeClient
-        //{
-        //    get
-        //    {
-        //        return new MergeClient(getApi());
-        //    }
-        //}
-
-        public ConvertClient ConvertClient
+        /*public ManagementClient ManagementClient
         {
             get
             {
-                return new ConvertClient(getApi());
+                return new ManagementClient(getApi());
+            }
+        }*/
+
+        public MergeClient MergeClient
+        {
+            get
+            {
+                return new MergeClient(getApi());
             }
         }
 
-        public ExtractClient ExtractClient
+        /*public OcrClient OcrClient
         {
             get
             {
-                return new ExtractClient(getApi());
+                return new OcrClient(getApi());
+            }
+        }*/
+
+        public OptimizeClient OptimizeClient
+        {
+            get
+            {
+                return new OptimizeClient(getApi());
             }
         }
 
@@ -145,6 +137,14 @@ namespace Pdf4meClient
             get
             {
                 return new SplitClient(getApi());
+            }
+        }
+
+        public StampClient StampClient
+        {
+            get
+            {
+                return new StampClient(getApi());
             }
         }
 
@@ -165,7 +165,6 @@ namespace Pdf4meClient
                 token = authenticationResult.AccessToken;
                 //txtToken.Text = token;
 
-
                 // Do Stamp
 
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
@@ -176,7 +175,7 @@ namespace Pdf4meClient
                 //client.SetBearerToken(token);
 
                 client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/bson"));
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
