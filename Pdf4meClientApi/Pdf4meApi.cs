@@ -3270,17 +3270,17 @@ namespace Pdf4me.Client
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.65.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ConvertToPdf
     {
-        /// <summary>Set Notification</summary>
-        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public Notification Notification { get; set; }
-
         /// <summary>Document containing the data</summary>
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
         /// <summary>Conversion configuration</summary>
-        [Newtonsoft.Json.JsonProperty("convertToPdfAction", Required = Newtonsoft.Json.Required.Always)]
-        public ConvertToPdfAction ConvertToPdfAction { get; set; } = new ConvertToPdfAction();
+        [Newtonsoft.Json.JsonProperty("convertToPdfAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ConvertToPdfAction ConvertToPdfAction { get; set; }
+
+        /// <summary>Set Notification</summary>
+        [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Notification Notification { get; set; }
 
         public string ToJson()
         {
@@ -3290,29 +3290,6 @@ namespace Pdf4me.Client
         public static ConvertToPdf FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdf>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.65.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class Notification
-    {
-        /// <summary>Run execution in asynchronous way, get notified over Online WebHook</summary>
-        [Newtonsoft.Json.JsonProperty("getNotification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? GetNotification { get; set; }
-
-        /// <summary>Will be used for Online WebHook</summary>
-        [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ConnectionId { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static Notification FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Notification>(data);
         }
 
     }
@@ -3329,7 +3306,7 @@ namespace Pdf4me.Client
         public string DocumentId { get; set; }
 
         /// <summary>Give filename inlcuding filetype</summary>
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Name { get; set; }
 
         /// <summary>Returns the Status of the Document</summary>
@@ -3386,6 +3363,29 @@ namespace Pdf4me.Client
         public static ConvertToPdfAction FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ConvertToPdfAction>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.10.65.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class Notification
+    {
+        /// <summary>Run execution in asynchronous way, get notified over Online WebHook</summary>
+        [Newtonsoft.Json.JsonProperty("getNotification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? GetNotification { get; set; }
+
+        /// <summary>Will be used for Online WebHook</summary>
+        [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ConnectionId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static Notification FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Notification>(data);
         }
 
     }
@@ -4963,15 +4963,15 @@ namespace Pdf4me.Client
         /// Default: 1.0
         /// The PDF/A-1 standard does not allow transparency.Therefore, for PDF/A-1 conforming input files you must
         /// not set alpha to a value other than 1.0</summary>
-        [Newtonsoft.Json.JsonProperty("alpha", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Alpha { get; set; }
+        [Newtonsoft.Json.JsonProperty("alpha", Required = Newtonsoft.Json.Required.Always)]
+        public double Alpha { get; set; }
 
         /// <summary>Modify scale of stamp. Allowed values for ‹scale_set› are:
         ///  - relToA4: Scale the stamp relative to the page size. For example, make stamp half as large on a A5 and
         /// twice as large on a A3 page as specified.</summary>
-        [Newtonsoft.Json.JsonProperty("scale", Required = Newtonsoft.Json.Required.Always)]
+        [Newtonsoft.Json.JsonProperty("scale", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public StampActionScale Scale { get; set; }
+        public StampActionScale? Scale { get; set; }
 
         [Newtonsoft.Json.JsonProperty("alignX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
@@ -5486,8 +5486,8 @@ namespace Pdf4me.Client
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Always)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Document>();
 
-        [Newtonsoft.Json.JsonProperty("mergeAction", Required = Newtonsoft.Json.Required.Always)]
-        public MergeAction MergeAction { get; set; } = new MergeAction();
+        [Newtonsoft.Json.JsonProperty("mergeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public MergeAction MergeAction { get; set; }
 
         /// <summary>Set Notification</summary>
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
