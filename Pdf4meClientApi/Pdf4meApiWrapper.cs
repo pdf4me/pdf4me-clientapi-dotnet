@@ -4,7 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Collections.Generic;
 
-namespace Pdf4meClient
+namespace Pdf4me.Client
 {
 
     static class CustomHttp
