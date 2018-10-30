@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pdf4me.Client
+namespace Pdf4meClient
 {
     public static class Extension
     {
