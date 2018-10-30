@@ -1,5 +1,4 @@
 ﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using Pdf4me.Client;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
