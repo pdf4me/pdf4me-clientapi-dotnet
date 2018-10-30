@@ -4,7 +4,7 @@
 // </auto-generated>
 //----------------------
 
-namespace Pdf4me.Client
+namespace Pdf4meClient
 {
 #pragma warning disable // Disable all warnings
 
