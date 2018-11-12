@@ -8,6 +8,14 @@ using System.Threading.Tasks;
 
 namespace Pdf4meClient
 {
+    public partial class ImageClient
+    {
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings)
+        {
+            settings.NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore;
+        }
+    }
+
     public static class Extension
     {
         //public static async Task<byte[]> OptimizeAsync(this LightClient pdfLightClient,  string profile, byte[] file, string fileName)
