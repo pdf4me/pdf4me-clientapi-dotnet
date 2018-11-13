@@ -104,7 +104,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="pdf4me.nswag" />
     <None Include="Pdf4meClientApi.nuspec" />
   </ItemGroup>
