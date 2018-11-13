@@ -32,27 +32,47 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> ConvertFileToPdfAsync(string fileName, object file)
+        public System.Threading.Tasks.Task<FileResponse> ConvertFileToPdfAsync(string fName, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return ConvertFileToPdfAsync(fileName, file, System.Threading.CancellationToken.None);
+            return ConvertFileToPdfAsync(fName, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> ConvertFileToPdfAsync(string fileName, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> ConvertFileToPdfAsync(string fName, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Convert/ConvertFileToPdf?");
+            if (fName != null)
+            {
+                urlBuilder_.Append("fName=").Append(System.Uri.EscapeDataString(ConvertToString(fName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentType != null)
+            {
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
             if (fileName != null)
             {
-                urlBuilder_.Append("fileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (file != null)
-            {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -94,7 +114,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -117,14 +137,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(ConvertToPdf req)
         {
             return ConvertToPdfAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<ConvertToPdfRes> ConvertToPdfAsync(ConvertToPdf req, System.Threading.CancellationToken cancellationToken)
@@ -188,7 +208,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -269,18 +289,18 @@ namespace Pdf4meClient
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>GetDocuments</summary>
-        /// <returns>GetDocuments Result</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<GetDocumentRes> GetDocumentsAsync(System.Guid? jobId)
+        public System.Threading.Tasks.Task<GetDocumentListRes> GetDocumentsAsync(System.Guid? jobId)
         {
             return GetDocumentsAsync(jobId, System.Threading.CancellationToken.None);
         }
 
         /// <summary>GetDocuments</summary>
-        /// <returns>GetDocuments Result</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<GetDocumentRes> GetDocumentsAsync(System.Guid? jobId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<GetDocumentListRes> GetDocumentsAsync(System.Guid? jobId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Document/GetDocuments?");
@@ -319,10 +339,10 @@ namespace Pdf4meClient
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(GetDocumentRes);
+                            var result_ = default(GetDocumentListRes);
                             try
                             {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentRes>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentListRes>(responseData_, _settings.Value);
                                 return result_;
                             }
                             catch (System.Exception exception_)
@@ -343,7 +363,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -352,7 +372,7 @@ namespace Pdf4meClient
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(GetDocumentRes);
+                        return default(GetDocumentListRes);
                     }
                     finally
                     {
@@ -367,7 +387,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>GetDocument</summary>
-        /// <returns>GetDocument Result</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<GetDocumentRes> GetDocumentAsync(GetDocumentReq req)
         {
@@ -375,7 +395,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>GetDocument</summary>
-        /// <returns>GetDocument Result</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<GetDocumentRes> GetDocumentAsync(GetDocumentReq req, System.Threading.CancellationToken cancellationToken)
@@ -439,7 +459,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -463,7 +483,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>DropDocument</summary>
-        /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<DropDocumentRes> DropDocumentAsync(DropDocumentReq req)
         {
@@ -471,7 +491,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>DropDocument</summary>
-        /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<DropDocumentRes> DropDocumentAsync(DropDocumentReq req, System.Threading.CancellationToken cancellationToken)
@@ -535,7 +555,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -559,7 +579,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>ProduceDocuments</summary>
-        /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ProduceDocumentsRes> ProduceDocumentsAsync(ProduceDocuments req)
         {
@@ -567,7 +587,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>ProduceDocuments</summary>
-        /// <returns>Contains the JobId, DocumentId and Overview of the droped docs</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<ProduceDocumentsRes> ProduceDocumentsAsync(ProduceDocuments req, System.Threading.CancellationToken cancellationToken)
@@ -631,7 +651,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -711,17 +731,17 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> ExtractPagesAsync(string pageNrs, object file)
+        public System.Threading.Tasks.Task<FileResponse> ExtractPagesAsync(string pageNrs, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return ExtractPagesAsync(pageNrs, file, System.Threading.CancellationToken.None);
+            return ExtractPagesAsync(pageNrs, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> ExtractPagesAsync(string pageNrs, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> ExtractPagesAsync(string pageNrs, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Extract/ExtractPages?");
@@ -729,9 +749,29 @@ namespace Pdf4meClient
             {
                 urlBuilder_.Append("pageNrs=").Append(System.Uri.EscapeDataString(ConvertToString(pageNrs, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file != null)
+            if (contentType != null)
             {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileName != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -773,7 +813,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -796,14 +836,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ExtractRes> ExtractAsync(Extract req)
         {
             return ExtractAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<ExtractRes> ExtractAsync(Extract req, System.Threading.CancellationToken cancellationToken)
@@ -867,7 +907,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -947,17 +987,17 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> CreateThumbnailAsync(int? width, string pageNr, string imageFormat, object file)
+        public System.Threading.Tasks.Task<FileResponse> CreateThumbnailAsync(int? width, string pageNr, string imageFormat, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return CreateThumbnailAsync(width, pageNr, imageFormat, file, System.Threading.CancellationToken.None);
+            return CreateThumbnailAsync(width, pageNr, imageFormat, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an extracted PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> CreateThumbnailAsync(int? width, string pageNr, string imageFormat, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> CreateThumbnailAsync(int? width, string pageNr, string imageFormat, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Image/CreateThumbnail?");
@@ -973,9 +1013,29 @@ namespace Pdf4meClient
             {
                 urlBuilder_.Append("imageFormat=").Append(System.Uri.EscapeDataString(ConvertToString(imageFormat, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file != null)
+            if (contentType != null)
             {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileName != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -1017,7 +1077,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1040,14 +1100,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains a PDF-A compatible document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req)
         {
             return CreateImagesAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a PDF-A compatible document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<CreateImagesRes> CreateImagesAsync(CreateImages req, System.Threading.CancellationToken cancellationToken)
@@ -1111,7 +1171,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1192,18 +1252,18 @@ namespace Pdf4meClient
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>CreateArchiveJobConfig</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ArchiveJobReq> CreateArchiveJobConfigAsync(ArchiveJobReq req)
+        public System.Threading.Tasks.Task<ArchiveJobRes> CreateArchiveJobConfigAsync(ArchiveJobReq req)
         {
             return CreateArchiveJobConfigAsync(req, System.Threading.CancellationToken.None);
         }
 
         /// <summary>CreateArchiveJobConfig</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ArchiveJobReq> CreateArchiveJobConfigAsync(ArchiveJobReq req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ArchiveJobRes> CreateArchiveJobConfigAsync(ArchiveJobReq req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/CreateArchiveJobConfig");
@@ -1240,10 +1300,10 @@ namespace Pdf4meClient
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(ArchiveJobReq);
+                            var result_ = default(ArchiveJobRes);
                             try
                             {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ArchiveJobReq>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<ArchiveJobRes>(responseData_, _settings.Value);
                                 return result_;
                             }
                             catch (System.Exception exception_)
@@ -1264,7 +1324,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1273,7 +1333,7 @@ namespace Pdf4meClient
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(ArchiveJobReq);
+                        return default(ArchiveJobRes);
                     }
                     finally
                     {
@@ -1288,7 +1348,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>RunJob</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<RunJobRes> RunJobAsync(Job req)
         {
@@ -1296,7 +1356,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>RunJob</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<RunJobRes> RunJobAsync(Job req, System.Threading.CancellationToken cancellationToken)
@@ -1360,7 +1420,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1384,7 +1444,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>SaveJobConfig</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<JobConfigRes> SaveJobConfigAsync(JobConfig req)
         {
@@ -1392,7 +1452,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>SaveJobConfig</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<JobConfigRes> SaveJobConfigAsync(JobConfig req, System.Threading.CancellationToken cancellationToken)
@@ -1456,7 +1516,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1480,7 +1540,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>JobConfigs</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<JobConfig>> JobConfigsAsync()
         {
@@ -1488,7 +1548,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>JobConfigs</summary>
-        /// <returns>Result contains an exucution JobConfig Id</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<JobConfig>> JobConfigsAsync(System.Threading.CancellationToken cancellationToken)
@@ -1549,7 +1609,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1630,7 +1690,7 @@ namespace Pdf4meClient
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>Version</summary>
-        /// <returns>Version</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<VersionRes> VersionAsync()
         {
@@ -1638,7 +1698,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>Version</summary>
-        /// <returns>Version</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<VersionRes> VersionAsync(System.Threading.CancellationToken cancellationToken)
@@ -1700,7 +1760,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1724,7 +1784,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>ApiUsage</summary>
-        /// <returns>ApiUsage to give overview of payment profile and number of api calls.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<ApiUsageRes> ApiUsageAsync()
         {
@@ -1732,7 +1792,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>ApiUsage</summary>
-        /// <returns>ApiUsage to give overview of payment profile and number of api calls.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<ApiUsageRes> ApiUsageAsync(System.Threading.CancellationToken cancellationToken)
@@ -1794,7 +1854,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1874,27 +1934,43 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains a merged PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> Merge2PdfsAsync(object file1, object file2)
+        public System.Threading.Tasks.Task<FileResponse> Merge2PdfsAsync(string contentTypeQuery, string contentDispositionQuery, object headersQuery, long? lengthQuery, string nameQuery, string fileNameQuery)
         {
-            return Merge2PdfsAsync(file1, file2, System.Threading.CancellationToken.None);
+            return Merge2PdfsAsync(contentTypeQuery, contentDispositionQuery, headersQuery, lengthQuery, nameQuery, fileNameQuery, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a merged PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> Merge2PdfsAsync(object file1, object file2, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> Merge2PdfsAsync(string contentTypeQuery, string contentDispositionQuery, object headersQuery, long? lengthQuery, string nameQuery, string fileNameQuery, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Merge/Merge2Pdfs?");
-            if (file1 != null)
+            if (contentTypeQuery != null)
             {
-                urlBuilder_.Append("file1=").Append(System.Uri.EscapeDataString(ConvertToString(file1, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentTypeQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file2 != null)
+            if (contentDispositionQuery != null)
             {
-                urlBuilder_.Append("file2=").Append(System.Uri.EscapeDataString(ConvertToString(file2, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDispositionQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headersQuery != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headersQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (lengthQuery != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(lengthQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (nameQuery != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(nameQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileNameQuery != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileNameQuery, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -1936,7 +2012,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -1959,14 +2035,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains a merged PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<MergeRes> MergeAsync(Merge req)
         {
             return MergeAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a merged PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<MergeRes> MergeAsync(Merge req, System.Threading.CancellationToken cancellationToken)
@@ -2030,7 +2106,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2111,7 +2187,7 @@ namespace Pdf4meClient
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
         /// <summary>RecognizeDocument</summary>
-        /// <returns>Recognize any document</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<RecognizeDocumentRes> RecognizeDocumentAsync(RecognizeDocument req)
         {
@@ -2119,7 +2195,7 @@ namespace Pdf4meClient
         }
 
         /// <summary>RecognizeDocument</summary>
-        /// <returns>Recognize any document</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<RecognizeDocumentRes> RecognizeDocumentAsync(RecognizeDocument req, System.Threading.CancellationToken cancellationToken)
@@ -2183,7 +2259,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2263,17 +2339,17 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> OptimizeByProfileAsync(Profile? profile, object file)
+        public System.Threading.Tasks.Task<FileResponse> OptimizeByProfileAsync(Profile? profile, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return OptimizeByProfileAsync(profile, file, System.Threading.CancellationToken.None);
+            return OptimizeByProfileAsync(profile, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> OptimizeByProfileAsync(Profile? profile, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> OptimizeByProfileAsync(Profile? profile, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Optimize/OptimizeByProfile?");
@@ -2281,9 +2357,29 @@ namespace Pdf4meClient
             {
                 urlBuilder_.Append("profile=").Append(System.Uri.EscapeDataString(ConvertToString(profile, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file != null)
+            if (contentType != null)
             {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileName != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -2325,7 +2421,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2348,14 +2444,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Optimize req)
         {
             return OptimizeAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an optimized PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<OptimizeRes> OptimizeAsync(Optimize req, System.Threading.CancellationToken cancellationToken)
@@ -2419,7 +2515,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2499,14 +2595,14 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains a PDF-A compatible document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CreatePdfARes> PdfAAsync(CreatePdfA req)
         {
             return PdfAAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a PDF-A compatible document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<CreatePdfARes> PdfAAsync(CreatePdfA req, System.Threading.CancellationToken cancellationToken)
@@ -2570,7 +2666,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2593,17 +2689,17 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains a PDF-A compatible document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> CreatePdfAAsync(PdfCompliance? pdfCompliance, object file)
+        public System.Threading.Tasks.Task<FileResponse> CreatePdfAAsync(PdfCompliance? pdfCompliance, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return CreatePdfAAsync(pdfCompliance, file, System.Threading.CancellationToken.None);
+            return CreatePdfAAsync(pdfCompliance, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a PDF-A compatible document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> CreatePdfAAsync(PdfCompliance? pdfCompliance, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> CreatePdfAAsync(PdfCompliance? pdfCompliance, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("PdfA/CreatePdfA?");
@@ -2611,9 +2707,29 @@ namespace Pdf4meClient
             {
                 urlBuilder_.Append("pdfCompliance=").Append(System.Uri.EscapeDataString(ConvertToString(pdfCompliance, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file != null)
+            if (contentType != null)
             {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileName != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -2655,7 +2771,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2735,17 +2851,17 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains a splited PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<byte[]>> SplitByPageNrAsync(int? pageNr, object file)
+        public System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<byte[]>> SplitByPageNrAsync(int? pageNr, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return SplitByPageNrAsync(pageNr, file, System.Threading.CancellationToken.None);
+            return SplitByPageNrAsync(pageNr, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a splited PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<byte[]>> SplitByPageNrAsync(int? pageNr, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.ObjectModel.ObservableCollection<byte[]>> SplitByPageNrAsync(int? pageNr, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Split/SplitByPageNr?");
@@ -2753,9 +2869,29 @@ namespace Pdf4meClient
             {
                 urlBuilder_.Append("pageNr=").Append(System.Uri.EscapeDataString(ConvertToString(pageNr, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file != null)
+            if (contentType != null)
             {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileName != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -2813,7 +2949,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2836,14 +2972,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains a splited PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<SplitRes> SplitAsync(Split req)
         {
             return SplitAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains a splited PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<SplitRes> SplitAsync(Split req, System.Threading.CancellationToken cancellationToken)
@@ -2907,7 +3043,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -2987,17 +3123,17 @@ namespace Pdf4meClient
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
 
-        /// <returns>Result contains an stamped PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> TextStampAsync(string text, string pages, AlignX? alignX, AlignY? alignY, object file)
+        public System.Threading.Tasks.Task<FileResponse> TextStampAsync(string text, string pages, AlignX? alignX, AlignY? alignY, string contentType, string contentDisposition, object headers, long? length, string name, string fileName)
         {
-            return TextStampAsync(text, pages, alignX, alignY, file, System.Threading.CancellationToken.None);
+            return TextStampAsync(text, pages, alignX, alignY, contentType, contentDisposition, headers, length, name, fileName, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains an stamped PDF document.</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<FileResponse> TextStampAsync(string text, string pages, AlignX? alignX, AlignY? alignY, object file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<FileResponse> TextStampAsync(string text, string pages, AlignX? alignX, AlignY? alignY, string contentType, string contentDisposition, object headers, long? length, string name, string fileName, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Stamp/TextStamp?");
@@ -3017,9 +3153,29 @@ namespace Pdf4meClient
             {
                 urlBuilder_.Append("alignY=").Append(System.Uri.EscapeDataString(ConvertToString(alignY, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
-            if (file != null)
+            if (contentType != null)
             {
-                urlBuilder_.Append("file=").Append(System.Uri.EscapeDataString(ConvertToString(file, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+                urlBuilder_.Append("ContentType=").Append(System.Uri.EscapeDataString(ConvertToString(contentType, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (contentDisposition != null)
+            {
+                urlBuilder_.Append("ContentDisposition=").Append(System.Uri.EscapeDataString(ConvertToString(contentDisposition, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (headers != null)
+            {
+                urlBuilder_.Append("Headers=").Append(System.Uri.EscapeDataString(ConvertToString(headers, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (length != null)
+            {
+                urlBuilder_.Append("Length=").Append(System.Uri.EscapeDataString(ConvertToString(length, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (name != null)
+            {
+                urlBuilder_.Append("Name=").Append(System.Uri.EscapeDataString(ConvertToString(name, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fileName != null)
+            {
+                urlBuilder_.Append("FileName=").Append(System.Uri.EscapeDataString(ConvertToString(fileName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -3061,7 +3217,7 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            throw new Pdf4meApiException("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, null);
+                            throw new Pdf4meApiException("Server Error", (int)response_.StatusCode, responseData_, headers_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -3084,14 +3240,14 @@ namespace Pdf4meClient
             }
         }
 
-        /// <returns>Result contains stamped document</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<StampRes> StampAsync(Stamp req)
         {
             return StampAsync(req, System.Threading.CancellationToken.None);
         }
 
-        /// <returns>Result contains stamped document</returns>
+        /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         public async System.Threading.Tasks.Task<StampRes> StampAsync(Stamp req, System.Threading.CancellationToken cancellationToken)
@@ -3155,7 +3311,7 @@ namespace Pdf4meClient
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<Pdf4meException>("Return Pdf4meException in case of a technical Error.", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -3213,39 +3369,6 @@ namespace Pdf4meClient
 
 
 
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class IFormFile
-    {
-        [Newtonsoft.Json.JsonProperty("contentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ContentType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("contentDisposition", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ContentDisposition { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("headers", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.Dictionary<string, System.Collections.ObjectModel.ObservableCollection<string>> Headers { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("length", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? Length { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("fileName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string FileName { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static IFormFile FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<IFormFile>(data);
-        }
-
-    }
-
     /// <summary>Pdf4me Exception gives more information of what is the error.</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Pdf4meException
@@ -3271,7 +3394,7 @@ namespace Pdf4meClient
     public partial class ConvertToPdf
     {
         /// <summary>Document containing the data</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
         /// <summary>Conversion configuration</summary>
@@ -3317,7 +3440,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("pages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Page> Pages { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("docData", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("docData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] DocData { get; set; }
 
         [Newtonsoft.Json.JsonProperty("docMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3435,25 +3558,25 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("subject", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Subject { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("pageCount", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("pageCount", Required = Newtonsoft.Json.Required.Always)]
         public long PageCount { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("size", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("size", Required = Newtonsoft.Json.Required.Always)]
         public long Size { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("isEncrypted", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("isEncrypted", Required = Newtonsoft.Json.Required.Always)]
         public bool IsEncrypted { get; set; }
 
         [Newtonsoft.Json.JsonProperty("pdfCompliance", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PdfCompliance { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("isSigned", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("isSigned", Required = Newtonsoft.Json.Required.Always)]
         public bool IsSigned { get; set; }
 
         [Newtonsoft.Json.JsonProperty("uploadedMimeType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string UploadedMimeType { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("uploadedFileSize", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("uploadedFileSize", Required = Newtonsoft.Json.Required.Always)]
         public long UploadedFileSize { get; set; }
 
         public string ToJson()
@@ -3609,6 +3732,64 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class GetDocumentReq
+    {
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? JobId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? DocumentId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("thumbnailsOnly", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? ThumbnailsOnly { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DocumentType { get; set; }
+
+        /// <summary>Run the action asynchronously, get notified for any status changes.</summary>
+        [Newtonsoft.Json.JsonProperty("getNotified", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? GetNotified { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ConnectionId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("userFingerprint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public UserFingerprint UserFingerprint { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static GetDocumentReq FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentReq>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
+    public partial class UserFingerprint
+    {
+        [Newtonsoft.Json.JsonProperty("ipAdress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IpAdress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("browser", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Browser { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static UserFingerprint FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<UserFingerprint>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class GetDocumentRes
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3757,64 +3938,6 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class GetDocumentReq
-    {
-        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? DocumentId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("thumbnailsOnly", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? ThumbnailsOnly { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("documentType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string DocumentType { get; set; }
-
-        /// <summary>Run the action asynchronously, get notified for any status changes.</summary>
-        [Newtonsoft.Json.JsonProperty("getNotified", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? GetNotified { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("connectionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ConnectionId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("userFingerprint", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public UserFingerprint UserFingerprint { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static GetDocumentReq FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<GetDocumentReq>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
-    public partial class UserFingerprint
-    {
-        [Newtonsoft.Json.JsonProperty("ipAdress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string IpAdress { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("browser", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Browser { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static UserFingerprint FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<UserFingerprint>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class DropDocumentReq
     {
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -3876,7 +3999,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Document Document { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
         public System.Guid JobId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("documentList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4099,7 +4222,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public OptimizeActionProfile? Profile { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("useProfile", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("useProfile", Required = Newtonsoft.Json.Required.Always)]
         public bool UseProfile { get; set; }
 
         /// <summary>Get or set whether redundant objects should be removed. If this property is
@@ -4427,10 +4550,10 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Extract
     {
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
-        [Newtonsoft.Json.JsonProperty("extractAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("extractAction", Required = Newtonsoft.Json.Required.Always)]
         public ExtractAction ExtractAction { get; set; } = new ExtractAction();
 
         /// <summary>Set Notification</summary>
@@ -4452,7 +4575,7 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ExtractAction
     {
-        [Newtonsoft.Json.JsonProperty("extractPages", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("extractPages", Required = Newtonsoft.Json.Required.Always)]
         public System.Collections.ObjectModel.ObservableCollection<int> ExtractPages { get; set; } = new System.Collections.ObjectModel.ObservableCollection<int>();
 
         [Newtonsoft.Json.JsonProperty("customProperties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -4493,11 +4616,11 @@ namespace Pdf4meClient
     public partial class CreateImages
     {
         /// <summary>Stamped Document</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
         /// <summary>MrcAction configuration</summary>
-        [Newtonsoft.Json.JsonProperty("imageAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("imageAction", Required = Newtonsoft.Json.Required.Always)]
         public ImageAction ImageAction { get; set; } = new ImageAction();
 
         /// <summary>Set Notification</summary>
@@ -4522,7 +4645,7 @@ namespace Pdf4meClient
         /// <summary>Set the Pages wo apply the convertion.
         /// 
         /// {default: PageSelection.All}</summary>
-        [Newtonsoft.Json.JsonProperty("pageSelection", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("pageSelection", Required = Newtonsoft.Json.Required.Always)]
         public PageSelection PageSelection { get; set; } = new PageSelection();
 
         /// <summary>Set or get the center mode. When set to True, the document is horizontally and vertically centered on the page.
@@ -4826,19 +4949,19 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ArchiveJobReq
     {
-        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobId { get; set; }
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid JobId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("sourceFolder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("sourceFolder", Required = Newtonsoft.Json.Required.Always)]
         public StorageFolder SourceFolder { get; set; } = new StorageFolder();
 
-        [Newtonsoft.Json.JsonProperty("executionTrigger", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("executionTrigger", Required = Newtonsoft.Json.Required.Always)]
         public ExecutionTrigger ExecutionTrigger { get; set; } = new ExecutionTrigger();
 
-        [Newtonsoft.Json.JsonProperty("archiveConfig", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("archiveConfig", Required = Newtonsoft.Json.Required.Always)]
         public ArchiveConfig ArchiveConfig { get; set; } = new ArchiveConfig();
 
-        [Newtonsoft.Json.JsonProperty("targetFolder", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("targetFolder", Required = Newtonsoft.Json.Required.Always)]
         public StorageFolder TargetFolder { get; set; } = new StorageFolder();
 
         public string ToJson()
@@ -4907,7 +5030,7 @@ namespace Pdf4meClient
     public partial class ArchiveConfig
     {
         /// <summary>Give the documents metadata for archiving.</summary>
-        [Newtonsoft.Json.JsonProperty("archiveMetadata", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("archiveMetadata", Required = Newtonsoft.Json.Required.Always)]
         public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString> ArchiveMetadata { get; set; } = new System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndString>();
 
         /// <summary>Place a signature stamp on to the document.</summary>
@@ -4963,7 +5086,7 @@ namespace Pdf4meClient
         /// Default: 1.0
         /// The PDF/A-1 standard does not allow transparency.Therefore, for PDF/A-1 conforming input files you must
         /// not set alpha to a value other than 1.0</summary>
-        [Newtonsoft.Json.JsonProperty("alpha", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("alpha", Required = Newtonsoft.Json.Required.Always)]
         public double Alpha { get; set; }
 
         /// <summary>Modify scale of stamp. Allowed values for ‹scale_set› are:
@@ -5026,7 +5149,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public TextFontEncoding? FontEncoding { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Always)]
         public string Value { get; set; }
 
         [Newtonsoft.Json.JsonProperty("mode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5121,14 +5244,14 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Rotate
     {
-        [Newtonsoft.Json.JsonProperty("angle", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Angle { get; set; }
+        [Newtonsoft.Json.JsonProperty("angle", Required = Newtonsoft.Json.Required.Always)]
+        public double Angle { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("originX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? OriginX { get; set; }
+        [Newtonsoft.Json.JsonProperty("originX", Required = Newtonsoft.Json.Required.Always)]
+        public int OriginX { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("originY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? OriginY { get; set; }
+        [Newtonsoft.Json.JsonProperty("originY", Required = Newtonsoft.Json.Required.Always)]
+        public int OriginY { get; set; }
 
         public string ToJson()
         {
@@ -5145,11 +5268,11 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Translate
     {
-        [Newtonsoft.Json.JsonProperty("offsetX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? OffsetX { get; set; }
+        [Newtonsoft.Json.JsonProperty("offsetX", Required = Newtonsoft.Json.Required.Always)]
+        public int OffsetX { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("offsetY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? OffsetY { get; set; }
+        [Newtonsoft.Json.JsonProperty("offsetY", Required = Newtonsoft.Json.Required.Always)]
+        public int OffsetY { get; set; }
 
         public string ToJson()
         {
@@ -5166,23 +5289,23 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Transform
     {
-        [Newtonsoft.Json.JsonProperty("a", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? A { get; set; }
+        [Newtonsoft.Json.JsonProperty("a", Required = Newtonsoft.Json.Required.Always)]
+        public int A { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("b", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? B { get; set; }
+        [Newtonsoft.Json.JsonProperty("b", Required = Newtonsoft.Json.Required.Always)]
+        public int B { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("c", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? C { get; set; }
+        [Newtonsoft.Json.JsonProperty("c", Required = Newtonsoft.Json.Required.Always)]
+        public int C { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("d", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? D { get; set; }
+        [Newtonsoft.Json.JsonProperty("d", Required = Newtonsoft.Json.Required.Always)]
+        public int D { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("x", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? X { get; set; }
+        [Newtonsoft.Json.JsonProperty("x", Required = Newtonsoft.Json.Required.Always)]
+        public int X { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("y", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int? Y { get; set; }
+        [Newtonsoft.Json.JsonProperty("y", Required = Newtonsoft.Json.Required.Always)]
+        public int Y { get; set; }
 
         public string ToJson()
         {
@@ -5226,11 +5349,11 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class ArchiveJobRes
     {
-        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobId { get; set; }
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid JobId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("createdSuccessfully", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? CreatedSuccessfully { get; set; }
+        [Newtonsoft.Json.JsonProperty("createdSuccessfully", Required = Newtonsoft.Json.Required.Always)]
+        public bool CreatedSuccessfully { get; set; }
 
         public string ToJson()
         {
@@ -5250,8 +5373,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? JobId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobConfigId { get; set; }
+        [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid JobConfigId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; }
@@ -5272,8 +5395,8 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class RunJobRes
     {
-        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobId { get; set; }
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid JobId { get; set; }
 
         /// <summary>List of Document Result</summary>
         [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5298,11 +5421,11 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class JobConfig
     {
-        [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobConfigId { get; set; }
+        [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid JobConfigId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Enabled { get; set; }
+        [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Always)]
+        public bool Enabled { get; set; }
 
         [Newtonsoft.Json.JsonProperty("active", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Active { get; set; }
@@ -5313,11 +5436,11 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("modDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTime? ModDate { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Always)]
         public string Name { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? UserId { get; set; }
+        [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid UserId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("sourceFolder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public StorageFolder SourceFolder { get; set; }
@@ -5416,8 +5539,8 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class JobConfigRes
     {
-        [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobConfigId { get; set; }
+        [Newtonsoft.Json.JsonProperty("jobConfigId", Required = Newtonsoft.Json.Required.Always)]
+        public System.Guid JobConfigId { get; set; }
 
         public string ToJson()
         {
@@ -5483,7 +5606,7 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Merge
     {
-        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("documents", Required = Newtonsoft.Json.Required.Always)]
         public System.Collections.ObjectModel.ObservableCollection<Document> Documents { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Document>();
 
         [Newtonsoft.Json.JsonProperty("mergeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5597,11 +5720,11 @@ namespace Pdf4meClient
     public partial class Optimize
     {
         /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
         /// <summary>Give an image stamp</summary>
-        [Newtonsoft.Json.JsonProperty("optimizeAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("optimizeAction", Required = Newtonsoft.Json.Required.Always)]
         public OptimizeAction OptimizeAction { get; set; } = new OptimizeAction();
 
         /// <summary>Set Notification</summary>
@@ -5649,11 +5772,11 @@ namespace Pdf4meClient
     public partial class CreatePdfA
     {
         /// <summary>Document containing the data</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
         /// <summary>PdfAAction configuration</summary>
-        [Newtonsoft.Json.JsonProperty("pdfAAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("pdfAAction", Required = Newtonsoft.Json.Required.Always)]
         public PdfAAction PdfAAction { get; set; } = new PdfAAction();
 
         /// <summary>Set Notification</summary>
@@ -5695,10 +5818,10 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class Split
     {
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
-        [Newtonsoft.Json.JsonProperty("splitAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("splitAction", Required = Newtonsoft.Json.Required.Always)]
         public SplitAction SplitAction { get; set; } = new SplitAction();
 
         /// <summary>Set Notification</summary>
@@ -5720,7 +5843,7 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.11.0.0 (Newtonsoft.Json v9.0.0.0)")]
     public partial class SplitAction
     {
-        [Newtonsoft.Json.JsonProperty("splitAfterPage", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("splitAfterPage", Required = Newtonsoft.Json.Required.Always)]
         public int SplitAfterPage { get; set; }
 
         [Newtonsoft.Json.JsonProperty("splitSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5767,11 +5890,11 @@ namespace Pdf4meClient
     public partial class Stamp
     {
         /// <summary>Give the document to change or use JobId/DocumentId to reference an uploaded document.</summary>
-        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Always)]
         public Document Document { get; set; } = new Document();
 
         /// <summary>Give an image stamp</summary>
-        [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("stampAction", Required = Newtonsoft.Json.Required.Always)]
         public StampAction StampAction { get; set; } = new StampAction();
 
         /// <summary>Set Notification</summary>
