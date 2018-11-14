@@ -20,7 +20,7 @@ namespace Pdf4meClient
         string _authString = "https://login.microsoftonline.com/devynooxlive.onmicrosoft.com";
         string _clientId = "";
         string _key = "";
-        string _token = "";
+        string _basicToken = "";
 
         static Pdf4me()
         {
@@ -46,9 +46,14 @@ namespace Pdf4meClient
             }
         }
 
-        public void Init(string token)
+        public void Init(string basicToken, string api = null)
         {
-            _token = token;
+            _basicToken = basicToken;
+
+            if (!string.IsNullOrEmpty(api))
+            {
+                _api = api;
+            }
         }
 
         public ConvertClient ConvertClient
@@ -153,7 +158,7 @@ namespace Pdf4meClient
 
             HttpClient client;
 
-            if (string.IsNullOrEmpty(_token))
+            if (!string.IsNullOrEmpty(_clientId) && !string.IsNullOrEmpty(_key))
             {
                 ClientCredential clientCred = new ClientCredential(_clientId, _key);
 
@@ -182,21 +187,29 @@ namespace Pdf4meClient
                 client.BaseAddress = apiUri;
 
             }
-            else
+            else if (!string.IsNullOrEmpty(_basicToken))
             {
+
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
                 client = new HttpClient();
                 client.Timeout = new TimeSpan(0, 5, 0);
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + _token);
-                //client.SetBearerToken(token);
+
+
+                //var byteArray = Encoding.ASCII.GetBytes($"{_clientId}:{_key}");
+                var byteArray = Encoding.ASCII.GetBytes($"{_basicToken}");
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
 
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
+
                 Uri apiUri = new Uri(_api);
                 client.BaseAddress = apiUri;
             }
+            else
+                throw new ApplicationException("Missing token for authentication, please give ClientId/Key or BasicToken");
+
 
 
             return client;
