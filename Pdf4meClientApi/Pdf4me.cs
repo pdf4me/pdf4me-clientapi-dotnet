@@ -35,7 +35,13 @@ namespace Pdf4meClient
             //_key = ConfigurationManager.AppSettings["Pdf4meSecret"];
         }
 
-        public void Init(string clientId, string key, string api = null)
+        /// <summary>
+        /// Initialise with Client Id and Key
+        /// </summary>
+        /// <param name="clientId">ClientId</param>
+        /// <param name="key">Secret</param>
+        /// <param name="api">Api url to be set. If passed null, url will https://api-dev.pdf4me.com</param>
+        public void Init(string clientId, string key, string api)
         {
             _clientId = clientId;
             _key = key;
@@ -44,9 +50,16 @@ namespace Pdf4meClient
             {
                 _api = api;
             }
+
+            _basicToken = "";
         }
 
-        public void Init(string basicToken, string api = null)
+        /// <summary>
+        /// Initialise with basic token
+        /// </summary>
+        /// <param name="basicToken">Token</param>
+        /// <param name="api">Api url to be set. If passed null, url will https://api-dev.pdf4me.com</param>
+        public void Init(string basicToken, string api)
         {
             _basicToken = basicToken;
 
@@ -54,6 +67,8 @@ namespace Pdf4meClient
             {
                 _api = api;
             }
+            _clientId = "";
+            _key = "";
         }
 
         public ConvertClient ConvertClient
@@ -162,11 +177,9 @@ namespace Pdf4meClient
             {
                 ClientCredential clientCred = new ClientCredential(_clientId, _key);
 
-                string token;
-
                 AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
                 AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
-                token = authenticationResult.AccessToken;
+                var token = authenticationResult.AccessToken;
                 //txtToken.Text = token;
 
                 // Do Stamp
