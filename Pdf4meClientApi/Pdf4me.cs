@@ -210,8 +210,9 @@ namespace Pdf4meClient
 
 
                 //var byteArray = Encoding.ASCII.GetBytes($"{_clientId}:{_key}");
-                var byteArray = Encoding.ASCII.GetBytes($"{_basicToken}");
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", Convert.ToBase64String(byteArray));
+                //var byteArray = Encoding.ASCII.GetBytes($"{_basicToken}");
+                //var basicToken = Convert.ToBase64String(byteArray);
+                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", _basicToken);
 
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
