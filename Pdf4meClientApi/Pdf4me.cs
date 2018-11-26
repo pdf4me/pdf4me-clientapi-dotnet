@@ -1,4 +1,4 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
+﻿//using Microsoft.IdentityModel.Clients.ActiveDirectory;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -17,9 +17,9 @@ namespace Pdf4meClient
         public static readonly Pdf4me Instance = new Pdf4me();
 
         string _api = "https://api-dev.pdf4me.com";
-        string _authString = "https://login.microsoftonline.com/devynooxlive.onmicrosoft.com";
-        string _clientId = "";
-        string _key = "";
+        //string _authString = "https://login.microsoftonline.com/devynooxlive.onmicrosoft.com";
+        //string _clientId = "";
+        //string _key = "";
         string _basicToken = "";
 
         static Pdf4me()
@@ -35,31 +35,31 @@ namespace Pdf4meClient
             //_key = ConfigurationManager.AppSettings["Pdf4meSecret"];
         }
 
-        /// <summary>
-        /// Initialise with Client Id and Key
-        /// </summary>
-        /// <param name="clientId">ClientId</param>
-        /// <param name="key">Secret</param>
-        /// <param name="api">Api url to be set. If passed null, url will https://api-dev.pdf4me.com</param>
-        public void Init(string clientId, string key, string api)
-        {
-            _clientId = clientId;
-            _key = key;
+        ///// <summary>
+        ///// Initialise with Client Id and Key
+        ///// </summary>
+        ///// <param name="clientId">ClientId</param>
+        ///// <param name="key">Secret</param>
+        ///// <param name="api">Api url to be set. If passed null, url will https://api-dev.pdf4me.com</param>
+        //public void Init(string clientId, string key, string api)
+        //{
+        //    _clientId = clientId;
+        //    _key = key;
 
-            if (!string.IsNullOrEmpty(api))
-            {
-                _api = api;
-            }
+        //    if (!string.IsNullOrEmpty(api))
+        //    {
+        //        _api = api;
+        //    }
 
-            _basicToken = "";
-        }
+        //    _basicToken = "";
+        //}
 
         /// <summary>
         /// Initialise with basic token
         /// </summary>
         /// <param name="basicToken">Token</param>
         /// <param name="api">Api url to be set. If passed null, url will https://api-dev.pdf4me.com</param>
-        public void Init(string basicToken, string api)
+        public void Init(string basicToken, string api = "")
         {
             _basicToken = basicToken;
 
@@ -67,8 +67,6 @@ namespace Pdf4meClient
             {
                 _api = api;
             }
-            _clientId = "";
-            _key = "";
         }
 
         public ConvertClient ConvertClient
@@ -173,34 +171,35 @@ namespace Pdf4meClient
 
             HttpClient client;
 
-            if (!string.IsNullOrEmpty(_clientId) && !string.IsNullOrEmpty(_key))
-            {
-                ClientCredential clientCred = new ClientCredential(_clientId, _key);
+            //if (!string.IsNullOrEmpty(_clientId) && !string.IsNullOrEmpty(_key))
+            //{
+            //    ClientCredential clientCred = new ClientCredential(_clientId, _key);
 
-                AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
-                AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
-                var token = authenticationResult.AccessToken;
-                //txtToken.Text = token;
+            //    AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
+            //    AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
+            //    var token = authenticationResult.AccessToken;
+            //    //txtToken.Text = token;
 
-                // Do Stamp
+            //    // Do Stamp
 
-                ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
+            //    ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                client = new HttpClient();
-                client.Timeout = new TimeSpan(0, 5, 0);
-                client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-                //client.SetBearerToken(token);
+            //    client = new HttpClient();
+            //    client.Timeout = new TimeSpan(0, 5, 0);
+            //    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
+            //    //client.SetBearerToken(token);
 
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //    client.DefaultRequestHeaders.Accept.Clear();
+            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+            //    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
-                Uri apiUri = new Uri(_api);
-                client.BaseAddress = apiUri;
+            //    Uri apiUri = new Uri(_api);
+            //    client.BaseAddress = apiUri;
 
-            }
-            else if (!string.IsNullOrEmpty(_basicToken))
+            //}
+            //else 
+            if (!string.IsNullOrEmpty(_basicToken))
             {
 
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
@@ -229,33 +228,33 @@ namespace Pdf4meClient
             return client;
         }
 
-        public string getApiToken()
-        {
+        //public string getApiToken()
+        //{
 
-            //string tenantName = "devynooxlive.onmicrosoft.com";
-            //string authString = "https://login.microsoftonline.com/" + tenantName;
+        //    //string tenantName = "devynooxlive.onmicrosoft.com";
+        //    //string authString = "https://login.microsoftonline.com/" + tenantName;
 
-            // SLApp
-            //string clientId = "98a707a7-1860-4bbb-b956-51d95f1f338c";
-            //string key = "o6YE76EHPPdnia7h/juHKIdDf7bWYgcu3PbzHuK6qJk=";
-
-
-            //string resource = clientId;
+        //    // SLApp
+        //    //string clientId = "98a707a7-1860-4bbb-b956-51d95f1f338c";
+        //    //string key = "o6YE76EHPPdnia7h/juHKIdDf7bWYgcu3PbzHuK6qJk=";
 
 
-            ClientCredential clientCred = new ClientCredential(_clientId, _key);
-
-            string token;
-
-            AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
-            AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
-            token = authenticationResult.AccessToken;
-            //txtToken.Text = token;
+        //    //string resource = clientId;
 
 
-            return token;
+        //    ClientCredential clientCred = new ClientCredential(_clientId, _key);
 
-        }
+        //    string token;
+
+        //    AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
+        //    AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
+        //    token = authenticationResult.AccessToken;
+        //    //txtToken.Text = token;
+
+
+        //    return token;
+
+        //}
 
 
     }
