@@ -215,7 +215,8 @@ namespace Pdf4meClient
 
                 client.DefaultRequestHeaders.Accept.Clear();
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
+                client.DefaultRequestHeaders.UserAgent.Clear();
+                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("pdf4me-csharp", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()));
 
                 Uri apiUri = new Uri(_api);
                 client.BaseAddress = apiUri;

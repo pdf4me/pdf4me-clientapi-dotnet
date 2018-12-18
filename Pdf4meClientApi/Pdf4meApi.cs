@@ -4546,12 +4546,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ConvertToPdfNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -4651,6 +4647,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("appAsyncProcType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string AppAsyncProcType { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -4659,24 +4658,6 @@ namespace Pdf4meClient
         public static Notification FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<Notification>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class IntegrationSetting
-    {
-        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<Integration> Integrations { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static IntegrationSetting FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<IntegrationSetting>(data);
         }
 
     }
@@ -4810,97 +4791,6 @@ namespace Pdf4meClient
         public static KeyValuePairOfStringAndString FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndString>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class Integration
-    {
-        [Newtonsoft.Json.JsonProperty("integrationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string IntegrationId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("folder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Folder { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationAlias", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string IntegrationAlias { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public IntegrationType? IntegrationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationConfig IntegrationConfig { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? ApplicationId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? Enabled { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("basicToken", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BasicToken { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("modDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ModDate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("modName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ModName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("url", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Url { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static Integration FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<Integration>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class IntegrationConfig
-    {
-        [Newtonsoft.Json.JsonProperty("configParams", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndObject> ConfigParams { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static IntegrationConfig FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<IntegrationConfig>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class KeyValuePairOfStringAndObject
-    {
-        [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Key { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public object Value { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static KeyValuePairOfStringAndObject FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndObject>(data);
         }
 
     }
@@ -5239,6 +5129,119 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class IntegrationSetting
+    {
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<Integration> Integrations { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static IntegrationSetting FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<IntegrationSetting>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class Integration
+    {
+        [Newtonsoft.Json.JsonProperty("integrationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IntegrationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("folder", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Folder { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("integrationAlias", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IntegrationAlias { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("integrationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public IntegrationType? IntegrationType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("integrationConfig", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public IntegrationConfig IntegrationConfig { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ApplicationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Enabled { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("basicToken", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BasicToken { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("modDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? ModDate { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("modName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ModName { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("url", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Url { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("requestType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public IntegrationRequestType? RequestType { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static Integration FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<Integration>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class IntegrationConfig
+    {
+        [Newtonsoft.Json.JsonProperty("configParams", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<KeyValuePairOfStringAndObject> ConfigParams { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static IntegrationConfig FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<IntegrationConfig>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class KeyValuePairOfStringAndObject
+    {
+        [Newtonsoft.Json.JsonProperty("key", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Key { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public object Value { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static KeyValuePairOfStringAndObject FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<KeyValuePairOfStringAndObject>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class DropDocumentRes
     {
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -5309,12 +5312,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ProduceDocumentsNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -5821,12 +5820,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ExtractNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -5907,12 +5902,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CreateImagesNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7168,12 +7159,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public MergeNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7251,12 +7238,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public RecognizeDocumentNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7316,12 +7299,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public OptimizeNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7383,12 +7362,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public CreatePdfANotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7447,12 +7422,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public SplitNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7539,12 +7510,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("notification", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Notification Notification { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("notificationType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public StampNotificationType? NotificationType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("integrationSetting", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public IntegrationSetting IntegrationSetting { get; set; }
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.ObjectModel.ObservableCollection<string> Integrations { get; set; }
 
         public string ToJson()
         {
@@ -7662,20 +7629,6 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ConvertToPdfNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum ConvertToPdfActionPdfConformance
     {
         [System.Runtime.Serialization.EnumMember(Value = "pdf17")]
@@ -7720,35 +7673,6 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = "timing")]
         Timing = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum IntegrationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "azureStorage")]
-        AzureStorage = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "oneDrive")]
-        OneDrive = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "sFTP")]
-        SFTP = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = "fTP")]
-        FTP = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = "amazonS3")]
-        AmazonS3 = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = "amazonGlacier")]
-        AmazonGlacier = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = "googleCloud")]
-        GoogleCloud = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = "googleDrive")]
-        GoogleDrive = 7,
 
     }
 
@@ -7929,16 +7853,45 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ProduceDocumentsNotificationType
+    public enum IntegrationType
     {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
+        [System.Runtime.Serialization.EnumMember(Value = "azureStorage")]
+        AzureStorage = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
+        [System.Runtime.Serialization.EnumMember(Value = "oneDrive")]
+        OneDrive = 1,
 
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
+        [System.Runtime.Serialization.EnumMember(Value = "sFTP")]
+        SFTP = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = "fTP")]
+        FTP = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = "amazonS3")]
+        AmazonS3 = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = "amazonGlacier")]
+        AmazonGlacier = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = "googleCloud")]
+        GoogleCloud = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = "googleDrive")]
+        GoogleDrive = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum IntegrationRequestType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = "none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = "all")]
+        All = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = "onRequest")]
+        OnRequest = 2,
 
     }
 
@@ -8241,34 +8194,6 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = "zip")]
         Zip = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ExtractNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum CreateImagesNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
 
     }
 
@@ -8650,90 +8575,6 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = "extract")]
         Extract = 13,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum MergeNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum RecognizeDocumentNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum OptimizeNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum CreatePdfANotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SplitNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.4.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum StampNotificationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = "defaultApp")]
-        DefaultApp = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = "awaitResult")]
-        AwaitResult = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = "asyncResult")]
-        AsyncResult = 2,
 
     }
 
