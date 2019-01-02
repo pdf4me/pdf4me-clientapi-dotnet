@@ -165,6 +165,14 @@ namespace Pdf4meClient
             }
         }
 
+        public BarcodeClient BarcodeClient
+        {
+            get
+            {
+                return new BarcodeClient(getApi());
+            }
+        }
+
         public HttpClient getApi()
         {
 
