@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Net.Http;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Pdf4meClient
 {
@@ -178,7 +179,9 @@ namespace Pdf4meClient
             SplitRes splitRes = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(respJson);
 
             // PDF extraction
-            return new List<byte[]> { splitRes.Documents[0].DocData, splitRes.Documents[1].DocData };
+            return splitRes.Documents.ToList().Select(a => a.DocData).ToList();
+
+            //return new List<byte[]> { splitRes.Documents.fi .DocData, splitRes.Documents[1].DocData };
         }
     }
 
