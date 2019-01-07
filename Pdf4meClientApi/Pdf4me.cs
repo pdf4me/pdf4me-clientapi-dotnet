@@ -125,13 +125,13 @@ namespace Pdf4meClient
             }
         }
 
-        /*public OcrClient OcrClient
+        public OcrClient OcrClient
         {
             get
             {
                 return new OcrClient(getApi());
             }
-        }*/
+        }
 
         public OptimizeClient OptimizeClient
         {
