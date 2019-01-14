@@ -16,7 +16,7 @@ namespace Pdf4meClient
 
         public static readonly Pdf4me Instance = new Pdf4me();
 
-        string _api = "https://api-dev.pdf4me.com";
+        string _api = "https://api.pdf4me.com";
         //string _authString = "https://login.microsoftonline.com/devynooxlive.onmicrosoft.com";
         //string _clientId = "";
         //string _key = "";
