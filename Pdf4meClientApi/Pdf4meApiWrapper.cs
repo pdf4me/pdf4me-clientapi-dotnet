@@ -56,11 +56,12 @@ namespace Pdf4meClient
                 var res = await client.SendAsync(message).ConfigureAwait(false);
 
                 // check response
-                int statusCode = (int) res.StatusCode;
-                if(statusCode == 500)
+                int statusCode = (int)res.StatusCode;
+                if (statusCode == 500)
                 {
                     throw new Pdf4meBackendException($"HTTP 500: {res.ReasonPhrase}");
-                }else if(statusCode != 200 && statusCode != 204)
+                }
+                else if (statusCode != 200 && statusCode != 204)
                 {
                     throw new Pdf4meBackendException($"HTTP {statusCode}: {res.ReasonPhrase}");
                 }
@@ -144,6 +145,60 @@ namespace Pdf4meClient
 
     public partial class PdfAClient
     {
+        public async Task<byte[]> RotatePageAsync(string pageNr, PdfRotateRotationType rotate, byte[] file)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "pageNr", pageNr, "rotate", Enum.GetName(typeof(PdfRotateRotationType), rotate) },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "PdfA/RotatePage",
+                _httpClient);
+        }
+
+        public async Task<byte[]> RotateDocumentAsync(PdfRotateRotationType rotate, byte[] file)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "rotate", Enum.GetName(typeof(PdfRotateRotationType), rotate) },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "PdfA/RotateDocument",
+                _httpClient);
+        }
+
+        public async Task<byte[]> ProtectDocumentAsync(string password, string permissions, byte[] file)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "password", password, "permissions", permissions },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "PdfA/ProtectDocument",
+                _httpClient);
+        }
+
+        public async Task<byte[]> UnlockDocumentAsync(string password, byte[] file)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "password", password },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "PdfA/UnlockDocument",
+                _httpClient);
+        }
+
+        public async Task<byte[]> ValidateDocumentAsync(PdfAActionCompliance pdfCompliance, byte[] file)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfAActionCompliance), pdfCompliance) },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "PdfA/ValidateDocument",
+                _httpClient);
+        }
+
+        public async Task<byte[]> RepairDocumentAsync(byte[] file)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string>() { },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "PdfA/RepairDocument",
+                _httpClient);
+        }
+
         public async Task<byte[]> CreatePdfAAsync(PdfAActionCompliance pdfCompliance, byte[] file)
         {
             return await CustomHttp.postWrapper(
