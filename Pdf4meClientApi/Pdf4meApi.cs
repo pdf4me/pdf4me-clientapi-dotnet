@@ -12101,10 +12101,10 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum Anonymous8
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"print")]
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
         All = 0,
 
-        [System.Runtime.Serialization.EnumMember(Value = @"print")]
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
         None = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
