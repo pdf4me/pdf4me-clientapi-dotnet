@@ -12102,10 +12102,10 @@ namespace Pdf4meClient
     public enum Anonymous8
     {
         [System.Runtime.Serialization.EnumMember(Value = @"print")]
-        Print = 0,
+        All = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"print")]
-        Print = 1,
+        None = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"copy")]
         Copy = 2,
