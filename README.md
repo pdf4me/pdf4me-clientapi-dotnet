@@ -30,14 +30,14 @@ Feature | Description
 ## Dependencies
 - [Newtonsoft](https://www.nuget.org/packages/Newtonsoft.Json/) - 11.0.2 or later
 
-The Pdf4me Client Api Library can be downloaded from [NuGet] (https://docs.nuget.org/consume/installing-nuget):
+The Pdf4me Client Api Library can be downloaded from [NuGet](https://docs.nuget.org/consume/installing-nuget):
 ```
 Install-Package Pdf4me.Client
 ```
 
 <a name="getting-started"></a>
 ## Getting Started
-To get started get a Token from our developers page [dev@pdf4me] (https://portal.pdf4me.com/).
+To get started get a Token from our developers page [dev@pdf4me](https://portal.pdf4me.com/).
 
 The Token is required for Basic Authentication. The Pdf4me Client Api provides you already 
 with the necessary implementation. You need only to get an instance for the Pdf4meClient as shown in the sample below.
@@ -83,4 +83,4 @@ namespace TestConsole
 <a name="documentation-for-api-endpoints"></a>
 ## Documentation for API Endpoints
 
-The Api Documentation can be found on our developers page [dev@pdf4me] (https://developer.pdf4me.com).
+The Api Documentation can be found on our developers page [dev@pdf4me](https://developer.pdf4me.com).
