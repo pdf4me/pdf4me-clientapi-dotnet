@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Pdf4me.Client")]
-[assembly: AssemblyDescription("The Pdf4me Client API is a .NET library which connects to its highly scalable SaaS cloud service with many functionalities to solve your document and PDF requirements. The SaaS api provides expert functionality to convert, optimize, compress, produce, merge, split, ocr, enrich, archive, print documents and PDFs.")]
+[assembly: AssemblyDescription("The Pdf4me Client API is a .NET library which connects to its highly scalable SaaS cloud service with many functionalities to solve your document and PDF requirements. The SaaS api provides expert functionality to convert, optimize, compress, produce, merge, split, ocr, enrich, archive, rotate, protect, validate, repair, print documents and PDFs.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Pdf4me")]
 [assembly: AssemblyProduct("Pdf4meClientApi")]
