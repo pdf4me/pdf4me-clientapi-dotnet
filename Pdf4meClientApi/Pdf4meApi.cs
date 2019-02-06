@@ -2832,7 +2832,7 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ApiCallDetail> GetApiCallDetailAsync(string apiCallId)
+        public System.Threading.Tasks.Task<ApiCallDetail> GetApiCallDetailAsync(System.Guid? apiCallId)
         {
             return GetApiCallDetailAsync(apiCallId, System.Threading.CancellationToken.None);
         }
@@ -2840,7 +2840,7 @@ namespace Pdf4meClient
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<ApiCallDetail> GetApiCallDetailAsync(string apiCallId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ApiCallDetail> GetApiCallDetailAsync(System.Guid? apiCallId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Management/GetApiCallDetail?");
@@ -2855,8 +2855,7 @@ namespace Pdf4meClient
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
                     request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -9187,6 +9186,12 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string JobId { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ApplicationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("applicationName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ApplicationName { get; set; }
+
         [Newtonsoft.Json.JsonProperty("jobIdExtern", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string JobIdExtern { get; set; }
 
@@ -9199,8 +9204,17 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Status { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("ipAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IpAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("apiCost", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? ApiCost { get; set; }
+
         [Newtonsoft.Json.JsonProperty("callType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CallType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("userAgent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UserAgent { get; set; }
 
         [Newtonsoft.Json.JsonProperty("inDocuments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.HashSet<Document> InDocuments { get; set; }
@@ -9226,7 +9240,7 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("actionReqJson", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActionReqJson { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("ActionResJson", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("actionResJson", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ActionResJson { get; set; }
 
         [Newtonsoft.Json.JsonProperty("errorDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
