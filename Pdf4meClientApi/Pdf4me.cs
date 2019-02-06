@@ -230,7 +230,7 @@ namespace Pdf4meClient
                 client.BaseAddress = apiUri;
             }
             else
-                throw new ApplicationException("Missing token for authentication, please give ClientId/Key or BasicToken");
+                throw new ApplicationException("Missing token for authentication, please give BasicToken");
 
 
 
