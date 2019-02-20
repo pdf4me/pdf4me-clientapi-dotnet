@@ -143,6 +143,11 @@ namespace Pdf4meClient
         }
     }
 
+    public partial class DocumentClient
+    {
+
+    }
+
     public partial class PdfAClient
     {
         public async Task<byte[]> RotatePageAsync(string pageNr, PdfRotateRotationType rotate, byte[] file)

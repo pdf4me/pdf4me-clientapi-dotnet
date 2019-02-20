@@ -101,6 +101,14 @@ namespace Pdf4meClient
             }
         }
 
+        public DocumentClient DocumentClient
+        {
+            get
+            {
+                return new DocumentClient(getApi());
+            }
+        }
+
         /*public JobClient JobClient
         {
             get
