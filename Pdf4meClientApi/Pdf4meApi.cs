@@ -2795,7 +2795,7 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<JobFlowPlan> GetJobFlowsAsync(string jobFlowPlanId, string machineId)
+        public System.Threading.Tasks.Task<System.Collections.Generic.HashSet<JobFlow>> GetJobFlowsAsync(string jobFlowPlanId, string machineId)
         {
             return GetJobFlowsAsync(jobFlowPlanId, machineId, System.Threading.CancellationToken.None);
         }
@@ -2803,7 +2803,7 @@ namespace Pdf4meClient
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<JobFlowPlan> GetJobFlowsAsync(string jobFlowPlanId, string machineId, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.HashSet<JobFlow>> GetJobFlowsAsync(string jobFlowPlanId, string machineId, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/GetJobFlows?");
@@ -2846,10 +2846,10 @@ namespace Pdf4meClient
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(JobFlowPlan);
+                            var result_ = default(System.Collections.Generic.HashSet<JobFlow>);
                             try
                             {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<JobFlowPlan>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<System.Collections.Generic.HashSet<JobFlow>>(responseData_, _settings.Value);
                                 return result_;
                             }
                             catch (System.Exception exception_)
@@ -2909,7 +2909,7 @@ namespace Pdf4meClient
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(JobFlowPlan);
+                        return default(System.Collections.Generic.HashSet<JobFlow>);
                     }
                     finally
                     {
@@ -2925,7 +2925,7 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<JobFlowPlan> SaveJobFlowsAsync(JobFlowPlan req)
+        public System.Threading.Tasks.Task<JobFlowPlan> SaveJobFlowsAsync(JobFlow req)
         {
             return SaveJobFlowsAsync(req, System.Threading.CancellationToken.None);
         }
@@ -2933,7 +2933,7 @@ namespace Pdf4meClient
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<JobFlowPlan> SaveJobFlowsAsync(JobFlowPlan req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<JobFlowPlan> SaveJobFlowsAsync(JobFlow req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Job/SaveJobFlows");
@@ -10203,6 +10203,42 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class JobFlow
+    {
+        [Newtonsoft.Json.JsonProperty("jobFlowId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? JobFlowId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? TenantId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subscriptionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? SubscriptionId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ApplicationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("actionFlow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public ActionFlow ActionFlow { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobFlowPlan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public JobFlowPlan JobFlowPlan { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static JobFlow FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<JobFlow>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class JobFlowPlan
     {
         [Newtonsoft.Json.JsonProperty("jobFlowPlanId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -10235,9 +10271,6 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("machineId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string MachineId { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("jobFlows", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Collections.Generic.HashSet<JobFlow> JobFlows { get; set; }
-
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -10246,39 +10279,6 @@ namespace Pdf4meClient
         public static JobFlowPlan FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<JobFlowPlan>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class JobFlow
-    {
-        [Newtonsoft.Json.JsonProperty("jobFlowId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? JobFlowId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? TenantId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("subscriptionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? SubscriptionId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? ApplicationId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("actionFlow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public ActionFlow ActionFlow { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static JobFlow FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<JobFlow>(data);
         }
 
     }
