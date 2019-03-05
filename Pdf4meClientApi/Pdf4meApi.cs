@@ -9981,6 +9981,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("jobFlowPlan", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public JobFlowPlan JobFlowPlan { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("creationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? CreationDate { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
