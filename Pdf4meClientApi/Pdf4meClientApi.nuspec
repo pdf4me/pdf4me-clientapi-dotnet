@@ -6,8 +6,8 @@
     <title>$title$</title>
     <authors>$author$</authors>
     <owners>$author$</owners>
-    <iconUrl>https://dev-dev.pdf4me.com/Content/images/favicons/favicon.ico</iconUrl>
-    <projectUrl>https://dev-dev.pdf4me.com</projectUrl>
+    <iconUrl>https://developer.pdf4me.com/wp-content/themes/pdf4me-beaver-child/favicon.ico</iconUrl>
+    <projectUrl>https://portal.pdf4me.com</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
     <releaseNotes>Additional Methods</releaseNotes>
