@@ -13331,6 +13331,9 @@ namespace Pdf4meClient
         [System.Runtime.Serialization.EnumMember(Value = @"extract")]
         Extract = 13,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"barCode")]
+        BarCode = 14,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
