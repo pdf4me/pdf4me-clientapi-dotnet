@@ -4,6 +4,7 @@ using System.IO;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace Pdf4meClient
 {
@@ -112,7 +113,7 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> ExtractPagesAsync(FileParameter file, string pageNrs, string jobIdExt = null )
+        public async Task<FileResponse> ExtractPagesAsync(FileParameter file, string pageNrs, string jobIdExt = null)
         {
             return await ExtractPagesAsync(pageNrs, jobIdExt, file);
         }
@@ -129,7 +130,21 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> CreateThumbnailAsync( FileParameter file, int width, string pageNr, string imageFormat, string jobIdExt = null)
+        public async Task<List<byte[]>> CreateThumbnailsAsync(byte[] file, int width, string pageNrs, ImageActionImageExtension imageFormat)
+        {
+            var res= await CustomHttp.postWrapper(
+                new List<string> { "width", width.ToString(), "pageNrs", pageNrs, "imageFormat", Enum.GetName(typeof(ImageActionImageExtension), imageFormat) },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "Image/CreateThumbnails",
+                _httpClient);
+
+            // desirialization
+            string respJson = System.Text.Encoding.Default.GetString(res);
+            return JsonConvert.DeserializeObject<List<byte[]>>(respJson);
+        }
+
+
+        public async Task<FileResponse> CreateThumbnailAsync(FileParameter file, int width, string pageNr, string imageFormat, string jobIdExt = null)
         {
             return await CreateThumbnailAsync(width, pageNr, imageFormat, jobIdExt, file);
         }
@@ -164,7 +179,7 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> OptimizeByProfileAsync( FileParameter file, Profile profile = Profile.Default, string jobIdExt = null)
+        public async Task<FileResponse> OptimizeByProfileAsync(FileParameter file, Profile profile = Profile.Default, string jobIdExt = null)
         {
             return await OptimizeByProfileAsync(profile, jobIdExt, file);
         }
@@ -289,12 +304,7 @@ namespace Pdf4meClient
 
             // desirialization
             string respJson = System.Text.Encoding.Default.GetString(res);
-            SplitRes splitRes = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(respJson);
-
-            // PDF extraction
-            return splitRes.Documents.ToList().Select(a => a.DocData).ToList();
-
-            //return new List<byte[]> { splitRes.Documents.fi .DocData, splitRes.Documents[1].DocData };
+            return JsonConvert.DeserializeObject<List<byte[]>>(respJson);
         }
 
         public async Task<HashSet<byte[]>> SplitByPageNrAsync(FileParameter file, int pageNr, string jobIdExt = null)
@@ -313,10 +323,7 @@ namespace Pdf4meClient
 
             // desirialization
             string respJson = System.Text.Encoding.Default.GetString(res);
-            SplitRes splitRes = Newtonsoft.Json.JsonConvert.DeserializeObject<SplitRes>(respJson);
-
-            // PDF extraction
-            return splitRes.Documents.ToList().Select(a => a.DocData).ToList();
+            return JsonConvert.DeserializeObject<List<byte[]>>(respJson);
         }
 
     }
@@ -332,7 +339,7 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> TextStampAsync( FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
+        public async Task<FileResponse> TextStampAsync(FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
         {
             return await TextStampAsync(text, pages, alignX, alignY, jobIdExt, file);
         }
