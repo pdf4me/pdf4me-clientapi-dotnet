@@ -317,13 +317,6 @@ namespace Pdf4meClient
 
             // PDF extraction
             return splitRes.Documents.ToList().Select(a => a.DocData).ToList();
-
-            //return new List<byte[]> { splitRes.Documents.fi .DocData, splitRes.Documents[1].DocData };
-        }
-
-        public async Task<HashSet<byte[]>> SplitRecurringAsync(FileParameter file, int pageNr, string jobIdExt = null)
-        {
-            return await SplitRecurringAsync(pageNr, jobIdExt, file);
         }
 
     }
