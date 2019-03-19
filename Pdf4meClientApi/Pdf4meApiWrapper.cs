@@ -244,13 +244,17 @@ namespace Pdf4meClient
             return await UnlockDocumentAsync(password, jobIdExt, file);
         }
 
-        public async Task<byte[]> ValidateDocumentAsync(byte[] file, PdfAActionCompliance pdfCompliance)
+        public async Task<ValidateRes> ValidateDocumentAsync(byte[] file, PdfAActionCompliance pdfCompliance)
         {
-            return await CustomHttp.postWrapper(
+            byte[] res = await CustomHttp.postWrapper(
                 new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfAActionCompliance), pdfCompliance) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "PdfA/ValidateDocument",
                 _httpClient);
+
+            // desirialization
+            string respJson = System.Text.Encoding.Default.GetString(res);
+            return JsonConvert.DeserializeObject<ValidateRes>(respJson);
         }
 
         public async Task<byte[]> RepairDocumentAsync(byte[] file)
