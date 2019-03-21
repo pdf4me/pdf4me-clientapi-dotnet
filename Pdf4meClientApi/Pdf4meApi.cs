@@ -6532,15 +6532,15 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.HashSet<byte[]>> SplitByPageNrAsync(int? pageNr, string jobIdExt, FileParameter file)
+        public System.Threading.Tasks.Task<System.Collections.Generic.HashSet<byte[]>> SplitByPageNrAsync(int? pageNr, string jobIdExt, System.Collections.Generic.IEnumerable<string> integrations, FileParameter file)
         {
-            return SplitByPageNrAsync(pageNr, jobIdExt, file, System.Threading.CancellationToken.None);
+            return SplitByPageNrAsync(pageNr, jobIdExt, integrations, file, System.Threading.CancellationToken.None);
         }
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.HashSet<byte[]>> SplitByPageNrAsync(int? pageNr, string jobIdExt, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.HashSet<byte[]>> SplitByPageNrAsync(int? pageNr, string jobIdExt, System.Collections.Generic.IEnumerable<string> integrations, FileParameter file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("Split/SplitByPageNr?");
@@ -6551,6 +6551,10 @@ namespace Pdf4meClient
             if (jobIdExt != null)
             {
                 urlBuilder_.Append("jobIdExt=").Append(System.Uri.EscapeDataString(ConvertToString(jobIdExt, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (integrations != null)
+            {
+                foreach (var item_ in integrations) { urlBuilder_.Append("integrations=").Append(System.Uri.EscapeDataString(ConvertToString(item_, System.Globalization.CultureInfo.InvariantCulture))).Append("&"); }
             }
             urlBuilder_.Length--;
 
@@ -11862,17 +11866,14 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum Profile
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"default")]
-        Default = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"max")]
+        Max = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"web")]
         Web = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"print")]
         Print = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"max")]
-        Max = 3,
 
     }
 
@@ -12731,17 +12732,14 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.15.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum OptimizeActionProfile
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"default")]
-        Default = 0,
+        [System.Runtime.Serialization.EnumMember(Value = @"max")]
+        Max = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"web")]
         Web = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"print")]
         Print = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"max")]
-        Max = 3,
 
     }
 
