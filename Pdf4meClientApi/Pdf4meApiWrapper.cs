@@ -372,14 +372,6 @@ namespace Pdf4meClient
             return await ReadBarcodesByTypeAsync(barcodeType, jobIdExt, file);
         }
 
-        public async Task<byte[]> CreateBarcodeByTypeAsync(BarcodType barcodType, string content)
-        {
-            return await CustomHttp.postWrapper(
-                new List<string> { "barcodType", barcodType.ToString(), "content", content },
-                new List<Tuple<byte[], string, string>> { },
-                "Barcode/CreateBarcodeByType",
-                _httpClient);
-        }
     }
 
     public class Pdf4meBackendException : Exception
