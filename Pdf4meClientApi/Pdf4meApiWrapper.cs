@@ -352,6 +352,36 @@ namespace Pdf4meClient
 
     }
 
+    public partial class BarcodeClient
+    {
+        public async Task<ReadBarcodesRes> ReadBarcodesByTypeAsync(byte[] file, BarcodeType barcodeType)
+        {
+            byte[] res = await CustomHttp.postWrapper(
+                new List<string> { "barcodeType", barcodeType.ToString() },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "Barcode/ReadBarcodesByType",
+                _httpClient);
+
+            // desirialization
+            string respJson = System.Text.Encoding.Default.GetString(res);
+            return JsonConvert.DeserializeObject<ReadBarcodesRes>(respJson);
+        }
+
+        public async Task<ReadBarcodesRes> ReadBarcodesByTypeAsync(FileParameter file, BarcodeType barcodeType, string jobIdExt = null)
+        {
+            return await ReadBarcodesByTypeAsync(barcodeType, jobIdExt, file);
+        }
+
+        public async Task<byte[]> CreateBarcodeByTypeAsync(BarcodType barcodType, string content)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "barcodType", barcodType.ToString(), "content", content },
+                new List<Tuple<byte[], string, string>> { },
+                "Barcode/CreateBarcodeByType",
+                _httpClient);
+        }
+    }
+
     public class Pdf4meBackendException : Exception
     {
         public Pdf4meBackendException()
