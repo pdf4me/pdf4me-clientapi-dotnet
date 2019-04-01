@@ -173,6 +173,14 @@ namespace Pdf4meClient
             }
         }
 
+        public UserClient UserClient
+        {
+            get
+            {
+                return new UserClient(getApi());
+            }
+        }
+
         public HttpClient getApi()
         {
 

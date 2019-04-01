@@ -19,7 +19,7 @@ Feature | Description
 **Protect** | Protects or Unlocks your document with given password.
 **Validation** | Validate your document for PDF/A compliance.
 **Repair** | Repairs your document.
-**Barcode** | Reads all types of barcode embedded in document.
+**Barcode** | Reads all types of barcode embedded in document or creates them
 
 
 <a name="frameworks-supported"></a>
@@ -39,7 +39,7 @@ Install-Package Pdf4me.Client
 ## Getting Started
 To get started get a Token by dropping us an [email](mailto:support-dev@pdf4me.com) or registering in our [portal](https://portal.pdf4me.com/).
 
-The Token is required for Basic Authentication. The Pdf4me Client Api provides you already 
+The Token is required for Authentication. The Pdf4me Client Api provides you already 
 with the necessary implementation. You need only to get an instance for the Pdf4meClient as shown in the sample below.
 
 ```csharp
