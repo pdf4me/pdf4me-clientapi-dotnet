@@ -7578,7 +7578,7 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<int> SaveUserPreferenceAsync(UserPreference userPreferenceReq)
+        public System.Threading.Tasks.Task<SaveUserPrefRes> SaveUserPreferenceAsync(UserPreference userPreferenceReq)
         {
             return SaveUserPreferenceAsync(userPreferenceReq, System.Threading.CancellationToken.None);
         }
@@ -7586,7 +7586,7 @@ namespace Pdf4meClient
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
-        public async System.Threading.Tasks.Task<int> SaveUserPreferenceAsync(UserPreference userPreferenceReq, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<SaveUserPrefRes> SaveUserPreferenceAsync(UserPreference userPreferenceReq, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("User/SaveUserPreference");
@@ -7623,10 +7623,10 @@ namespace Pdf4meClient
                         if (status_ == "200")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(int);
+                            var result_ = default(SaveUserPrefRes);
                             try
                             {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<int>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SaveUserPrefRes>(responseData_, _settings.Value);
                                 return result_;
                             }
                             catch (System.Exception exception_)
@@ -7668,16 +7668,16 @@ namespace Pdf4meClient
                         if (status_ == "500")
                         {
                             var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
-                            var result_ = default(int);
+                            var result_ = default(SaveUserPrefRes);
                             try
                             {
-                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<int>(responseData_, _settings.Value);
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SaveUserPrefRes>(responseData_, _settings.Value);
                             }
                             catch (System.Exception exception_)
                             {
                                 throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
                             }
-                            throw new Pdf4meApiException<int>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                            throw new Pdf4meApiException<SaveUserPrefRes>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
                         }
                         else
                         if (status_ != "200" && status_ != "204")
@@ -7686,7 +7686,7 @@ namespace Pdf4meClient
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(int);
+                        return default(SaveUserPrefRes);
                     }
                     finally
                     {
@@ -10652,23 +10652,8 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.28.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class Machine
     {
-        [Newtonsoft.Json.JsonProperty("machineId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? MachineId { get; set; }
-
         [Newtonsoft.Json.JsonProperty("active", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Active { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? UserId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? TenantId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("subscriptionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? SubscriptionId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? ApplicationId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("enabled", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? Enabled { get; set; }
@@ -10678,21 +10663,6 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("machineName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string MachineName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("lastUpdate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? LastUpdate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("creationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? CreationDate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("creationName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CreationName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("modDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ModDate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("modName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ModName { get; set; }
 
         public string ToJson()
         {
@@ -12064,32 +12034,11 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.28.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class UserPreference
     {
-        [Newtonsoft.Json.JsonProperty("userPreferenceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? UserPreferenceId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("userId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? UserId { get; set; }
-
         [Newtonsoft.Json.JsonProperty("prefKey", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PrefKey { get; set; }
 
         [Newtonsoft.Json.JsonProperty("preferenceData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PreferenceData { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("creationName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string CreationName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("creationDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? CreationDate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("modName", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ModName { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("modDate", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? ModDate { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.Guid? ApplicationId { get; set; }
 
         public string ToJson()
         {
@@ -12099,6 +12048,24 @@ namespace Pdf4meClient
         public static UserPreference FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<UserPreference>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.28.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class SaveUserPrefRes
+    {
+        [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? TraceId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static SaveUserPrefRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SaveUserPrefRes>(data);
         }
 
     }
