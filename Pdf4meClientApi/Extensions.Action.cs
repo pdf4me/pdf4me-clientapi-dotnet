@@ -28,77 +28,72 @@ namespace Pdf4meClient
             var pdf4meAction = new Pdf4meAction()
             {
                 ActionConfig = JsonConvert.SerializeObject(action),
-                //ActionType = Pdf4meActionActionType.Optimize
             };
 
-            switch(typeof(T).GetType().Name.ToString())
-            {
-                case "OptimizeAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Optimize;
-                    break;
-                case "ConvertToPdfAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.ConvertToPdf;
-                    break;
-                case "ConverterAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Converter;
-                    break;
-                case "CreateBarcodeAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.CreateBarcode;
-                    break;
-                case "ReadBarcodeAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.ReadBarcode;
-                    break;
-                case "ExtractAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Extract;
-                    break;
-                case "ExtractResourcesAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.ExtractResources;
-                    break;
-                case "ImageAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Image;
-                    break;
-                case "MergeAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Merge;
-                    break;
-                case "OcrAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Ocr;
-                    break;
-                case "PdfAAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.PdfA;
-                    break;
-                case "ProtectAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Protect;
-                    break;
-                case "RepairAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Repair;
-                    break;
-                case "RotateAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Rotate;
-                    break;
-                case "SignAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Sign;
-                    break;
-                case "SplitAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Split;
-                    break;
-                case "StampAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Stamp;
-                    break;
-                case "ThumbnailAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.Thumbnail;
-                    break;
-                case "UserAction":
-                    pdf4meAction.ActionType = Pdf4meActionActionType.User;
-                    break;
+            if (action is OptimizeAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Optimize;
 
+            if (action is ConvertToPdfAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.ConvertToPdf;
 
-            }
+            //if (action is ConvertAction)
+            //    pdf4meAction.ActionType = Pdf4meActionActionType.Converter;
+
+            //if (action is CreateBarcodeAction)
+            //    pdf4meAction.ActionType = Pdf4meActionActionType.CreateBarcode;
+
+            if (action is ReadBarcodeAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.ReadBarcode;
+
+            if (action is ExtractAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Extract;
+
+            if (action is ExtractResourcesAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.ExtractResources;
+
+            if (action is ImageAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Image;
+
+            if (action is MergeAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Merge;
+
+            if (action is OcrAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Ocr;
+
+            if (action is PdfAAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.PdfA;
+
+            if (action is ProtectAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Protect;
+
+            if (action is RepairAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Repair;
+
+            if (action is RotateAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Rotate;
+
+            if (action is SignAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Sign;
+
+            if (action is SplitAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Split;
+
+            if (action is StampAction)
+                pdf4meAction.ActionType = Pdf4meActionActionType.Stamp;
+
+            //if (action is CreateThumbnailAction)
+            //    pdf4meAction.ActionType = Pdf4meActionActionType.Thumbnail;
+
+            //if (action is UserAction)
+            //    pdf4meAction.ActionType = Pdf4meActionActionType.User;
+
 
             actionFlow.Actions.Add(pdf4meAction);
 
         }
 
-       
+
+
 
         //public static async Task<byte[]> OptimizeAsync(this LightClient pdfLightClient,  string profile, byte[] file, string fileName)
         //{
