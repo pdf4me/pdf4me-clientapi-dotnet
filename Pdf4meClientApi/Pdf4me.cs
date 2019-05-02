@@ -101,21 +101,21 @@ namespace Pdf4meClient
             }
         }
 
-        /*public JobClient JobClient
+        public JobClient JobClient
         {
             get
             {
                 return new JobClient(getApi());
             }
-        }*/
+        }
 
-        /*public ManagementClient ManagementClient
+        public ManagementClient ManagementClient
         {
             get
             {
                 return new ManagementClient(getApi());
             }
-        }*/
+        }
 
         public MergeClient MergeClient
         {
