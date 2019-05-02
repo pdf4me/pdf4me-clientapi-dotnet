@@ -9098,9 +9098,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("barcodeDataType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BarcodeDataType { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("barcodeType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonProperty("barcodeReadType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public ScanBarcodeBarcodeType? BarcodeType { get; set; }
+        public ScanBarcodeBarcodeReadType? BarcodeReadType { get; set; }
 
         [Newtonsoft.Json.JsonProperty("barcodeDataLen", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public int? BarcodeDataLen { get; set; }
@@ -14113,7 +14113,7 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.36.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ScanBarcodeBarcodeType
+    public enum ScanBarcodeBarcodeReadType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
         All = 0,

@@ -18,6 +18,37 @@ namespace Pdf4meClient
 
     public static class Extension
     {
+
+        public static void AddAction(this ActionFlow actionFlow, OptimizeAction action)
+        {
+            if (actionFlow.Actions == null)
+                actionFlow.Actions = new HashSet<Pdf4meAction>();
+
+            var pdf4meAction = new Pdf4meAction()
+            {
+                ActionConfig = action.ToJson(),
+                ActionType = Pdf4meActionActionType.Optimize
+            };
+
+            actionFlow.Actions.Add(pdf4meAction);
+
+        }
+
+        public static void AddAction(this ActionFlow actionFlow, ConvertToPdfAction action)
+        {
+            if (actionFlow.Actions == null)
+                actionFlow.Actions = new HashSet<Pdf4meAction>();
+
+            var pdf4meAction = new Pdf4meAction()
+            {
+                ActionConfig = action.ToJson(),
+                ActionType = Pdf4meActionActionType.ConvertToPdf
+            };
+
+            actionFlow.Actions.Add(pdf4meAction);
+
+        }
+
         //public static async Task<byte[]> OptimizeAsync(this LightClient pdfLightClient,  string profile, byte[] file, string fileName)
         //{
 
@@ -32,9 +63,9 @@ namespace Pdf4meClient
         //    using (var ms = new MemoryStream(file))
         //    {
         //        HttpClient client = Pdf4me.Instance.getApi();
-                
+
         //        content.Add(new StreamContent(ms), "file", fileName);
-                
+
         //        message.Method = HttpMethod.Post;
         //        message.Content = content;
         //        message.RequestUri = new Uri($"{client.BaseAddress.AbsoluteUri}{uriAddon}");
@@ -58,10 +89,10 @@ namespace Pdf4meClient
         //        //return optimizeRes;
 
         //    }
-            
+
 
         //}
-               
+
 
     }
 }
