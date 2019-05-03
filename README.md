@@ -25,10 +25,12 @@ Feature | Description
 <a name="frameworks-supported"></a>
 ## Frameworks supported
 - .NET 4.5.2 or later
+- .NET Core 2.0 or later
 
 <a name="dependencies"></a>
 ## Dependencies
 - [Newtonsoft](https://www.nuget.org/packages/Newtonsoft.Json/) - 11.0.2 or later
+- [System.Net.Http](https://www.nuget.org/packages/Newtonsoft.Json/) - 4.3.4 or later
 
 The Pdf4me Client Api Library can be downloaded from [NuGet](https://docs.nuget.org/consume/installing-nuget):
 ```
