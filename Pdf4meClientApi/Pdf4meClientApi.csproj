@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp2.2;netcoreapp2.0;net462;net461;net452</TargetFrameworks>
-    <AssemblyName>Pdf4me.CoreClient</AssemblyName>
+    <AssemblyName>Pdf4meClientApi</AssemblyName>
     <RootNamespace>Pdf4me.CoreClient</RootNamespace>
     <ApplicationIcon>pdf4me.ico</ApplicationIcon>
   </PropertyGroup>
@@ -30,9 +30,9 @@
     <PackageIconUrl>https://developer.pdf4me.com/wp-content/themes/pdf4me-beaver-child/favicon.ico</PackageIconUrl>
     <PackageProjectUrl>https://portal.pdf4me.com</PackageProjectUrl>
     <Authors>Pdf4me</Authors>
-    <AssemblyVersion>0.5.10.0</AssemblyVersion>
-    <FileVersion>0.5.10.0</FileVersion>
-    <Version>0.5.10</Version>
+    <AssemblyVersion>0.5.59.0</AssemblyVersion>
+    <FileVersion>0.5.59.0</FileVersion>
+    <Version>0.5.59</Version>
   </PropertyGroup>
 
 </Project>
