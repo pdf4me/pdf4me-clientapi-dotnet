@@ -115,6 +115,15 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
+        public async Task<byte[]> DeletePagesAsync(byte[] file, string pageNrs)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "pageNrs", pageNrs },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
+                "Extract/DeletePages",
+                _httpClient);
+        }
+
         public async Task<FileResponse> ExtractPagesAsync(FileParameter file, string pageNrs, string jobIdExt = null)
         {
             return await ExtractPagesAsync(pageNrs, jobIdExt, file);
