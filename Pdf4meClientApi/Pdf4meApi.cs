@@ -9463,6 +9463,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("documentUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocumentUrl { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("scanPages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<ScanPage> ScanPages { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -9619,6 +9622,30 @@ namespace Pdf4meClient
         public static DocLog FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<DocLog>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.13.36.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class ScanPage
+    {
+        [Newtonsoft.Json.JsonProperty("barcodes", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<ScanBarcode> Barcodes { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pageNr", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? PageNr { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("properties", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<KeyValuePairOfStringAndObject> Properties { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static ScanPage FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<ScanPage>(data);
         }
 
     }
@@ -9843,6 +9870,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("documentUrl", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocumentUrl { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("scanPages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<ScanPage> ScanPages { get; set; }
 
         public string ToJson()
         {
