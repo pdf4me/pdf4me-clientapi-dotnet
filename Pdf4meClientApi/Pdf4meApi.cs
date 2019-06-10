@@ -8923,6 +8923,191 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.3.1.0 (NJsonSchema v9.14.1.0 (Newtonsoft.Json v11.0.0.0))")]
+    public partial class SwissQRClient
+    {
+        private System.Net.Http.HttpClient _httpClient;
+        private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
+
+        public SwissQRClient(System.Net.Http.HttpClient httpClient)
+        {
+            _httpClient = httpClient;
+            _settings = new System.Lazy<Newtonsoft.Json.JsonSerializerSettings>(() =>
+            {
+                var settings = new Newtonsoft.Json.JsonSerializerSettings();
+                UpdateJsonSerializerSettings(settings);
+                return settings;
+            });
+        }
+
+        protected Newtonsoft.Json.JsonSerializerSettings JsonSerializerSettings { get { return _settings.Value; } }
+
+        partial void UpdateJsonSerializerSettings(Newtonsoft.Json.JsonSerializerSettings settings);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, string url);
+        partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
+        partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
+
+        /// <returns>Success</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<SwissQrCreatorRes> CreateSwissQrBillAsync(SwissQrCreatorReq req)
+        {
+            return CreateSwissQrBillAsync(req, System.Threading.CancellationToken.None);
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        public async System.Threading.Tasks.Task<SwissQrCreatorRes> CreateSwissQrBillAsync(SwissQrCreatorReq req, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("SwissQR/CreateSwissQrBill");
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(SwissQrCreatorRes);
+                            try
+                            {
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<SwissQrCreatorRes>(responseData_, _settings.Value);
+                                return result_;
+                            }
+                            catch (System.Exception exception_)
+                            {
+                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
+                            }
+                        }
+                        else
+                        if (status_ == "401")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
+                            try
+                            {
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
+                            }
+                            catch (System.Exception exception_)
+                            {
+                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
+                            }
+                            throw new Pdf4meApiException<Pdf4meException>("Unauthorized", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                        }
+                        else
+                        if (status_ == "402")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
+                            try
+                            {
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
+                            }
+                            catch (System.Exception exception_)
+                            {
+                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
+                            }
+                            throw new Pdf4meApiException<Pdf4meException>("Client Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                        }
+                        else
+                        if (status_ == "500")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            var result_ = default(Pdf4meException);
+                            try
+                            {
+                                result_ = Newtonsoft.Json.JsonConvert.DeserializeObject<Pdf4meException>(responseData_, _settings.Value);
+                            }
+                            catch (System.Exception exception_)
+                            {
+                                throw new Pdf4meApiException("Could not deserialize the response body.", (int)response_.StatusCode, responseData_, headers_, exception_);
+                            }
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, responseData_, headers_, result_, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+
+                        return default(SwissQrCreatorRes);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
+        private string ConvertToString(object value, System.Globalization.CultureInfo cultureInfo)
+        {
+            if (value is System.Enum)
+            {
+                string name = System.Enum.GetName(value.GetType(), value);
+                if (name != null)
+                {
+                    var field = System.Reflection.IntrospectionExtensions.GetTypeInfo(value.GetType()).GetDeclaredField(name);
+                    if (field != null)
+                    {
+                        var attribute = System.Reflection.CustomAttributeExtensions.GetCustomAttribute(field, typeof(System.Runtime.Serialization.EnumMemberAttribute))
+                            as System.Runtime.Serialization.EnumMemberAttribute;
+                        if (attribute != null)
+                        {
+                            return attribute.Value != null ? attribute.Value : name;
+                        }
+                    }
+                }
+            }
+            else if (value is bool)
+            {
+                return System.Convert.ToString(value, cultureInfo).ToLowerInvariant();
+            }
+            else if (value is byte[])
+            {
+                return System.Convert.ToBase64String((byte[])value);
+            }
+            else if (value != null && value.GetType().IsArray)
+            {
+                var array = System.Linq.Enumerable.OfType<object>((System.Array)value);
+                return string.Join(",", System.Linq.Enumerable.Select(array, o => ConvertToString(o, cultureInfo)));
+            }
+
+            return System.Convert.ToString(value, cultureInfo);
+        }
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NSwag", "12.3.1.0 (NJsonSchema v9.14.1.0 (Newtonsoft.Json v11.0.0.0))")]
     public partial class UserClient
     {
         private System.Net.Http.HttpClient _httpClient;
@@ -13898,6 +14083,230 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class SwissQrCreatorReq
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; } = new Document();
+
+        [Newtonsoft.Json.JsonProperty("swissQrCreatorAction", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SwissQrCreatorAction SwissQrCreatorAction { get; set; } = new SwissQrCreatorAction();
+
+        [Newtonsoft.Json.JsonProperty("ipAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IpAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JobId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobIdExt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JobIdExt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<string> Integrations { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static SwissQrCreatorReq FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SwissQrCreatorReq>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class SwissQrCreatorAction
+    {
+        [Newtonsoft.Json.JsonProperty("billingData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public BillingData BillingData { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("languageType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SwissQrCreatorActionLanguageType? LanguageType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("seperatorLine", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SwissQrCreatorActionSeperatorLine? SeperatorLine { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("formatType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SwissQrCreatorActionFormatType? FormatType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("stampOnPdfRequired", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? StampOnPdfRequired { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ActionId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static SwissQrCreatorAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SwissQrCreatorAction>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class BillingData
+    {
+        [Newtonsoft.Json.JsonProperty("qrType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataQrType? QrType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("version", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataVersion? Version { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("codingType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCodingType? CodingType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("iban", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Iban { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCr_AddressType? Cr_AddressType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_StreetOrAddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_BuildNoOrAddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_PostalCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCr_Country? Cr_Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUcr_AddressType? Ucr_AddressType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_StreetOrAddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_BuildNoOrAddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_PostalCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUcr_Country? Ucr_Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("currency", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCurrency? Currency { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUd_AddressType? Ud_AddressType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_StreetOrAddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_BuildNoOrAddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_PostalCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUd_Country? Ud_Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("referenceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataReferenceType? ReferenceType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unstructuredMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UnstructuredMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("billingInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BillingInfo { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("av1_Parameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Av1_Parameters { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("av2_Parameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Av2_Parameters { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static BillingData FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<BillingData>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class SwissQrCreatorRes
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DocMetadata InDocMetadata { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errorDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrorDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TraceId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JobId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static SwissQrCreatorRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<SwissQrCreatorRes>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class GetUserPrefRes
     {
         [Newtonsoft.Json.JsonProperty("userPreferences", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -16047,6 +16456,2398 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"swisscomSigning")]
         SwisscomSigning = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SwissQrCreatorActionLanguageType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"german")]
+        German = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"french")]
+        French = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italian")]
+        Italian = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"english")]
+        English = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SwissQrCreatorActionSeperatorLine
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"lineWithScissor")]
+        LineWithScissor = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"line")]
+        Line = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SwissQrCreatorActionFormatType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"tiff")]
+        Tiff = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pDF")]
+        PDF = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sVG")]
+        SVG = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pNG")]
+        PNG = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
+        JPEG = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataQrType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"sPC")]
+        SPC = 0,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataVersion
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"v20")]
+        V20 = 0,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataCodingType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"default")]
+        Default = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uTF8")]
+        UTF8 = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataCr_AddressType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"s")]
+        S = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"k")]
+        K = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataCr_Country
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"andorra")]
+        Andorra = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedArabEmirates")]
+        UnitedArabEmirates = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"afghanistan")]
+        Afghanistan = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"antiguaandBarbuda")]
+        AntiguaandBarbuda = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"anguilla")]
+        Anguilla = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"albania")]
+        Albania = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"armenia")]
+        Armenia = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"angola")]
+        Angola = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"antarctica")]
+        Antarctica = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"argentina")]
+        Argentina = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"americanSamoa")]
+        AmericanSamoa = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"austria")]
+        Austria = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australia")]
+        Australia = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"aruba")]
+        Aruba = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ålandIslands")]
+        ÅlandIslands = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"azerbaijan")]
+        Azerbaijan = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bosniaandHerzegovina")]
+        BosniaandHerzegovina = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"barbados")]
+        Barbados = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bangladesh")]
+        Bangladesh = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belgium")]
+        Belgium = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"burkinaFaso")]
+        BurkinaFaso = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bulgaria")]
+        Bulgaria = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bahrain")]
+        Bahrain = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"burundi")]
+        Burundi = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"benin")]
+        Benin = 24,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintBarthélemy")]
+        SaintBarthélemy = 25,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bermuda")]
+        Bermuda = 26,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bruneiDarussalam")]
+        BruneiDarussalam = 27,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"boliviaPlurinationalStateof")]
+        BoliviaPlurinationalStateof = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bonaireSintEustatiusandSaba")]
+        BonaireSintEustatiusandSaba = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"brazil")]
+        Brazil = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bahamas")]
+        Bahamas = 31,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bhutan")]
+        Bhutan = 32,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bouvetIsland")]
+        BouvetIsland = 33,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"botswana")]
+        Botswana = 34,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belarus")]
+        Belarus = 35,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belize")]
+        Belize = 36,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"canada")]
+        Canada = 37,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cocosKeelingIslands")]
+        CocosKeelingIslands = 38,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"congoDemocraticRepublicofthe")]
+        CongoDemocraticRepublicofthe = 39,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"centralAfricanRepublic")]
+        CentralAfricanRepublic = 40,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"congo")]
+        Congo = 41,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"switzerland")]
+        Switzerland = 42,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"côtedIvoire")]
+        CôtedIvoire = 43,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cookIslands")]
+        CookIslands = 44,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"chile")]
+        Chile = 45,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cameroon")]
+        Cameroon = 46,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"china")]
+        China = 47,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"colombia")]
+        Colombia = 48,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"costaRica")]
+        CostaRica = 49,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cuba")]
+        Cuba = 50,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"caboVerde")]
+        CaboVerde = 51,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"curaçao")]
+        Curaçao = 52,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"christmasIsland")]
+        ChristmasIsland = 53,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cyprus")]
+        Cyprus = 54,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"czechia")]
+        Czechia = 55,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"germany")]
+        Germany = 56,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"djibouti")]
+        Djibouti = 57,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"denmark")]
+        Denmark = 58,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dominica")]
+        Dominica = 59,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dominicanRepublic")]
+        DominicanRepublic = 60,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"algeria")]
+        Algeria = 61,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ecuador")]
+        Ecuador = 62,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"estonia")]
+        Estonia = 63,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"egypt")]
+        Egypt = 64,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"westernSahara")]
+        WesternSahara = 65,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eritrea")]
+        Eritrea = 66,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"spain")]
+        Spain = 67,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ethiopia")]
+        Ethiopia = 68,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"finland")]
+        Finland = 69,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fiji")]
+        Fiji = 70,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"falklandIslandsMalvinas")]
+        FalklandIslandsMalvinas = 71,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"micronesiaFederatedStatesof")]
+        MicronesiaFederatedStatesof = 72,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"faroeIslands")]
+        FaroeIslands = 73,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"france")]
+        France = 74,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gabon")]
+        Gabon = 75,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedKingdomofGreatBritainandNorthernIreland")]
+        UnitedKingdomofGreatBritainandNorthernIreland = 76,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"grenada")]
+        Grenada = 77,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"georgia")]
+        Georgia = 78,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchGuiana")]
+        FrenchGuiana = 79,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guernsey")]
+        Guernsey = 80,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ghana")]
+        Ghana = 81,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gibraltar")]
+        Gibraltar = 82,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"greenland")]
+        Greenland = 83,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gambia")]
+        Gambia = 84,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guinea")]
+        Guinea = 85,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guadeloupe")]
+        Guadeloupe = 86,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"equatorialGuinea")]
+        EquatorialGuinea = 87,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"greece")]
+        Greece = 88,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southGeorgiaandtheSouthSandwichIslands")]
+        SouthGeorgiaandtheSouthSandwichIslands = 89,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guatemala")]
+        Guatemala = 90,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guam")]
+        Guam = 91,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guineaBissau")]
+        GuineaBissau = 92,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guyana")]
+        Guyana = 93,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hongKong")]
+        HongKong = 94,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"heardIslandandMcDonaldIslands")]
+        HeardIslandandMcDonaldIslands = 95,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"honduras")]
+        Honduras = 96,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"croatia")]
+        Croatia = 97,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"haiti")]
+        Haiti = 98,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hungary")]
+        Hungary = 99,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"indonesia")]
+        Indonesia = 100,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ireland")]
+        Ireland = 101,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"israel")]
+        Israel = 102,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"isleofMan")]
+        IsleofMan = 103,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"india")]
+        India = 104,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"britishIndianOceanTerritory")]
+        BritishIndianOceanTerritory = 105,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iraq")]
+        Iraq = 106,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iranIslamicRepublicof")]
+        IranIslamicRepublicof = 107,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iceland")]
+        Iceland = 108,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italy")]
+        Italy = 109,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jersey")]
+        Jersey = 110,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jamaica")]
+        Jamaica = 111,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jordan")]
+        Jordan = 112,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"japan")]
+        Japan = 113,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kenya")]
+        Kenya = 114,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kyrgyzstan")]
+        Kyrgyzstan = 115,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cambodia")]
+        Cambodia = 116,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kiribati")]
+        Kiribati = 117,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"comoros")]
+        Comoros = 118,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintKittsandNevis")]
+        SaintKittsandNevis = 119,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreaDemocraticPeoplesRepublicof")]
+        KoreaDemocraticPeoplesRepublicof = 120,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreaRepublicof")]
+        KoreaRepublicof = 121,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kuwait")]
+        Kuwait = 122,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"caymanIslands")]
+        CaymanIslands = 123,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kazakhstan")]
+        Kazakhstan = 124,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"laoPeoplesDemocraticRepublic")]
+        LaoPeoplesDemocraticRepublic = 125,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lebanon")]
+        Lebanon = 126,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintLucia")]
+        SaintLucia = 127,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"liechtenstein")]
+        Liechtenstein = 128,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sriLanka")]
+        SriLanka = 129,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"liberia")]
+        Liberia = 130,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lesotho")]
+        Lesotho = 131,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lithuania")]
+        Lithuania = 132,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"luxembourg")]
+        Luxembourg = 133,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"latvia")]
+        Latvia = 134,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"libya")]
+        Libya = 135,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"morocco")]
+        Morocco = 136,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"monaco")]
+        Monaco = 137,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"moldovaRepublicof")]
+        MoldovaRepublicof = 138,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"montenegro")]
+        Montenegro = 139,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintMartinFrenchpart")]
+        SaintMartinFrenchpart = 140,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"madagascar")]
+        Madagascar = 141,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"marshallIslands")]
+        MarshallIslands = 142,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"northMacedonia")]
+        NorthMacedonia = 143,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mali")]
+        Mali = 144,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"myanmar")]
+        Myanmar = 145,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mongolia")]
+        Mongolia = 146,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"macao")]
+        Macao = 147,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"northernMarianaIslands")]
+        NorthernMarianaIslands = 148,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"martinique")]
+        Martinique = 149,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mauritania")]
+        Mauritania = 150,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"montserrat")]
+        Montserrat = 151,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malta")]
+        Malta = 152,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mauritius")]
+        Mauritius = 153,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"maldives")]
+        Maldives = 154,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malawi")]
+        Malawi = 155,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mexico")]
+        Mexico = 156,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malaysia")]
+        Malaysia = 157,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mozambique")]
+        Mozambique = 158,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"namibia")]
+        Namibia = 159,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"newCaledonia")]
+        NewCaledonia = 160,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"niger")]
+        Niger = 161,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"norfolkIsland")]
+        NorfolkIsland = 162,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nigeria")]
+        Nigeria = 163,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nicaragua")]
+        Nicaragua = 164,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"netherlands")]
+        Netherlands = 165,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"norway")]
+        Norway = 166,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nepal")]
+        Nepal = 167,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nauru")]
+        Nauru = 168,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"niue")]
+        Niue = 169,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"newZealand")]
+        NewZealand = 170,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"oman")]
+        Oman = 171,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"panama")]
+        Panama = 172,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"peru")]
+        Peru = 173,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchPolynesia")]
+        FrenchPolynesia = 174,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"papuaNewGuinea")]
+        PapuaNewGuinea = 175,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"philippines")]
+        Philippines = 176,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pakistan")]
+        Pakistan = 177,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"poland")]
+        Poland = 178,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintPierreandMiquelon")]
+        SaintPierreandMiquelon = 179,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pitcairn")]
+        Pitcairn = 180,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"puertoRico")]
+        PuertoRico = 181,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palestineStateof")]
+        PalestineStateof = 182,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"portugal")]
+        Portugal = 183,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palau")]
+        Palau = 184,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"paraguay")]
+        Paraguay = 185,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qatar")]
+        Qatar = 186,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"réunion")]
+        Réunion = 187,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"romania")]
+        Romania = 188,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"serbia")]
+        Serbia = 189,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"russianFederation")]
+        RussianFederation = 190,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rwanda")]
+        Rwanda = 191,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saudiArabia")]
+        SaudiArabia = 192,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"solomonIslands")]
+        SolomonIslands = 193,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"seychelles")]
+        Seychelles = 194,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sudan")]
+        Sudan = 195,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sweden")]
+        Sweden = 196,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"singapore")]
+        Singapore = 197,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintHelenaAscensionandTristandaCunha")]
+        SaintHelenaAscensionandTristandaCunha = 198,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"slovenia")]
+        Slovenia = 199,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"svalbardandJanMayen")]
+        SvalbardandJanMayen = 200,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"slovakia")]
+        Slovakia = 201,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sierraLeone")]
+        SierraLeone = 202,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sanMarino")]
+        SanMarino = 203,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"senegal")]
+        Senegal = 204,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"somalia")]
+        Somalia = 205,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"suriname")]
+        Suriname = 206,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southSudan")]
+        SouthSudan = 207,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saoTomeandPrincipe")]
+        SaoTomeandPrincipe = 208,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"elSalvador")]
+        ElSalvador = 209,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sintMaartenDutchpart")]
+        SintMaartenDutchpart = 210,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"syrianArabRepublic")]
+        SyrianArabRepublic = 211,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eswatini")]
+        Eswatini = 212,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turksandCaicosIslands")]
+        TurksandCaicosIslands = 213,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"chad")]
+        Chad = 214,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchSouthernTerritories")]
+        FrenchSouthernTerritories = 215,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"togo")]
+        Togo = 216,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"thailand")]
+        Thailand = 217,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tajikistan")]
+        Tajikistan = 218,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tokelau")]
+        Tokelau = 219,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"timorLeste")]
+        TimorLeste = 220,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turkmenistan")]
+        Turkmenistan = 221,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tunisia")]
+        Tunisia = 222,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tonga")]
+        Tonga = 223,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turkey")]
+        Turkey = 224,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"trinidadandTobago")]
+        TrinidadandTobago = 225,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tuvalu")]
+        Tuvalu = 226,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"taiwanProvinceofChina")]
+        TaiwanProvinceofChina = 227,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tanzaniaUnitedRepublicof")]
+        TanzaniaUnitedRepublicof = 228,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ukraine")]
+        Ukraine = 229,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uganda")]
+        Uganda = 230,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedStatesMinorOutlyingIslands")]
+        UnitedStatesMinorOutlyingIslands = 231,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedStatesofAmerica")]
+        UnitedStatesofAmerica = 232,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uruguay")]
+        Uruguay = 233,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uzbekistan")]
+        Uzbekistan = 234,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"holySee")]
+        HolySee = 235,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintVincentandtheGrenadines")]
+        SaintVincentandtheGrenadines = 236,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"venezuelaBolivarianRepublicof")]
+        VenezuelaBolivarianRepublicof = 237,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virginIslandsBritish")]
+        VirginIslandsBritish = 238,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virginIslandsUS")]
+        VirginIslandsUS = 239,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vietNam")]
+        VietNam = 240,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vanuatu")]
+        Vanuatu = 241,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"wallisandFutuna")]
+        WallisandFutuna = 242,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"samoa")]
+        Samoa = 243,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"yemen")]
+        Yemen = 244,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mayotte")]
+        Mayotte = 245,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southAfrica")]
+        SouthAfrica = 246,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zambia")]
+        Zambia = 247,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zimbabwe")]
+        Zimbabwe = 248,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataUcr_AddressType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"s")]
+        S = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"k")]
+        K = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataUcr_Country
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"andorra")]
+        Andorra = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedArabEmirates")]
+        UnitedArabEmirates = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"afghanistan")]
+        Afghanistan = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"antiguaandBarbuda")]
+        AntiguaandBarbuda = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"anguilla")]
+        Anguilla = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"albania")]
+        Albania = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"armenia")]
+        Armenia = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"angola")]
+        Angola = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"antarctica")]
+        Antarctica = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"argentina")]
+        Argentina = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"americanSamoa")]
+        AmericanSamoa = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"austria")]
+        Austria = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australia")]
+        Australia = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"aruba")]
+        Aruba = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ålandIslands")]
+        ÅlandIslands = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"azerbaijan")]
+        Azerbaijan = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bosniaandHerzegovina")]
+        BosniaandHerzegovina = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"barbados")]
+        Barbados = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bangladesh")]
+        Bangladesh = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belgium")]
+        Belgium = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"burkinaFaso")]
+        BurkinaFaso = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bulgaria")]
+        Bulgaria = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bahrain")]
+        Bahrain = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"burundi")]
+        Burundi = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"benin")]
+        Benin = 24,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintBarthélemy")]
+        SaintBarthélemy = 25,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bermuda")]
+        Bermuda = 26,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bruneiDarussalam")]
+        BruneiDarussalam = 27,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"boliviaPlurinationalStateof")]
+        BoliviaPlurinationalStateof = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bonaireSintEustatiusandSaba")]
+        BonaireSintEustatiusandSaba = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"brazil")]
+        Brazil = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bahamas")]
+        Bahamas = 31,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bhutan")]
+        Bhutan = 32,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bouvetIsland")]
+        BouvetIsland = 33,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"botswana")]
+        Botswana = 34,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belarus")]
+        Belarus = 35,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belize")]
+        Belize = 36,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"canada")]
+        Canada = 37,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cocosKeelingIslands")]
+        CocosKeelingIslands = 38,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"congoDemocraticRepublicofthe")]
+        CongoDemocraticRepublicofthe = 39,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"centralAfricanRepublic")]
+        CentralAfricanRepublic = 40,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"congo")]
+        Congo = 41,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"switzerland")]
+        Switzerland = 42,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"côtedIvoire")]
+        CôtedIvoire = 43,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cookIslands")]
+        CookIslands = 44,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"chile")]
+        Chile = 45,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cameroon")]
+        Cameroon = 46,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"china")]
+        China = 47,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"colombia")]
+        Colombia = 48,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"costaRica")]
+        CostaRica = 49,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cuba")]
+        Cuba = 50,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"caboVerde")]
+        CaboVerde = 51,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"curaçao")]
+        Curaçao = 52,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"christmasIsland")]
+        ChristmasIsland = 53,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cyprus")]
+        Cyprus = 54,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"czechia")]
+        Czechia = 55,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"germany")]
+        Germany = 56,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"djibouti")]
+        Djibouti = 57,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"denmark")]
+        Denmark = 58,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dominica")]
+        Dominica = 59,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dominicanRepublic")]
+        DominicanRepublic = 60,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"algeria")]
+        Algeria = 61,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ecuador")]
+        Ecuador = 62,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"estonia")]
+        Estonia = 63,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"egypt")]
+        Egypt = 64,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"westernSahara")]
+        WesternSahara = 65,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eritrea")]
+        Eritrea = 66,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"spain")]
+        Spain = 67,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ethiopia")]
+        Ethiopia = 68,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"finland")]
+        Finland = 69,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fiji")]
+        Fiji = 70,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"falklandIslandsMalvinas")]
+        FalklandIslandsMalvinas = 71,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"micronesiaFederatedStatesof")]
+        MicronesiaFederatedStatesof = 72,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"faroeIslands")]
+        FaroeIslands = 73,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"france")]
+        France = 74,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gabon")]
+        Gabon = 75,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedKingdomofGreatBritainandNorthernIreland")]
+        UnitedKingdomofGreatBritainandNorthernIreland = 76,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"grenada")]
+        Grenada = 77,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"georgia")]
+        Georgia = 78,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchGuiana")]
+        FrenchGuiana = 79,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guernsey")]
+        Guernsey = 80,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ghana")]
+        Ghana = 81,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gibraltar")]
+        Gibraltar = 82,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"greenland")]
+        Greenland = 83,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gambia")]
+        Gambia = 84,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guinea")]
+        Guinea = 85,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guadeloupe")]
+        Guadeloupe = 86,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"equatorialGuinea")]
+        EquatorialGuinea = 87,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"greece")]
+        Greece = 88,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southGeorgiaandtheSouthSandwichIslands")]
+        SouthGeorgiaandtheSouthSandwichIslands = 89,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guatemala")]
+        Guatemala = 90,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guam")]
+        Guam = 91,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guineaBissau")]
+        GuineaBissau = 92,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guyana")]
+        Guyana = 93,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hongKong")]
+        HongKong = 94,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"heardIslandandMcDonaldIslands")]
+        HeardIslandandMcDonaldIslands = 95,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"honduras")]
+        Honduras = 96,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"croatia")]
+        Croatia = 97,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"haiti")]
+        Haiti = 98,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hungary")]
+        Hungary = 99,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"indonesia")]
+        Indonesia = 100,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ireland")]
+        Ireland = 101,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"israel")]
+        Israel = 102,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"isleofMan")]
+        IsleofMan = 103,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"india")]
+        India = 104,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"britishIndianOceanTerritory")]
+        BritishIndianOceanTerritory = 105,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iraq")]
+        Iraq = 106,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iranIslamicRepublicof")]
+        IranIslamicRepublicof = 107,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iceland")]
+        Iceland = 108,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italy")]
+        Italy = 109,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jersey")]
+        Jersey = 110,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jamaica")]
+        Jamaica = 111,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jordan")]
+        Jordan = 112,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"japan")]
+        Japan = 113,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kenya")]
+        Kenya = 114,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kyrgyzstan")]
+        Kyrgyzstan = 115,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cambodia")]
+        Cambodia = 116,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kiribati")]
+        Kiribati = 117,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"comoros")]
+        Comoros = 118,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintKittsandNevis")]
+        SaintKittsandNevis = 119,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreaDemocraticPeoplesRepublicof")]
+        KoreaDemocraticPeoplesRepublicof = 120,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreaRepublicof")]
+        KoreaRepublicof = 121,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kuwait")]
+        Kuwait = 122,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"caymanIslands")]
+        CaymanIslands = 123,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kazakhstan")]
+        Kazakhstan = 124,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"laoPeoplesDemocraticRepublic")]
+        LaoPeoplesDemocraticRepublic = 125,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lebanon")]
+        Lebanon = 126,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintLucia")]
+        SaintLucia = 127,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"liechtenstein")]
+        Liechtenstein = 128,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sriLanka")]
+        SriLanka = 129,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"liberia")]
+        Liberia = 130,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lesotho")]
+        Lesotho = 131,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lithuania")]
+        Lithuania = 132,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"luxembourg")]
+        Luxembourg = 133,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"latvia")]
+        Latvia = 134,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"libya")]
+        Libya = 135,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"morocco")]
+        Morocco = 136,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"monaco")]
+        Monaco = 137,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"moldovaRepublicof")]
+        MoldovaRepublicof = 138,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"montenegro")]
+        Montenegro = 139,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintMartinFrenchpart")]
+        SaintMartinFrenchpart = 140,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"madagascar")]
+        Madagascar = 141,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"marshallIslands")]
+        MarshallIslands = 142,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"northMacedonia")]
+        NorthMacedonia = 143,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mali")]
+        Mali = 144,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"myanmar")]
+        Myanmar = 145,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mongolia")]
+        Mongolia = 146,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"macao")]
+        Macao = 147,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"northernMarianaIslands")]
+        NorthernMarianaIslands = 148,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"martinique")]
+        Martinique = 149,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mauritania")]
+        Mauritania = 150,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"montserrat")]
+        Montserrat = 151,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malta")]
+        Malta = 152,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mauritius")]
+        Mauritius = 153,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"maldives")]
+        Maldives = 154,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malawi")]
+        Malawi = 155,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mexico")]
+        Mexico = 156,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malaysia")]
+        Malaysia = 157,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mozambique")]
+        Mozambique = 158,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"namibia")]
+        Namibia = 159,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"newCaledonia")]
+        NewCaledonia = 160,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"niger")]
+        Niger = 161,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"norfolkIsland")]
+        NorfolkIsland = 162,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nigeria")]
+        Nigeria = 163,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nicaragua")]
+        Nicaragua = 164,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"netherlands")]
+        Netherlands = 165,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"norway")]
+        Norway = 166,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nepal")]
+        Nepal = 167,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nauru")]
+        Nauru = 168,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"niue")]
+        Niue = 169,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"newZealand")]
+        NewZealand = 170,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"oman")]
+        Oman = 171,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"panama")]
+        Panama = 172,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"peru")]
+        Peru = 173,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchPolynesia")]
+        FrenchPolynesia = 174,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"papuaNewGuinea")]
+        PapuaNewGuinea = 175,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"philippines")]
+        Philippines = 176,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pakistan")]
+        Pakistan = 177,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"poland")]
+        Poland = 178,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintPierreandMiquelon")]
+        SaintPierreandMiquelon = 179,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pitcairn")]
+        Pitcairn = 180,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"puertoRico")]
+        PuertoRico = 181,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palestineStateof")]
+        PalestineStateof = 182,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"portugal")]
+        Portugal = 183,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palau")]
+        Palau = 184,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"paraguay")]
+        Paraguay = 185,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qatar")]
+        Qatar = 186,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"réunion")]
+        Réunion = 187,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"romania")]
+        Romania = 188,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"serbia")]
+        Serbia = 189,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"russianFederation")]
+        RussianFederation = 190,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rwanda")]
+        Rwanda = 191,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saudiArabia")]
+        SaudiArabia = 192,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"solomonIslands")]
+        SolomonIslands = 193,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"seychelles")]
+        Seychelles = 194,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sudan")]
+        Sudan = 195,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sweden")]
+        Sweden = 196,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"singapore")]
+        Singapore = 197,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintHelenaAscensionandTristandaCunha")]
+        SaintHelenaAscensionandTristandaCunha = 198,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"slovenia")]
+        Slovenia = 199,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"svalbardandJanMayen")]
+        SvalbardandJanMayen = 200,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"slovakia")]
+        Slovakia = 201,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sierraLeone")]
+        SierraLeone = 202,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sanMarino")]
+        SanMarino = 203,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"senegal")]
+        Senegal = 204,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"somalia")]
+        Somalia = 205,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"suriname")]
+        Suriname = 206,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southSudan")]
+        SouthSudan = 207,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saoTomeandPrincipe")]
+        SaoTomeandPrincipe = 208,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"elSalvador")]
+        ElSalvador = 209,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sintMaartenDutchpart")]
+        SintMaartenDutchpart = 210,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"syrianArabRepublic")]
+        SyrianArabRepublic = 211,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eswatini")]
+        Eswatini = 212,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turksandCaicosIslands")]
+        TurksandCaicosIslands = 213,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"chad")]
+        Chad = 214,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchSouthernTerritories")]
+        FrenchSouthernTerritories = 215,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"togo")]
+        Togo = 216,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"thailand")]
+        Thailand = 217,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tajikistan")]
+        Tajikistan = 218,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tokelau")]
+        Tokelau = 219,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"timorLeste")]
+        TimorLeste = 220,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turkmenistan")]
+        Turkmenistan = 221,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tunisia")]
+        Tunisia = 222,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tonga")]
+        Tonga = 223,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turkey")]
+        Turkey = 224,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"trinidadandTobago")]
+        TrinidadandTobago = 225,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tuvalu")]
+        Tuvalu = 226,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"taiwanProvinceofChina")]
+        TaiwanProvinceofChina = 227,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tanzaniaUnitedRepublicof")]
+        TanzaniaUnitedRepublicof = 228,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ukraine")]
+        Ukraine = 229,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uganda")]
+        Uganda = 230,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedStatesMinorOutlyingIslands")]
+        UnitedStatesMinorOutlyingIslands = 231,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedStatesofAmerica")]
+        UnitedStatesofAmerica = 232,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uruguay")]
+        Uruguay = 233,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uzbekistan")]
+        Uzbekistan = 234,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"holySee")]
+        HolySee = 235,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintVincentandtheGrenadines")]
+        SaintVincentandtheGrenadines = 236,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"venezuelaBolivarianRepublicof")]
+        VenezuelaBolivarianRepublicof = 237,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virginIslandsBritish")]
+        VirginIslandsBritish = 238,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virginIslandsUS")]
+        VirginIslandsUS = 239,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vietNam")]
+        VietNam = 240,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vanuatu")]
+        Vanuatu = 241,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"wallisandFutuna")]
+        WallisandFutuna = 242,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"samoa")]
+        Samoa = 243,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"yemen")]
+        Yemen = 244,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mayotte")]
+        Mayotte = 245,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southAfrica")]
+        SouthAfrica = 246,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zambia")]
+        Zambia = 247,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zimbabwe")]
+        Zimbabwe = 248,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataCurrency
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"cHF")]
+        CHF = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eUR")]
+        EUR = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataUd_AddressType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"s")]
+        S = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"k")]
+        K = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataUd_Country
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"andorra")]
+        Andorra = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedArabEmirates")]
+        UnitedArabEmirates = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"afghanistan")]
+        Afghanistan = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"antiguaandBarbuda")]
+        AntiguaandBarbuda = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"anguilla")]
+        Anguilla = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"albania")]
+        Albania = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"armenia")]
+        Armenia = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"angola")]
+        Angola = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"antarctica")]
+        Antarctica = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"argentina")]
+        Argentina = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"americanSamoa")]
+        AmericanSamoa = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"austria")]
+        Austria = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australia")]
+        Australia = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"aruba")]
+        Aruba = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ålandIslands")]
+        ÅlandIslands = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"azerbaijan")]
+        Azerbaijan = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bosniaandHerzegovina")]
+        BosniaandHerzegovina = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"barbados")]
+        Barbados = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bangladesh")]
+        Bangladesh = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belgium")]
+        Belgium = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"burkinaFaso")]
+        BurkinaFaso = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bulgaria")]
+        Bulgaria = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bahrain")]
+        Bahrain = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"burundi")]
+        Burundi = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"benin")]
+        Benin = 24,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintBarthélemy")]
+        SaintBarthélemy = 25,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bermuda")]
+        Bermuda = 26,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bruneiDarussalam")]
+        BruneiDarussalam = 27,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"boliviaPlurinationalStateof")]
+        BoliviaPlurinationalStateof = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bonaireSintEustatiusandSaba")]
+        BonaireSintEustatiusandSaba = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"brazil")]
+        Brazil = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bahamas")]
+        Bahamas = 31,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bhutan")]
+        Bhutan = 32,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bouvetIsland")]
+        BouvetIsland = 33,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"botswana")]
+        Botswana = 34,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belarus")]
+        Belarus = 35,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"belize")]
+        Belize = 36,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"canada")]
+        Canada = 37,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cocosKeelingIslands")]
+        CocosKeelingIslands = 38,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"congoDemocraticRepublicofthe")]
+        CongoDemocraticRepublicofthe = 39,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"centralAfricanRepublic")]
+        CentralAfricanRepublic = 40,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"congo")]
+        Congo = 41,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"switzerland")]
+        Switzerland = 42,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"côtedIvoire")]
+        CôtedIvoire = 43,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cookIslands")]
+        CookIslands = 44,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"chile")]
+        Chile = 45,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cameroon")]
+        Cameroon = 46,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"china")]
+        China = 47,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"colombia")]
+        Colombia = 48,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"costaRica")]
+        CostaRica = 49,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cuba")]
+        Cuba = 50,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"caboVerde")]
+        CaboVerde = 51,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"curaçao")]
+        Curaçao = 52,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"christmasIsland")]
+        ChristmasIsland = 53,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cyprus")]
+        Cyprus = 54,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"czechia")]
+        Czechia = 55,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"germany")]
+        Germany = 56,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"djibouti")]
+        Djibouti = 57,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"denmark")]
+        Denmark = 58,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dominica")]
+        Dominica = 59,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dominicanRepublic")]
+        DominicanRepublic = 60,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"algeria")]
+        Algeria = 61,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ecuador")]
+        Ecuador = 62,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"estonia")]
+        Estonia = 63,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"egypt")]
+        Egypt = 64,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"westernSahara")]
+        WesternSahara = 65,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eritrea")]
+        Eritrea = 66,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"spain")]
+        Spain = 67,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ethiopia")]
+        Ethiopia = 68,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"finland")]
+        Finland = 69,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fiji")]
+        Fiji = 70,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"falklandIslandsMalvinas")]
+        FalklandIslandsMalvinas = 71,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"micronesiaFederatedStatesof")]
+        MicronesiaFederatedStatesof = 72,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"faroeIslands")]
+        FaroeIslands = 73,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"france")]
+        France = 74,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gabon")]
+        Gabon = 75,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedKingdomofGreatBritainandNorthernIreland")]
+        UnitedKingdomofGreatBritainandNorthernIreland = 76,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"grenada")]
+        Grenada = 77,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"georgia")]
+        Georgia = 78,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchGuiana")]
+        FrenchGuiana = 79,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guernsey")]
+        Guernsey = 80,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ghana")]
+        Ghana = 81,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gibraltar")]
+        Gibraltar = 82,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"greenland")]
+        Greenland = 83,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gambia")]
+        Gambia = 84,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guinea")]
+        Guinea = 85,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guadeloupe")]
+        Guadeloupe = 86,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"equatorialGuinea")]
+        EquatorialGuinea = 87,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"greece")]
+        Greece = 88,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southGeorgiaandtheSouthSandwichIslands")]
+        SouthGeorgiaandtheSouthSandwichIslands = 89,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guatemala")]
+        Guatemala = 90,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guam")]
+        Guam = 91,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guineaBissau")]
+        GuineaBissau = 92,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"guyana")]
+        Guyana = 93,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hongKong")]
+        HongKong = 94,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"heardIslandandMcDonaldIslands")]
+        HeardIslandandMcDonaldIslands = 95,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"honduras")]
+        Honduras = 96,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"croatia")]
+        Croatia = 97,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"haiti")]
+        Haiti = 98,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hungary")]
+        Hungary = 99,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"indonesia")]
+        Indonesia = 100,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ireland")]
+        Ireland = 101,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"israel")]
+        Israel = 102,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"isleofMan")]
+        IsleofMan = 103,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"india")]
+        India = 104,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"britishIndianOceanTerritory")]
+        BritishIndianOceanTerritory = 105,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iraq")]
+        Iraq = 106,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iranIslamicRepublicof")]
+        IranIslamicRepublicof = 107,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"iceland")]
+        Iceland = 108,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italy")]
+        Italy = 109,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jersey")]
+        Jersey = 110,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jamaica")]
+        Jamaica = 111,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jordan")]
+        Jordan = 112,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"japan")]
+        Japan = 113,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kenya")]
+        Kenya = 114,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kyrgyzstan")]
+        Kyrgyzstan = 115,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cambodia")]
+        Cambodia = 116,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kiribati")]
+        Kiribati = 117,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"comoros")]
+        Comoros = 118,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintKittsandNevis")]
+        SaintKittsandNevis = 119,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreaDemocraticPeoplesRepublicof")]
+        KoreaDemocraticPeoplesRepublicof = 120,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreaRepublicof")]
+        KoreaRepublicof = 121,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kuwait")]
+        Kuwait = 122,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"caymanIslands")]
+        CaymanIslands = 123,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kazakhstan")]
+        Kazakhstan = 124,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"laoPeoplesDemocraticRepublic")]
+        LaoPeoplesDemocraticRepublic = 125,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lebanon")]
+        Lebanon = 126,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintLucia")]
+        SaintLucia = 127,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"liechtenstein")]
+        Liechtenstein = 128,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sriLanka")]
+        SriLanka = 129,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"liberia")]
+        Liberia = 130,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lesotho")]
+        Lesotho = 131,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lithuania")]
+        Lithuania = 132,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"luxembourg")]
+        Luxembourg = 133,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"latvia")]
+        Latvia = 134,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"libya")]
+        Libya = 135,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"morocco")]
+        Morocco = 136,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"monaco")]
+        Monaco = 137,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"moldovaRepublicof")]
+        MoldovaRepublicof = 138,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"montenegro")]
+        Montenegro = 139,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintMartinFrenchpart")]
+        SaintMartinFrenchpart = 140,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"madagascar")]
+        Madagascar = 141,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"marshallIslands")]
+        MarshallIslands = 142,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"northMacedonia")]
+        NorthMacedonia = 143,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mali")]
+        Mali = 144,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"myanmar")]
+        Myanmar = 145,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mongolia")]
+        Mongolia = 146,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"macao")]
+        Macao = 147,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"northernMarianaIslands")]
+        NorthernMarianaIslands = 148,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"martinique")]
+        Martinique = 149,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mauritania")]
+        Mauritania = 150,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"montserrat")]
+        Montserrat = 151,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malta")]
+        Malta = 152,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mauritius")]
+        Mauritius = 153,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"maldives")]
+        Maldives = 154,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malawi")]
+        Malawi = 155,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mexico")]
+        Mexico = 156,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"malaysia")]
+        Malaysia = 157,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mozambique")]
+        Mozambique = 158,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"namibia")]
+        Namibia = 159,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"newCaledonia")]
+        NewCaledonia = 160,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"niger")]
+        Niger = 161,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"norfolkIsland")]
+        NorfolkIsland = 162,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nigeria")]
+        Nigeria = 163,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nicaragua")]
+        Nicaragua = 164,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"netherlands")]
+        Netherlands = 165,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"norway")]
+        Norway = 166,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nepal")]
+        Nepal = 167,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nauru")]
+        Nauru = 168,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"niue")]
+        Niue = 169,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"newZealand")]
+        NewZealand = 170,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"oman")]
+        Oman = 171,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"panama")]
+        Panama = 172,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"peru")]
+        Peru = 173,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchPolynesia")]
+        FrenchPolynesia = 174,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"papuaNewGuinea")]
+        PapuaNewGuinea = 175,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"philippines")]
+        Philippines = 176,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pakistan")]
+        Pakistan = 177,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"poland")]
+        Poland = 178,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintPierreandMiquelon")]
+        SaintPierreandMiquelon = 179,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pitcairn")]
+        Pitcairn = 180,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"puertoRico")]
+        PuertoRico = 181,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palestineStateof")]
+        PalestineStateof = 182,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"portugal")]
+        Portugal = 183,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palau")]
+        Palau = 184,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"paraguay")]
+        Paraguay = 185,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qatar")]
+        Qatar = 186,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"réunion")]
+        Réunion = 187,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"romania")]
+        Romania = 188,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"serbia")]
+        Serbia = 189,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"russianFederation")]
+        RussianFederation = 190,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rwanda")]
+        Rwanda = 191,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saudiArabia")]
+        SaudiArabia = 192,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"solomonIslands")]
+        SolomonIslands = 193,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"seychelles")]
+        Seychelles = 194,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sudan")]
+        Sudan = 195,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sweden")]
+        Sweden = 196,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"singapore")]
+        Singapore = 197,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintHelenaAscensionandTristandaCunha")]
+        SaintHelenaAscensionandTristandaCunha = 198,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"slovenia")]
+        Slovenia = 199,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"svalbardandJanMayen")]
+        SvalbardandJanMayen = 200,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"slovakia")]
+        Slovakia = 201,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sierraLeone")]
+        SierraLeone = 202,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sanMarino")]
+        SanMarino = 203,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"senegal")]
+        Senegal = 204,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"somalia")]
+        Somalia = 205,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"suriname")]
+        Suriname = 206,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southSudan")]
+        SouthSudan = 207,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saoTomeandPrincipe")]
+        SaoTomeandPrincipe = 208,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"elSalvador")]
+        ElSalvador = 209,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sintMaartenDutchpart")]
+        SintMaartenDutchpart = 210,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"syrianArabRepublic")]
+        SyrianArabRepublic = 211,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eswatini")]
+        Eswatini = 212,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turksandCaicosIslands")]
+        TurksandCaicosIslands = 213,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"chad")]
+        Chad = 214,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"frenchSouthernTerritories")]
+        FrenchSouthernTerritories = 215,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"togo")]
+        Togo = 216,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"thailand")]
+        Thailand = 217,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tajikistan")]
+        Tajikistan = 218,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tokelau")]
+        Tokelau = 219,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"timorLeste")]
+        TimorLeste = 220,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turkmenistan")]
+        Turkmenistan = 221,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tunisia")]
+        Tunisia = 222,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tonga")]
+        Tonga = 223,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"turkey")]
+        Turkey = 224,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"trinidadandTobago")]
+        TrinidadandTobago = 225,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tuvalu")]
+        Tuvalu = 226,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"taiwanProvinceofChina")]
+        TaiwanProvinceofChina = 227,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tanzaniaUnitedRepublicof")]
+        TanzaniaUnitedRepublicof = 228,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ukraine")]
+        Ukraine = 229,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uganda")]
+        Uganda = 230,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedStatesMinorOutlyingIslands")]
+        UnitedStatesMinorOutlyingIslands = 231,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unitedStatesofAmerica")]
+        UnitedStatesofAmerica = 232,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uruguay")]
+        Uruguay = 233,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uzbekistan")]
+        Uzbekistan = 234,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"holySee")]
+        HolySee = 235,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"saintVincentandtheGrenadines")]
+        SaintVincentandtheGrenadines = 236,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"venezuelaBolivarianRepublicof")]
+        VenezuelaBolivarianRepublicof = 237,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virginIslandsBritish")]
+        VirginIslandsBritish = 238,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"virginIslandsUS")]
+        VirginIslandsUS = 239,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vietNam")]
+        VietNam = 240,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vanuatu")]
+        Vanuatu = 241,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"wallisandFutuna")]
+        WallisandFutuna = 242,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"samoa")]
+        Samoa = 243,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"yemen")]
+        Yemen = 244,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mayotte")]
+        Mayotte = 245,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"southAfrica")]
+        SouthAfrica = 246,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zambia")]
+        Zambia = 247,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zimbabwe")]
+        Zimbabwe = 248,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "9.14.1.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BillingDataReferenceType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"qRR")]
+        QRR = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sCOR")]
+        SCOR = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nON")]
+        NON = 2,
 
     }
 
