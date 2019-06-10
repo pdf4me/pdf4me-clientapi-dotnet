@@ -181,6 +181,14 @@ namespace Pdf4meClient
             }
         }
 
+        public SwissQRClient SwissQRClient
+        {
+            get
+            {
+                return new SwissQRClient(getApi());
+            }
+        }
+
         public HttpClient getApi()
         {
 
