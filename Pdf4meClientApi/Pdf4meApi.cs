@@ -13047,8 +13047,8 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SwissQrCreatorActionFormatType? FormatType { get; set; }
 
-        [Newtonsoft.Json.JsonProperty("stampOnPdfRequired", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public bool? StampOnPdfRequired { get; set; }
+        [Newtonsoft.Json.JsonProperty("swissQrOnPdfRequired", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? SwissQrOnPdfRequired { get; set; }
 
         [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ActionId { get; set; }
