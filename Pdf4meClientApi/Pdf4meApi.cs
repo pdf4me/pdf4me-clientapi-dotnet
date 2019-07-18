@@ -9145,6 +9145,12 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public Pdf4meDocumentDocStatus? DocStatus { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("errCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("errMsg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ErrMsg { get; set; }
+
         [Newtonsoft.Json.JsonProperty("inExecution", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public bool? InExecution { get; set; }
 
@@ -15354,6 +15360,9 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"produce")]
         Produce = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"convertFromPdf")]
+        ConvertFromPdf = 21,
 
     }
 
