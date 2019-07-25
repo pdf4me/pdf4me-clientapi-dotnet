@@ -189,6 +189,14 @@ namespace Pdf4meClient
             }
         }
 
+        public ConvertFromPdfClient ConvertFromPdfClient
+        {
+            get
+            {
+                return new ConvertFromPdfClient(getApi());
+            }
+        }
+
         public HttpClient getApi()
         {
 
