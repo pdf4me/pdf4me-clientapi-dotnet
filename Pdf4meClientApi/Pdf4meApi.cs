@@ -8745,6 +8745,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.HashSet<DocMetadata> InDocMetadata { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -8942,6 +8945,90 @@ namespace Pdf4meClient
         public static DocMetadata FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<DocMetadata>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class UsageApplication
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subscriptionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string SubscriptionId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string ApplicationId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subCostTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? SubCostTotal { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subCostCurrent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? SubCostCurrent { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("apiCostTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? ApiCostTotal { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("apiCostCurrent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? ApiCostCurrent { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ApiCallCnt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? ApiCallCnt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("feature", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Feature { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("featureCallCnt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? FeatureCallCnt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("durationMsAvg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DurationMsAvg { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("durationMsMin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DurationMsMin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("durationMsMax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DurationMsMax { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pagesAvg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? PagesAvg { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pagesMin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? PagesMin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pagesMax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? PagesMax { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pagesSum", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? PagesSum { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("docSizeAvg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DocSizeAvg { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("docSizeMin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DocSizeMin { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("docSizeMax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DocSizeMax { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("docSizeSum", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public long? DocSizeSum { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timeStampFrom", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? TimeStampFrom { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("timeStampTo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTime? TimeStampTo { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static UsageApplication FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<UsageApplication>(data);
         }
 
     }
@@ -9335,6 +9422,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -9396,6 +9486,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("qualityType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public ConvertFromPdfActionQualityType? QualityType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("singlePage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? SinglePage { get; set; }
 
         [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ActionId { get; set; }
@@ -10463,6 +10556,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -10994,6 +11090,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
 
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
@@ -12253,90 +12352,6 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class UsageApplication
-    {
-        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Id { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("subscriptionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string SubscriptionId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("applicationId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string ApplicationId { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("subCostTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? SubCostTotal { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("subCostCurrent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? SubCostCurrent { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("apiCostTotal", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? ApiCostTotal { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("apiCostCurrent", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? ApiCostCurrent { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ApiCallCnt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? ApiCallCnt { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("feature", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Feature { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("featureCallCnt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? FeatureCallCnt { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("durationMsAvg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DurationMsAvg { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("durationMsMin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DurationMsMin { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("durationMsMax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DurationMsMax { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pagesAvg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PagesAvg { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pagesMin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PagesMin { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pagesMax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PagesMax { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("pagesSum", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? PagesSum { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("docSizeAvg", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DocSizeAvg { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("docSizeMin", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DocSizeMin { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("docSizeMax", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DocSizeMax { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("docSizeSum", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public long? DocSizeSum { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("timeStampFrom", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TimeStampFrom { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("timeStampTo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public System.DateTime? TimeStampTo { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static UsageApplication FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<UsageApplication>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class CheckAvailabilityRes
     {
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -12522,6 +12537,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("structuredDataJson", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string StructuredDataJson { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -12586,6 +12604,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
 
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
@@ -13203,6 +13224,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -13293,6 +13317,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.HashSet<DocMetadata> InDocMetadata { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -13357,6 +13384,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("usageApplicationList", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<UsageApplication> UsageApplicationList { get; set; }
 
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
@@ -14837,6 +14867,12 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"pptx")]
         Pptx = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfOcr")]
+        PdfOcr = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"textOcr")]
+        TextOcr = 14,
 
     }
 
