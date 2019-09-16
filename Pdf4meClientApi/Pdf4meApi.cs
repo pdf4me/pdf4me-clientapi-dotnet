@@ -767,18 +767,18 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<ConvertFromPdfRes> ConvertAsync(ConvertFromPdf req)
+        public System.Threading.Tasks.Task<ConvertFromPdfRes> ConvertFromPdfAsync(ConvertFromPdf req)
         {
-            return ConvertAsync(req, System.Threading.CancellationToken.None);
+            return ConvertFromPdfAsync(req, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<ConvertFromPdfRes> ConvertAsync(ConvertFromPdf req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ConvertFromPdfRes> ConvertFromPdfAsync(ConvertFromPdf req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append("ConvertFromPdf/Convert");
+            urlBuilder_.Append("ConvertFromPdf/ConvertFromPdf");
 
             var client_ = _httpClient;
             try
