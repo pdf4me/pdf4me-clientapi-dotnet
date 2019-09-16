@@ -14829,50 +14829,23 @@ namespace Pdf4meClient
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.23.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum ConvertFromPdfActionOutputFormat
     {
-        [System.Runtime.Serialization.EnumMember(Value = @"pdf")]
-        Pdf = 0,
-
         [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"doc")]
-        Doc = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xps")]
-        Xps = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"html")]
-        Html = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xml")]
-        Xml = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"teX")]
-        TeX = 6,
+        None = 0,
 
         [System.Runtime.Serialization.EnumMember(Value = @"docX")]
-        DocX = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"svg")]
-        Svg = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"mobiXml")]
-        MobiXml = 9,
+        DocX = 1,
 
         [System.Runtime.Serialization.EnumMember(Value = @"excel")]
-        Excel = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"epub")]
-        Epub = 11,
+        Excel = 2,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pptx")]
-        Pptx = 12,
+        Pptx = 3,
 
         [System.Runtime.Serialization.EnumMember(Value = @"pdfOcr")]
-        PdfOcr = 13,
+        PdfOcr = 4,
 
         [System.Runtime.Serialization.EnumMember(Value = @"textOcr")]
-        TextOcr = 14,
+        TextOcr = 5,
 
     }
 
