@@ -4333,6 +4333,86 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<SubscriptionUsage> GetSubscriptionUsageAsync()
+        {
+            return GetSubscriptionUsageAsync(System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<SubscriptionUsage> GetSubscriptionUsageAsync(System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("Management/GetSubscriptionUsage");
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<SubscriptionUsage>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == "401")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Pdf4meException>(response_, headers_).ConfigureAwait(false);
+                            throw new Pdf4meApiException<Pdf4meException>("Unauthorized", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == "500")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Pdf4meException>(response_, headers_).ConfigureAwait(false);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+
+                        return default(SubscriptionUsage);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
+        /// <returns>Success</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
         public System.Threading.Tasks.Task<CheckAvailabilityRes> CheckAvailabilityAsync()
         {
             return CheckAvailabilityAsync(System.Threading.CancellationToken.None);
@@ -9468,6 +9548,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public DocMetadata InDocMetadata { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subscriptionUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SubscriptionUsage SubscriptionUsage { get; set; }
 
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
