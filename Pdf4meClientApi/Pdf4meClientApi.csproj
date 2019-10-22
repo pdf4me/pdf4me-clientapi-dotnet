@@ -27,15 +27,15 @@
   <PropertyGroup>
     <TargetLatestRuntimePatch>true</TargetLatestRuntimePatch>
     <Description>Pdf, Ocr, Document SaaS-Api - fast and easy to use expert functionality</Description>
-    <PackageTags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document</PackageTags>
+    <PackageTags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document barcode</PackageTags>
     <PackageReleaseNotes>Latest</PackageReleaseNotes>
     <Copyright>Copyright 2019</Copyright>
     <PackageIconUrl>https://developer.pdf4me.com/wp-content/themes/pdf4me-beaver-child/favicon.ico</PackageIconUrl>
     <PackageProjectUrl>https://portal.pdf4me.com</PackageProjectUrl>
     <Authors>Pdf4me</Authors>
-    <AssemblyVersion>0.5.82.0</AssemblyVersion>
-    <FileVersion>0.5.82.0</FileVersion>
-    <Version>0.5.82</Version>
+    <AssemblyVersion>0.5.83.0</AssemblyVersion>
+    <FileVersion>0.5.83.0</FileVersion>
+    <Version>0.5.83</Version>
     <PackageId>Pdf4me.Client</PackageId>
   </PropertyGroup>
 
