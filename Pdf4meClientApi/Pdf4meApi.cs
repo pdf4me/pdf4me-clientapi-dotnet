@@ -16236,6 +16236,9 @@ namespace Pdf4meClient
         [System.Runtime.Serialization.EnumMember(Value = @"splitByBarcode")]
         SplitByBarcode = 22,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"jobFlow")]
+        JobFlow = 23,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.24.0 (Newtonsoft.Json v11.0.0.0)")]
