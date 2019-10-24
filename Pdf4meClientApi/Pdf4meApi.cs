@@ -9620,6 +9620,10 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
         public SplitByBarcodeActionBarcodeType? BarcodeType { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("splitBarcodePage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public SplitByBarcodeActionSplitBarcodePage? SplitBarcodePage { get; set; }
+
         [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? ActionId { get; set; }
 
@@ -15226,6 +15230,20 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"qrcode")]
         Qrcode = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SplitByBarcodeActionSplitBarcodePage
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"before")]
+        Before = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"after")]
+        After = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"remove")]
+        Remove = 2,
 
     }
 
