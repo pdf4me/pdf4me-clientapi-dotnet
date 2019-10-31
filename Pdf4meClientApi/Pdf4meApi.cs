@@ -16257,6 +16257,9 @@ namespace Pdf4meClient
         [System.Runtime.Serialization.EnumMember(Value = @"jobFlow")]
         JobFlow = 23,
 
+        [System.Runtime.Serialization.EnumMember(Value = @"swissQRCode")]
+        SwissQRCode = 24,
+
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
