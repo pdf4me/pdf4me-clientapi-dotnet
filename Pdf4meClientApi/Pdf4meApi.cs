@@ -11894,6 +11894,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("actionFlow", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public ActionFlow ActionFlow { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("jobFlowAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public JobFlowAction JobFlowAction { get; set; }
+
         [Newtonsoft.Json.JsonProperty("ipAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string IpAddress { get; set; }
 
@@ -11935,6 +11938,30 @@ namespace Pdf4meClient
         public static ActionFlow FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ActionFlow>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.0.27.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class JobFlowAction
+    {
+        [Newtonsoft.Json.JsonProperty("id", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? Id { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ActionId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static JobFlowAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<JobFlowAction>(data);
         }
 
     }
