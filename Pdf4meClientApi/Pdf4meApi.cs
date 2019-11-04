@@ -9645,6 +9645,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("splittedDocuments", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.HashSet<Document> SplittedDocuments { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("subscriptionUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SubscriptionUsage SubscriptionUsage { get; set; }
+
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
 
@@ -14039,6 +14042,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("errorDetails", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ErrorDetails { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subscriptionUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SubscriptionUsage SubscriptionUsage { get; set; }
 
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string TraceId { get; set; }
