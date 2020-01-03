@@ -8158,7 +8158,7 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<string> ReadSwissQrCodeAsync(ReadBarcodes req)
+        public System.Threading.Tasks.Task<ReadBarcodesRes> ReadSwissQrCodeAsync(ReadBarcodes req)
         {
             return ReadSwissQrCodeAsync(req, System.Threading.CancellationToken.None);
         }
@@ -8166,7 +8166,7 @@ namespace Pdf4meClient
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<string> ReadSwissQrCodeAsync(ReadBarcodes req, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<ReadBarcodesRes> ReadSwissQrCodeAsync(ReadBarcodes req, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("SwissQR/ReadSwissQrCode");
@@ -8202,7 +8202,7 @@ namespace Pdf4meClient
                         var status_ = ((int)response_.StatusCode).ToString();
                         if (status_ == "200")
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<string>(response_, headers_).ConfigureAwait(false);
+                            var objectResponse_ = await ReadObjectResponseAsync<ReadBarcodesRes>(response_, headers_).ConfigureAwait(false);
                             return objectResponse_.Object;
                         }
                         else
@@ -8230,7 +8230,7 @@ namespace Pdf4meClient
                             throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
                         }
 
-                        return default(string);
+                        return default(ReadBarcodesRes);
                     }
                     finally
                     {
