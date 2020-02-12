@@ -10249,6 +10249,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("scanPages", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.HashSet<ScanPage> ScanPages { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("allowOCR", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? AllowOCR { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -11947,6 +11950,12 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("transform", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public Transform Transform { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("underline", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public bool? Underline { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("lineWidth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? LineWidth { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -11967,6 +11976,9 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("imageData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public byte[] ImageData { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("docBlobRef", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string DocBlobRef { get; set; }
 
         [Newtonsoft.Json.JsonProperty("imageType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string ImageType { get; set; }
