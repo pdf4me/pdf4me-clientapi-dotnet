@@ -9266,6 +9266,9 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("barcodeData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string BarcodeData { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("billingData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public BillingData BillingData { get; set; }
+
         [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Collections.Generic.HashSet<DocMetadata> InDocMetadata { get; set; }
 
@@ -9412,6 +9415,131 @@ namespace Pdf4meClient
         public static ScanBarcode FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<ScanBarcode>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class BillingData
+    {
+        [Newtonsoft.Json.JsonProperty("qrType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataQrType? QrType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("version", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataVersion? Version { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("codingType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCodingType? CodingType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("iban", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Iban { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCr_AddressType? Cr_AddressType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_StreetOrAddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_BuildNoOrAddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_PostalCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Cr_City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("cr_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCr_Country? Cr_Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUcr_AddressType? Ucr_AddressType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_StreetOrAddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_BuildNoOrAddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_PostalCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ucr_City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ucr_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUcr_Country? Ucr_Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public double? Amount { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("currency", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataCurrency? Currency { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUd_AddressType? Ud_AddressType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_Name { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_StreetOrAddressLine1 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_BuildNoOrAddressLine2 { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_PostalCode { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Ud_City { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ud_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataUd_Country? Ud_Country { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("referenceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public BillingDataReferenceType? ReferenceType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Reference { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("unstructuredMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string UnstructuredMessage { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("billingInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string BillingInfo { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("av1_Parameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Av1_Parameters { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("av2_Parameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Av2_Parameters { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static BillingData FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<BillingData>(data);
         }
 
     }
@@ -14186,131 +14314,6 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public partial class BillingData
-    {
-        [Newtonsoft.Json.JsonProperty("qrType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataQrType? QrType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("version", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataVersion? Version { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("codingType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataCodingType? CodingType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("iban", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Iban { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataCr_AddressType? Cr_AddressType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cr_Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cr_StreetOrAddressLine1 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cr_BuildNoOrAddressLine2 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cr_PostalCode { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Cr_City { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("cr_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataCr_Country? Cr_Country { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataUcr_AddressType? Ucr_AddressType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ucr_Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ucr_StreetOrAddressLine1 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ucr_BuildNoOrAddressLine2 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ucr_PostalCode { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ucr_City { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ucr_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataUcr_Country? Ucr_Country { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("amount", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public double? Amount { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("currency", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataCurrency? Currency { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_AddressType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataUd_AddressType? Ud_AddressType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_Name", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ud_Name { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_StreetOrAddressLine1", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ud_StreetOrAddressLine1 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_BuildNoOrAddressLine2", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ud_BuildNoOrAddressLine2 { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_PostalCode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ud_PostalCode { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_City", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Ud_City { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("ud_Country", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataUd_Country? Ud_Country { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("referenceType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
-        public BillingDataReferenceType? ReferenceType { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("reference", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Reference { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("unstructuredMessage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string UnstructuredMessage { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("billingInfo", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string BillingInfo { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("av1_Parameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Av1_Parameters { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("av2_Parameters", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Av2_Parameters { get; set; }
-
-        public string ToJson()
-        {
-            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
-        }
-
-        public static BillingData FromJson(string data)
-        {
-            return Newtonsoft.Json.JsonConvert.DeserializeObject<BillingData>(data);
-        }
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class SwissQrCreatorRes
     {
         [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
@@ -15461,1404 +15464,6 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"all")]
         All = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum BarcodeTypes
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"all")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"code11")]
-        Code11 = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"code39")]
-        Code39 = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"code93")]
-        Code93 = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"code128")]
-        Code128 = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"codabar")]
-        Codabar = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"inter2of5")]
-        Inter2of5 = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"patchCode")]
-        PatchCode = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ean8")]
-        Ean8 = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"upce")]
-        Upce = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ean13")]
-        Ean13 = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"upca")]
-        Upca = 12,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"plus2")]
-        Plus2 = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"plus5")]
-        Plus5 = 14,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdf417")]
-        Pdf417 = 15,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"dataMatrix")]
-        DataMatrix = 16,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"qrCode")]
-        QrCode = 17,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"postnet")]
-        Postnet = 18,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"planet")]
-        Planet = 19,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rm4SCC")]
-        Rm4SCC = 20,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"australiaPost")]
-        AustraliaPost = 21,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"intelligentMail")]
-        IntelligentMail = 22,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"code39Extended")]
-        Code39Extended = 23,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"microQRCode")]
-        MicroQRCode = 24,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"all_2D")]
-        All_2D = 25,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pharmaCode")]
-        PharmaCode = 26,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ucc128")]
-        Ucc128 = 27,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rss14")]
-        Rss14 = 28,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rssLimited")]
-        RssLimited = 29,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rssExpanded")]
-        RssExpanded = 30,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"all_1D")]
-        All_1D = 31,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum BarcodeOrientation
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
-        Unknown = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"leftToRight")]
-        LeftToRight = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rightToLeft")]
-        RightToLeft = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"topToBottom")]
-        TopToBottom = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"bottomToTop")]
-        BottomToTop = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"all")]
-        All = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ReadBarcodeActionQuietZoneSize
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"extraSmall")]
-        ExtraSmall = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"small")]
-        Small = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"normal")]
-        Normal = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"large")]
-        Large = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ReadBarcodeActionPdfReadingType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"render")]
-        Render = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"images")]
-        Images = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ReadBarcodeActionThresholdMode
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"automatic")]
-        Automatic = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"fixed")]
-        Fixed = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"multiple")]
-        Multiple = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"adaptive")]
-        Adaptive = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum DocLogLevel
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"verbose")]
-        Verbose = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"info")]
-        Info = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"warning")]
-        Warning = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"error")]
-        Error = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"timing")]
-        Timing = 4,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SplitByBarcodeActionBarcodeFilter
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"startsWith")]
-        StartsWith = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"endsWith")]
-        EndsWith = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"contains")]
-        Contains = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"exact")]
-        Exact = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SplitByBarcodeActionBarcodeType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"any")]
-        Any = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"datamatrix")]
-        Datamatrix = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"qrcode")]
-        Qrcode = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SplitByBarcodeActionSplitBarcodePage
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"before")]
-        Before = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"after")]
-        After = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"remove")]
-        Remove = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ConvertToPdfActionPdfConformance
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"pdf17")]
-        Pdf17 = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1")]
-        PdfA1 = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2")]
-        PdfA2 = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3")]
-        PdfA3 = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ConvertToPdfActionConversionMode
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"fast")]
-        Fast = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"detailed")]
-        Detailed = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ConvertFromPdfActionOutputFormat
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"docX")]
-        DocX = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"excel")]
-        Excel = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pptx")]
-        Pptx = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfOcr")]
-        PdfOcr = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"textOcr")]
-        TextOcr = 5,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ConvertFromPdfActionQualityType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"draft")]
-        Draft = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"high")]
-        High = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Pdf4meDocumentDocumentType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"uploadDoc")]
-        UploadDoc = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"converted")]
-        Converted = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"stamped")]
-        Stamped = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ocr")]
-        Ocr = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"split")]
-        Split = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"optimize")]
-        Optimize = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"merge")]
-        Merge = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Pdf4meDocumentDocStatus
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"error")]
-        Error = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"finished")]
-        Finished = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"uploaded")]
-        Uploaded = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"loading")]
-        Loading = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"loaded")]
-        Loaded = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"converting")]
-        Converting = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"converted")]
-        Converted = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"optimizing")]
-        Optimizing = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"optimized")]
-        Optimized = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"doingOcr")]
-        DoingOcr = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ocred")]
-        Ocred = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"doingZip")]
-        DoingZip = 12,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"stamping")]
-        Stamping = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"stamped")]
-        Stamped = 14,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"processing")]
-        Processing = 15,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"signed")]
-        Signed = 16,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Pdf4meDocumentStorageProviderBroker
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
-        Kloudless = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Pdf4meDocumentStorageProvider
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"local")]
-        Local = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"url")]
-        Url = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"oneDrive")]
-        OneDrive = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"dropbox")]
-        Dropbox = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"googleDrive")]
-        GoogleDrive = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
-        Kloudless = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum DropDocumentReqCloudStorageProvider
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"local")]
-        Local = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"url")]
-        Url = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"oneDrive")]
-        OneDrive = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"dropbox")]
-        Dropbox = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"googleDrive")]
-        GoogleDrive = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
-        Kloudless = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum IntegrationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"azureStorage")]
-        AzureStorage = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"oneDrive")]
-        OneDrive = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"sFTP")]
-        SFTP = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"fTP")]
-        FTP = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"amazonS3")]
-        AmazonS3 = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"amazonGlacier")]
-        AmazonGlacier = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"googleCloud")]
-        GoogleCloud = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"googleDrive")]
-        GoogleDrive = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"webHook")]
-        WebHook = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"dropbox")]
-        Dropbox = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"azureBus")]
-        AzureBus = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"awsSQS")]
-        AwsSQS = 12,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"awsSNS")]
-        AwsSNS = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"azureEventHub")]
-        AzureEventHub = 14,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"signingSwissQuoVadisSealsign")]
-        SigningSwissQuoVadisSealsign = 15,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum IntegrationRequestType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"all")]
-        All = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"onRequest")]
-        OnRequest = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum OcrActionOutputType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"txt")]
-        Txt = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"docx")]
-        Docx = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xlsx")]
-        Xlsx = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pptx")]
-        Pptx = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfSearchable")]
-        PdfSearchable = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"xml")]
-        Xml = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rtf")]
-        Rtf = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rtt")]
-        Rtt = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"vcf")]
-        Vcf = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"json")]
-        Json = 10,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum PdfAActionCompliance
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1b")]
-        PdfA1b = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1a")]
-        PdfA1a = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2b")]
-        PdfA2b = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2u")]
-        PdfA2u = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2a")]
-        PdfA2a = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3b")]
-        PdfA3b = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3u")]
-        PdfA3u = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3a")]
-        PdfA3a = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum PdfAActionOutputIntentProfile
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"notSet")]
-        NotSet = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"sRGBColorSpace")]
-        SRGBColorSpace = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum OptimizeActionProfile
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"max")]
-        Max = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"web")]
-        Web = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"print")]
-        Print = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum BitonalCompressions
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
-        Raw = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
-        JPEG = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
-        Flate = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
-        LZW = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
-        Group3 = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
-        Group3_2D = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
-        Group4 = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
-        JBIG2 = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
-        JPEG2000 = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"mRC")]
-        MRC = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"source")]
-        Source = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ContinuousCompressions
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
-        Raw = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
-        JPEG = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
-        Flate = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
-        LZW = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
-        Group3 = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
-        Group3_2D = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
-        Group4 = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
-        JBIG2 = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
-        JPEG2000 = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"mRC")]
-        MRC = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"source")]
-        Source = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum IndexedCompressions
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
-        Raw = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
-        JPEG = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
-        Flate = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
-        LZW = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
-        Group3 = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
-        Group3_2D = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
-        Group4 = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
-        JBIG2 = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
-        JPEG2000 = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"mRC")]
-        MRC = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"source")]
-        Source = 11,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum OptimizeActionDitheringMode
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"floydSteinberg")]
-        FloydSteinberg = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"halftone")]
-        Halftone = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pattern")]
-        Pattern = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"g3Optimized")]
-        G3Optimized = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"g4Optimized")]
-        G4Optimized = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"atkinson")]
-        Atkinson = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Strip
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"threads")]
-        Threads = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"metadata")]
-        Metadata = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pieceInfo")]
-        PieceInfo = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"structTree")]
-        StructTree = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"thumb")]
-        Thumb = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"spider")]
-        Spider = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"alternates")]
-        Alternates = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"forms")]
-        Forms = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"links")]
-        Links = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"annots")]
-        Annots = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"formsAnnots")]
-        FormsAnnots = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"outputIntents")]
-        OutputIntents = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"all")]
-        All = 12,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ProduceOutputFileType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdf")]
-        Pdf = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"zip")]
-        Zip = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum RenderOptions
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"noAntialiasing")]
-        NoAntialiasing = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"noInterpolation")]
-        NoInterpolation = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"noLowPassFilter")]
-        NoLowPassFilter = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"noHinting")]
-        NoHinting = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"printingMode")]
-        PrintingMode = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"noBPC")]
-        NoBPC = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"fitPaths")]
-        FitPaths = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"useBoxFilter")]
-        UseBoxFilter = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionRotateMode
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"attribute")]
-        Attribute = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"portrait")]
-        Portrait = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"landscape")]
-        Landscape = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionCmsEngine
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"neugebauer")]
-        Neugebauer = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"lcms")]
-        Lcms = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"customCMSConfig")]
-        CustomCMSConfig = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionDithering
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"floydSteinberg")]
-        FloydSteinberg = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"halftone")]
-        Halftone = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pattern")]
-        Pattern = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"g3Optimized")]
-        G3Optimized = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"g4Optimized")]
-        G4Optimized = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"atkinson")]
-        Atkinson = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionFillOrder
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"mostSignificantBit")]
-        MostSignificantBit = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"leastSignificantBit")]
-        LeastSignificantBit = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionImageExtension
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"jpg")]
-        Jpg = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jpeg")]
-        Jpeg = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"bmp")]
-        Bmp = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"gif")]
-        Gif = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jb2")]
-        Jb2 = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jp2")]
-        Jp2 = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jpf")]
-        Jpf = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jpx")]
-        Jpx = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"png")]
-        Png = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"tif")]
-        Tif = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"tiff")]
-        Tiff = 10,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionColorSpace
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"rGB")]
-        RGB = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rGBA")]
-        RGBA = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"gray")]
-        Gray = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"grayA")]
-        GrayA = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"cMYK")]
-        CMYK = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"yCbCr")]
-        YCbCr = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"yCbCrK")]
-        YCbCrK = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"palette")]
-        Palette = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"lAB")]
-        LAB = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"cMYK_Konly")]
-        CMYK_Konly = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"cMYKA")]
-        CMYKA = 10,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageActionCompression
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
-        LZW = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
-        JPEG = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
-        Flate = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
-        Raw = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
-        Group3 = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
-        Group3_2D = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
-        Group4 = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
-        JBIG2 = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
-        JPEG2000 = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"tIFFJPEG")]
-        TIFFJPEG = 9,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum PageSelectionPageSequence
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"all")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"first")]
-        First = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"last")]
-        Last = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"odd")]
-        Odd = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"even")]
-        Even = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"notFirst")]
-        NotFirst = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"notLast")]
-        NotLast = 6,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum StorageFolderStorageType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"localSystem")]
-        LocalSystem = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum StampActionScale
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"relToA4")]
-        RelToA4 = 0,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum StampActionAlignX
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"left")]
-        Left = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"center")]
-        Center = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"right")]
-        Right = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum StampActionAlignY
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"top")]
-        Top = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"middle")]
-        Middle = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"bottom")]
-        Bottom = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum StampActionStampType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"annotation")]
-        Annotation = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"foreground")]
-        Foreground = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"background")]
-        Background = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum TextAlignX
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"left")]
-        Left = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"center")]
-        Center = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"right")]
-        Right = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum TextAlignY
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"top")]
-        Top = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"middle")]
-        Middle = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"bottom")]
-        Bottom = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum TextFontEncoding
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"unicode")]
-        Unicode = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"winAnsi")]
-        WinAnsi = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum TextMode
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"fill")]
-        Fill = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"stroke")]
-        Stroke = 1,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ImageCompression
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"cCITTFax")]
-        CCITTFax = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
-        Flate = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"dCT")]
-        DCT = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Pdf4meActionActionType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"user")]
-        User = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"optimize")]
-        Optimize = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA")]
-        PdfA = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"ocr")]
-        Ocr = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"converter")]
-        Converter = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"convertToPdf")]
-        ConvertToPdf = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"stamp")]
-        Stamp = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"split")]
-        Split = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"merge")]
-        Merge = 9,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"extractResources")]
-        ExtractResources = 10,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"thumbnail")]
-        Thumbnail = 11,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"image")]
-        Image = 12,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"extract")]
-        Extract = 13,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"readBarcode")]
-        ReadBarcode = 14,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"createBarcode")]
-        CreateBarcode = 15,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"protect")]
-        Protect = 16,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"repair")]
-        Repair = 17,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"rotate")]
-        Rotate = 18,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"sign")]
-        Sign = 19,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"produce")]
-        Produce = 20,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"convertFromPdf")]
-        ConvertFromPdf = 21,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"splitByBarcode")]
-        SplitByBarcode = 22,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jobFlow")]
-        JobFlow = 23,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"swissQRCode")]
-        SwissQRCode = 24,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum PdfRotateRotationType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"noRotation")]
-        NoRotation = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"clockwise")]
-        Clockwise = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"counterClockwise")]
-        CounterClockwise = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"upsideDown")]
-        UpsideDown = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum Permissions
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"all")]
-        All = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"copy")]
-        Copy = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"annotate")]
-        Annotate = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"fillForms")]
-        FillForms = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"supportDisabilities")]
-        SupportDisabilities = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"assemble")]
-        Assemble = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"digitalPrint")]
-        DigitalPrint = 7,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"print")]
-        Print = 8,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"modify")]
-        Modify = 9,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum ValidateActionPdfConformance
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1b")]
-        PdfA1b = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1a")]
-        PdfA1a = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2b")]
-        PdfA2b = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2u")]
-        PdfA2u = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2a")]
-        PdfA2a = 4,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3b")]
-        PdfA3b = 5,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3u")]
-        PdfA3u = 6,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3a")]
-        PdfA3a = 7,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SigningProviderType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
-        Undef = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"quoVadisSealsign")]
-        QuoVadisSealsign = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"swissSignSuisseID")]
-        SwissSignSuisseID = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"swisscomSigning")]
-        SwisscomSigning = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SwissQrCreatorActionLanguageType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"german")]
-        German = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"french")]
-        French = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"italian")]
-        Italian = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"english")]
-        English = 3,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SwissQrCreatorActionSeperatorLine
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"lineWithScissor")]
-        LineWithScissor = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"line")]
-        Line = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"none")]
-        None = 2,
-
-    }
-
-    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
-    public enum SwissQrCreatorActionFormatType
-    {
-        [System.Runtime.Serialization.EnumMember(Value = @"tiff")]
-        Tiff = 0,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pDF")]
-        PDF = 1,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"sVG")]
-        SVG = 2,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"pNG")]
-        PNG = 3,
-
-        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
-        JPEG = 4,
 
     }
 
@@ -19200,6 +17805,1404 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"nON")]
         NON = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BarcodeTypes
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        All = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
+        Unknown = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code11")]
+        Code11 = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code39")]
+        Code39 = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code93")]
+        Code93 = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code128")]
+        Code128 = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"codabar")]
+        Codabar = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"inter2of5")]
+        Inter2of5 = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"patchCode")]
+        PatchCode = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean8")]
+        Ean8 = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upce")]
+        Upce = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean13")]
+        Ean13 = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upca")]
+        Upca = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"plus2")]
+        Plus2 = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"plus5")]
+        Plus5 = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdf417")]
+        Pdf417 = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dataMatrix")]
+        DataMatrix = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qrCode")]
+        QrCode = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"postnet")]
+        Postnet = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"planet")]
+        Planet = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rm4SCC")]
+        Rm4SCC = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australiaPost")]
+        AustraliaPost = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"intelligentMail")]
+        IntelligentMail = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code39Extended")]
+        Code39Extended = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"microQRCode")]
+        MicroQRCode = 24,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"all_2D")]
+        All_2D = 25,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pharmaCode")]
+        PharmaCode = 26,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ucc128")]
+        Ucc128 = 27,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rss14")]
+        Rss14 = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rssLimited")]
+        RssLimited = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rssExpanded")]
+        RssExpanded = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"all_1D")]
+        All_1D = 31,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BarcodeOrientation
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"unknown")]
+        Unknown = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"leftToRight")]
+        LeftToRight = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rightToLeft")]
+        RightToLeft = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"topToBottom")]
+        TopToBottom = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bottomToTop")]
+        BottomToTop = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        All = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ReadBarcodeActionQuietZoneSize
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"extraSmall")]
+        ExtraSmall = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"small")]
+        Small = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"normal")]
+        Normal = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"large")]
+        Large = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ReadBarcodeActionPdfReadingType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"render")]
+        Render = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"images")]
+        Images = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ReadBarcodeActionThresholdMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"automatic")]
+        Automatic = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fixed")]
+        Fixed = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"multiple")]
+        Multiple = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"adaptive")]
+        Adaptive = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum DocLogLevel
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"verbose")]
+        Verbose = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"info")]
+        Info = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"warning")]
+        Warning = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"error")]
+        Error = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"timing")]
+        Timing = 4,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SplitByBarcodeActionBarcodeFilter
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"startsWith")]
+        StartsWith = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"endsWith")]
+        EndsWith = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"contains")]
+        Contains = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"exact")]
+        Exact = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SplitByBarcodeActionBarcodeType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"any")]
+        Any = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"datamatrix")]
+        Datamatrix = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qrcode")]
+        Qrcode = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SplitByBarcodeActionSplitBarcodePage
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"before")]
+        Before = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"after")]
+        After = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"remove")]
+        Remove = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ConvertToPdfActionPdfConformance
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"pdf17")]
+        Pdf17 = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1")]
+        PdfA1 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2")]
+        PdfA2 = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3")]
+        PdfA3 = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ConvertToPdfActionConversionMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"fast")]
+        Fast = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"detailed")]
+        Detailed = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ConvertFromPdfActionOutputFormat
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"docX")]
+        DocX = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"excel")]
+        Excel = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pptx")]
+        Pptx = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfOcr")]
+        PdfOcr = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"textOcr")]
+        TextOcr = 5,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ConvertFromPdfActionQualityType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"draft")]
+        Draft = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"high")]
+        High = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Pdf4meDocumentDocumentType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"uploadDoc")]
+        UploadDoc = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"converted")]
+        Converted = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"stamped")]
+        Stamped = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ocr")]
+        Ocr = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"split")]
+        Split = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"optimize")]
+        Optimize = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        Merge = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Pdf4meDocumentDocStatus
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"error")]
+        Error = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"finished")]
+        Finished = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uploaded")]
+        Uploaded = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"loading")]
+        Loading = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"loaded")]
+        Loaded = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"converting")]
+        Converting = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"converted")]
+        Converted = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"optimizing")]
+        Optimizing = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"optimized")]
+        Optimized = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"doingOcr")]
+        DoingOcr = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ocred")]
+        Ocred = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"doingZip")]
+        DoingZip = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"stamping")]
+        Stamping = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"stamped")]
+        Stamped = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"processing")]
+        Processing = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"signed")]
+        Signed = 16,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Pdf4meDocumentStorageProviderBroker
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
+        Kloudless = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Pdf4meDocumentStorageProvider
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"local")]
+        Local = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"url")]
+        Url = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"oneDrive")]
+        OneDrive = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dropbox")]
+        Dropbox = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"googleDrive")]
+        GoogleDrive = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
+        Kloudless = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum DropDocumentReqCloudStorageProvider
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"local")]
+        Local = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"url")]
+        Url = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"oneDrive")]
+        OneDrive = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dropbox")]
+        Dropbox = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"googleDrive")]
+        GoogleDrive = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
+        Kloudless = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum IntegrationType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"azureStorage")]
+        AzureStorage = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"oneDrive")]
+        OneDrive = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sFTP")]
+        SFTP = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fTP")]
+        FTP = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"amazonS3")]
+        AmazonS3 = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"amazonGlacier")]
+        AmazonGlacier = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"googleCloud")]
+        GoogleCloud = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"googleDrive")]
+        GoogleDrive = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"webHook")]
+        WebHook = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dropbox")]
+        Dropbox = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"azureBus")]
+        AzureBus = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"awsSQS")]
+        AwsSQS = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"awsSNS")]
+        AwsSNS = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"azureEventHub")]
+        AzureEventHub = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"signingSwissQuoVadisSealsign")]
+        SigningSwissQuoVadisSealsign = 15,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum IntegrationRequestType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        All = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"onRequest")]
+        OnRequest = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum OcrActionOutputType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"txt")]
+        Txt = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"docx")]
+        Docx = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"xlsx")]
+        Xlsx = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pptx")]
+        Pptx = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfSearchable")]
+        PdfSearchable = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"xml")]
+        Xml = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rtf")]
+        Rtf = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rtt")]
+        Rtt = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vcf")]
+        Vcf = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"json")]
+        Json = 10,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum PdfAActionCompliance
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1b")]
+        PdfA1b = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1a")]
+        PdfA1a = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2b")]
+        PdfA2b = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2u")]
+        PdfA2u = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2a")]
+        PdfA2a = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3b")]
+        PdfA3b = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3u")]
+        PdfA3u = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3a")]
+        PdfA3a = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum PdfAActionOutputIntentProfile
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"notSet")]
+        NotSet = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sRGBColorSpace")]
+        SRGBColorSpace = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum OptimizeActionProfile
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"max")]
+        Max = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"web")]
+        Web = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"print")]
+        Print = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum BitonalCompressions
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
+        Raw = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
+        JPEG = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
+        Flate = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
+        LZW = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
+        Group3 = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
+        Group3_2D = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
+        Group4 = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
+        JBIG2 = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
+        JPEG2000 = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mRC")]
+        MRC = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"source")]
+        Source = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ContinuousCompressions
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
+        Raw = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
+        JPEG = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
+        Flate = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
+        LZW = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
+        Group3 = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
+        Group3_2D = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
+        Group4 = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
+        JBIG2 = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
+        JPEG2000 = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mRC")]
+        MRC = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"source")]
+        Source = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum IndexedCompressions
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
+        Raw = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
+        JPEG = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
+        Flate = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
+        LZW = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
+        Group3 = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
+        Group3_2D = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
+        Group4 = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
+        JBIG2 = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
+        JPEG2000 = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mRC")]
+        MRC = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"source")]
+        Source = 11,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum OptimizeActionDitheringMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"floydSteinberg")]
+        FloydSteinberg = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"halftone")]
+        Halftone = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pattern")]
+        Pattern = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"g3Optimized")]
+        G3Optimized = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"g4Optimized")]
+        G4Optimized = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"atkinson")]
+        Atkinson = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Strip
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"threads")]
+        Threads = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"metadata")]
+        Metadata = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pieceInfo")]
+        PieceInfo = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"structTree")]
+        StructTree = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"thumb")]
+        Thumb = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"spider")]
+        Spider = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"alternates")]
+        Alternates = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"forms")]
+        Forms = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"links")]
+        Links = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"annots")]
+        Annots = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"formsAnnots")]
+        FormsAnnots = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"outputIntents")]
+        OutputIntents = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        All = 12,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ProduceOutputFileType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdf")]
+        Pdf = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"zip")]
+        Zip = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum RenderOptions
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"noAntialiasing")]
+        NoAntialiasing = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"noInterpolation")]
+        NoInterpolation = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"noLowPassFilter")]
+        NoLowPassFilter = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"noHinting")]
+        NoHinting = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"printingMode")]
+        PrintingMode = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"noBPC")]
+        NoBPC = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fitPaths")]
+        FitPaths = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"useBoxFilter")]
+        UseBoxFilter = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionRotateMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"attribute")]
+        Attribute = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"portrait")]
+        Portrait = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"landscape")]
+        Landscape = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionCmsEngine
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"neugebauer")]
+        Neugebauer = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lcms")]
+        Lcms = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"customCMSConfig")]
+        CustomCMSConfig = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionDithering
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"floydSteinberg")]
+        FloydSteinberg = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"halftone")]
+        Halftone = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pattern")]
+        Pattern = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"g3Optimized")]
+        G3Optimized = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"g4Optimized")]
+        G4Optimized = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"atkinson")]
+        Atkinson = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionFillOrder
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"mostSignificantBit")]
+        MostSignificantBit = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"leastSignificantBit")]
+        LeastSignificantBit = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionImageExtension
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"jpg")]
+        Jpg = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jpeg")]
+        Jpeg = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bmp")]
+        Bmp = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gif")]
+        Gif = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jb2")]
+        Jb2 = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jp2")]
+        Jp2 = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jpf")]
+        Jpf = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jpx")]
+        Jpx = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"png")]
+        Png = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tif")]
+        Tif = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tiff")]
+        Tiff = 10,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionColorSpace
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"rGB")]
+        RGB = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rGBA")]
+        RGBA = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gray")]
+        Gray = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"grayA")]
+        GrayA = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cMYK")]
+        CMYK = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"yCbCr")]
+        YCbCr = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"yCbCrK")]
+        YCbCrK = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"palette")]
+        Palette = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"lAB")]
+        LAB = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cMYK_Konly")]
+        CMYK_Konly = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cMYKA")]
+        CMYKA = 10,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageActionCompression
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"lZW")]
+        LZW = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
+        JPEG = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
+        Flate = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"raw")]
+        Raw = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3")]
+        Group3 = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group3_2D")]
+        Group3_2D = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"group4")]
+        Group4 = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jBIG2")]
+        JBIG2 = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG2000")]
+        JPEG2000 = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"tIFFJPEG")]
+        TIFFJPEG = 9,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum PageSelectionPageSequence
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        All = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"first")]
+        First = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"last")]
+        Last = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"odd")]
+        Odd = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"even")]
+        Even = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"notFirst")]
+        NotFirst = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"notLast")]
+        NotLast = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum StorageFolderStorageType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"localSystem")]
+        LocalSystem = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum StampActionScale
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"relToA4")]
+        RelToA4 = 0,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum StampActionAlignX
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"left")]
+        Left = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"center")]
+        Center = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"right")]
+        Right = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum StampActionAlignY
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"top")]
+        Top = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"middle")]
+        Middle = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bottom")]
+        Bottom = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum StampActionStampType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"annotation")]
+        Annotation = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"foreground")]
+        Foreground = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"background")]
+        Background = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum TextAlignX
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"left")]
+        Left = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"center")]
+        Center = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"right")]
+        Right = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum TextAlignY
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"top")]
+        Top = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"middle")]
+        Middle = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bottom")]
+        Bottom = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum TextFontEncoding
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"unicode")]
+        Unicode = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"winAnsi")]
+        WinAnsi = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum TextMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"fill")]
+        Fill = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"stroke")]
+        Stroke = 1,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ImageCompression
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"cCITTFax")]
+        CCITTFax = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"flate")]
+        Flate = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dCT")]
+        DCT = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Pdf4meActionActionType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"user")]
+        User = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"optimize")]
+        Optimize = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA")]
+        PdfA = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ocr")]
+        Ocr = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"converter")]
+        Converter = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"convertToPdf")]
+        ConvertToPdf = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"stamp")]
+        Stamp = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"split")]
+        Split = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"merge")]
+        Merge = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"extractResources")]
+        ExtractResources = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"thumbnail")]
+        Thumbnail = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"image")]
+        Image = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"extract")]
+        Extract = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"readBarcode")]
+        ReadBarcode = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"createBarcode")]
+        CreateBarcode = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"protect")]
+        Protect = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"repair")]
+        Repair = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rotate")]
+        Rotate = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sign")]
+        Sign = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"produce")]
+        Produce = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"convertFromPdf")]
+        ConvertFromPdf = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"splitByBarcode")]
+        SplitByBarcode = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jobFlow")]
+        JobFlow = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"swissQRCode")]
+        SwissQRCode = 24,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum PdfRotateRotationType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"noRotation")]
+        NoRotation = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"clockwise")]
+        Clockwise = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"counterClockwise")]
+        CounterClockwise = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upsideDown")]
+        UpsideDown = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Permissions
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"all")]
+        All = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"copy")]
+        Copy = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"annotate")]
+        Annotate = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fillForms")]
+        FillForms = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"supportDisabilities")]
+        SupportDisabilities = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"assemble")]
+        Assemble = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"digitalPrint")]
+        DigitalPrint = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"print")]
+        Print = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"modify")]
+        Modify = 9,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum ValidateActionPdfConformance
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1b")]
+        PdfA1b = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA1a")]
+        PdfA1a = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2b")]
+        PdfA2b = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2u")]
+        PdfA2u = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA2a")]
+        PdfA2a = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3b")]
+        PdfA3b = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3u")]
+        PdfA3u = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdfA3a")]
+        PdfA3a = 7,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SigningProviderType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"quoVadisSealsign")]
+        QuoVadisSealsign = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"swissSignSuisseID")]
+        SwissSignSuisseID = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"swisscomSigning")]
+        SwisscomSigning = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SwissQrCreatorActionLanguageType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"german")]
+        German = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"french")]
+        French = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italian")]
+        Italian = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"english")]
+        English = 3,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SwissQrCreatorActionSeperatorLine
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"lineWithScissor")]
+        LineWithScissor = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"line")]
+        Line = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum SwissQrCreatorActionFormatType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"tiff")]
+        Tiff = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pDF")]
+        PDF = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sVG")]
+        SVG = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pNG")]
+        PNG = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"jPEG")]
+        JPEG = 4,
 
     }
 
