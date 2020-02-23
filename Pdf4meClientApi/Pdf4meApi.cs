@@ -10711,6 +10711,13 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("mergeData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public MergeData MergeData { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("Paper", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Paper { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("printMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public DocGenDocumentPrintMode? PrintMode { get; set; }
+
         /// <summary>DocumentId</summary>
         [Newtonsoft.Json.JsonProperty("documentId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string DocumentId { get; set; }
@@ -10771,12 +10778,6 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("printPackage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PrintPackage { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("paper", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Paper { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("printMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PrintMode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("envelopeDelivery", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnvelopeDelivery { get; set; }
@@ -10918,12 +10919,6 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("printPackage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string PrintPackage { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("paper", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Paper { get; set; }
-
-        [Newtonsoft.Json.JsonProperty("printMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string PrintMode { get; set; }
 
         [Newtonsoft.Json.JsonProperty("envelopeDelivery", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string EnvelopeDelivery { get; set; }
@@ -11130,6 +11125,13 @@ namespace Pdf4meClient
         [Newtonsoft.Json.JsonProperty("mergeData", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public MergeData MergeData { get; set; }
 
+        [Newtonsoft.Json.JsonProperty("paper", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Paper { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("printMode", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public Pdf4meDocumentPrintMode? PrintMode { get; set; }
+
         public string ToJson()
         {
             return Newtonsoft.Json.JsonConvert.SerializeObject(this);
@@ -11211,6 +11213,12 @@ namespace Pdf4meClient
 
         [Newtonsoft.Json.JsonProperty("cloudStorageFilesDesc", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string CloudStorageFilesDesc { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("tenantId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? TenantId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subscriptionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? SubscriptionId { get; set; }
 
         [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.Guid? TraceId { get; set; }
@@ -18897,6 +18905,20 @@ namespace Pdf4meClient
     }
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum DocGenDocumentPrintMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"simplex")]
+        Simplex = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"duplex")]
+        Duplex = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
     public enum Pdf4meDocumentDocumentType
     {
         [System.Runtime.Serialization.EnumMember(Value = @"uploadDoc")]
@@ -19012,6 +19034,20 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"kloudless")]
         Kloudless = 6,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum Pdf4meDocumentPrintMode
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"undef")]
+        Undef = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"simplex")]
+        Simplex = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"duplex")]
+        Duplex = 2,
 
     }
 
