@@ -112,7 +112,7 @@ namespace Pdf4meClient
                 new List<string> { "fileName", fileName },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", fileName) },
                 "DocGeneration/MailMerge",
-                _httpClient);
+                _httpClient); 
         }
     }
 

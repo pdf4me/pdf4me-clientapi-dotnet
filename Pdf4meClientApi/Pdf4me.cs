@@ -109,6 +109,14 @@ namespace Pdf4meClient
             }
         }
 
+        public DocGenerationClient DocGenerationClient
+        {
+            get
+            {
+                return new DocGenerationClient(getApi());
+            }
+        }
+
         public ManagementClient ManagementClient
         {
             get
