@@ -104,6 +104,18 @@ namespace Pdf4meClient
 
     }
 
+    public partial class DocGenerationClient
+    {
+        public async Task<byte[]> MailMergeAsync(byte[] file, string fileName)
+        {
+            return await CustomHttp.postWrapper(
+                new List<string> { "fileName", fileName },
+                new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", fileName) },
+                "DocGeneration/MailMerge",
+                _httpClient);
+        }
+    }
+
     public partial class ExtractClient
     {
         public async Task<byte[]> ExtractPagesAsync(byte[] file, string pageNrs)
