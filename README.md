@@ -12,7 +12,7 @@ Feature | Description
 [**Extract**](https://developer.pdf4me.com/docs/api/basic-functionality/extract-pdf/) | From a PDF extract multiple pages into a new document.
 [**OCR**](https://developer.pdf4me.com/docs/api/basic-functionality/ocr/) | Create a searchable OCR Document out of your scans or images.
 [**Images**](https://developer.pdf4me.com/docs/api/basic-functionality/create-image/) | Extract images from your document, can be any type of document.
-[**Create Pdf/A**](https://developer.pdf4me.com/docs/api/basic-functionality/pdfa/) | Create a archive confhttps://developer.pdf4me.com/docs/api/basic-functionality/pdfa/)orm PDF/A including xmp Metadata.
+[**Create Pdf/A**](https://developer.pdf4me.com/docs/api/basic-functionality/pdfa/) | Create a archive conform PDF/A including xmp Metadata.
 [**Convert to PDF**](https://developer.pdf4me.com/docs/api/basic-functionality/convert-to-pdf/) | Convert your documents from any format to a proper PDF document.
 [**Stamp**](https://developer.pdf4me.com/docs/api/basic-functionality/stamp/) | Stamp your document with text or images.
 [**Rotate**](https://developer.pdf4me.com/docs/api/basic-functionality/rotate-pdf/) | Rotates pages in your document.
