@@ -423,6 +423,94 @@ namespace Pdf4meClient
             }
         }
 
+        /// <returns>Success</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        public System.Threading.Tasks.Task<AddBarcodeRes> AddBarcodeAsync(AddBarcode req)
+        {
+            return AddBarcodeAsync(req, System.Threading.CancellationToken.None);
+        }
+
+        /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
+        /// <returns>Success</returns>
+        /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
+        public async System.Threading.Tasks.Task<AddBarcodeRes> AddBarcodeAsync(AddBarcode req, System.Threading.CancellationToken cancellationToken)
+        {
+            var urlBuilder_ = new System.Text.StringBuilder();
+            urlBuilder_.Append("Barcode/AddBarcode");
+
+            var client_ = _httpClient;
+            try
+            {
+                using (var request_ = new System.Net.Http.HttpRequestMessage())
+                {
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(req, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+
+                    PrepareRequest(client_, request_, urlBuilder_);
+                    var url_ = urlBuilder_.ToString();
+                    request_.RequestUri = new System.Uri(url_, System.UriKind.RelativeOrAbsolute);
+                    PrepareRequest(client_, request_, url_);
+
+                    var response_ = await client_.SendAsync(request_, System.Net.Http.HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+                    try
+                    {
+                        var headers_ = System.Linq.Enumerable.ToDictionary(response_.Headers, h_ => h_.Key, h_ => h_.Value);
+                        if (response_.Content != null && response_.Content.Headers != null)
+                        {
+                            foreach (var item_ in response_.Content.Headers)
+                                headers_[item_.Key] = item_.Value;
+                        }
+
+                        ProcessResponse(client_, response_);
+
+                        var status_ = ((int)response_.StatusCode).ToString();
+                        if (status_ == "200")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<AddBarcodeRes>(response_, headers_).ConfigureAwait(false);
+                            return objectResponse_.Object;
+                        }
+                        else
+                        if (status_ == "401")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Pdf4meException>(response_, headers_).ConfigureAwait(false);
+                            throw new Pdf4meApiException<Pdf4meException>("Unauthorized", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == "402")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Pdf4meException>(response_, headers_).ConfigureAwait(false);
+                            throw new Pdf4meApiException<Pdf4meException>("Client Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ == "500")
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<Pdf4meException>(response_, headers_).ConfigureAwait(false);
+                            throw new Pdf4meApiException<Pdf4meException>("Server Error", (int)response_.StatusCode, objectResponse_.Text, headers_, objectResponse_.Object, null);
+                        }
+                        else
+                        if (status_ != "200" && status_ != "204")
+                        {
+                            var responseData_ = response_.Content == null ? null : await response_.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            throw new Pdf4meApiException("The HTTP status code of the response was not expected (" + (int)response_.StatusCode + ").", (int)response_.StatusCode, responseData_, headers_, null);
+                        }
+
+                        return default(AddBarcodeRes);
+                    }
+                    finally
+                    {
+                        if (response_ != null)
+                            response_.Dispose();
+                    }
+                }
+            }
+            finally
+            {
+            }
+        }
+
         protected struct ObjectResponseResult<T>
         {
             public ObjectResponseResult(T responseObject, string responseText)
@@ -10486,6 +10574,111 @@ namespace Pdf4meClient
 
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class AddBarcode
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; } = new Document();
+
+        [Newtonsoft.Json.JsonProperty("addBarcodeAction", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public AddBarcodeAction AddBarcodeAction { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("ipAddress", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string IpAddress { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JobId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobIdExt", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JobIdExt { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("integrations", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Collections.Generic.HashSet<string> Integrations { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static AddBarcode FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddBarcode>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class AddBarcodeAction
+    {
+        [Newtonsoft.Json.JsonProperty("barcodeType", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public AddBarcodeActionBarcodeType? BarcodeType { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("value", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Value { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sizeX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? SizeX { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("sizeY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int? SizeY { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("alignX", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public AddBarcodeActionAlignX? AlignX { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("alignY", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        [Newtonsoft.Json.JsonConverter(typeof(Newtonsoft.Json.Converters.StringEnumConverter))]
+        public AddBarcodeActionAlignY? AlignY { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("pageSequence", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string PageSequence { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("actionId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? ActionId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static AddBarcodeAction FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddBarcodeAction>(data);
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class AddBarcodeRes
+    {
+        [Newtonsoft.Json.JsonProperty("document", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public Document Document { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("inDocMetadata", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public DocMetadata InDocMetadata { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string TraceId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string JobId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("subscriptionUsage", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public SubscriptionUsage SubscriptionUsage { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this);
+        }
+
+        public static AddBarcodeRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<AddBarcodeRes>(data);
+        }
+
+    }
+
     /// <summary>Convert any document to a PDF</summary>
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
     public partial class ConvertToPdf
@@ -18839,6 +19032,414 @@ namespace Pdf4meClient
 
         [System.Runtime.Serialization.EnumMember(Value = @"remove")]
         Remove = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum AddBarcodeActionBarcodeType
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"none")]
+        None = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code11")]
+        Code11 = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code2Of5Standard")]
+        Code2Of5Standard = 2,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code2Of5Interleaved")]
+        Code2Of5Interleaved = 3,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code2Of5Iata")]
+        Code2Of5Iata = 4,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code2Of5Matrix")]
+        Code2Of5Matrix = 5,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code2Of5DataLogic")]
+        Code2Of5DataLogic = 6,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code2Of5Industry")]
+        Code2Of5Industry = 7,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code39")]
+        Code39 = 8,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code39Extended")]
+        Code39Extended = 9,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean8")]
+        Ean8 = 10,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean8With2Addon")]
+        Ean8With2Addon = 11,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean8With5Addon")]
+        Ean8With5Addon = 12,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean13")]
+        Ean13 = 13,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean13With2Addon")]
+        Ean13With2Addon = 14,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean13With5Addon")]
+        Ean13With5Addon = 15,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"eanUcc128")]
+        EanUcc128 = 16,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upc12")]
+        Upc12 = 17,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"codabar2")]
+        Codabar2 = 18,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"codabar18")]
+        Codabar18 = 19,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code128")]
+        Code128 = 20,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"deutschePostLeitcode")]
+        DeutschePostLeitcode = 21,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"deutschePostIdentcode")]
+        DeutschePostIdentcode = 22,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"isbn13With5Addon")]
+        Isbn13With5Addon = 23,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ismn")]
+        Ismn = 24,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code93")]
+        Code93 = 25,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"issn")]
+        Issn = 26,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"issnWith2Addon")]
+        IssnWith2Addon = 27,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"flattermarken")]
+        Flattermarken = 28,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBar")]
+        Gs1DataBar = 29,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBarLimited")]
+        Gs1DataBarLimited = 30,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBarExpanded")]
+        Gs1DataBarExpanded = 31,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"telepenAlpha")]
+        TelepenAlpha = 32,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ucc128")]
+        Ucc128 = 33,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upcA")]
+        UpcA = 34,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upcAWith2Addon")]
+        UpcAWith2Addon = 35,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upcAWith5Addon")]
+        UpcAWith5Addon = 36,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upcE")]
+        UpcE = 37,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upcEWith2Addon")]
+        UpcEWith2Addon = 38,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upcEWith5Addon")]
+        UpcEWith5Addon = 39,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsPostnet5")]
+        UspsPostnet5 = 40,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsPostnet6")]
+        UspsPostnet6 = 41,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsPostnet9")]
+        UspsPostnet9 = 42,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsPostnet10")]
+        UspsPostnet10 = 43,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsPostnet11")]
+        UspsPostnet11 = 44,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsPostnet12")]
+        UspsPostnet12 = 45,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"plessey")]
+        Plessey = 46,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"msi")]
+        Msi = 47,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"sscc18")]
+        Sscc18 = 48,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"fim")]
+        Fim = 49,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"logmars")]
+        Logmars = 50,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pharmacodeOneTrack")]
+        PharmacodeOneTrack = 51,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pzn7")]
+        Pzn7 = 52,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pharmacodeTwoTrack")]
+        PharmacodeTwoTrack = 53,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"cepNet")]
+        CepNet = 54,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdf417")]
+        Pdf417 = 55,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pdf417Truncated")]
+        Pdf417Truncated = 56,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"maxicode")]
+        Maxicode = 57,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qrCode")]
+        QrCode = 58,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code128SubsetA")]
+        Code128SubsetA = 59,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code128SubsetB")]
+        Code128SubsetB = 60,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code128SubsetC")]
+        Code128SubsetC = 61,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code93Extended")]
+        Code93Extended = 62,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australianPostCustom")]
+        AustralianPostCustom = 63,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australianPostCustom2")]
+        AustralianPostCustom2 = 64,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australianPostCustom3")]
+        AustralianPostCustom3 = 65,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australianPostReplyPaid")]
+        AustralianPostReplyPaid = 66,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australianPostRouting")]
+        AustralianPostRouting = 67,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"australianPostRedirection")]
+        AustralianPostRedirection = 68,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"isbn13")]
+        Isbn13 = 69,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"rm4Scc")]
+        Rm4Scc = 70,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dataMatrix")]
+        DataMatrix = 71,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ean14")]
+        Ean14 = 72,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"vin")]
+        Vin = 73,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"codablockF")]
+        CodablockF = 74,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"nve18")]
+        Nve18 = 75,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"japanesePostal")]
+        JapanesePostal = 76,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"koreanPostalAuthority")]
+        KoreanPostalAuthority = 77,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBarTruncated")]
+        Gs1DataBarTruncated = 78,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBarStacked")]
+        Gs1DataBarStacked = 79,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBarStackedOmnidirectional")]
+        Gs1DataBarStackedOmnidirectional = 80,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1DataBarExpandedStacked")]
+        Gs1DataBarExpandedStacked = 81,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"planet12")]
+        Planet12 = 82,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"planet14")]
+        Planet14 = 83,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"microPdf417")]
+        MicroPdf417 = 84,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uspsIntelligentMail")]
+        UspsIntelligentMail = 85,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"plesseyBidirectional")]
+        PlesseyBidirectional = 86,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"telepen")]
+        Telepen = 87,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"gs1_128")]
+        Gs1_128 = 88,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"itf14")]
+        Itf14 = 89,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"kix")]
+        Kix = 90,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"code32")]
+        Code32 = 91,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"aztec")]
+        Aztec = 92,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italianPostal2Of5")]
+        ItalianPostal2Of5 = 93,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"italianPostal3Of9")]
+        ItalianPostal3Of9 = 94,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dpd")]
+        Dpd = 95,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"microQRCode")]
+        MicroQRCode = 96,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLic128")]
+        HibcLic128 = 97,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLic3OF9")]
+        HibcLic3OF9 = 98,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPas128")]
+        HibcPas128 = 99,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPas3OF9")]
+        HibcPas3OF9 = 100,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLicDataMatrix")]
+        HibcLicDataMatrix = 101,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPasDataMatrix")]
+        HibcPasDataMatrix = 102,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLicQRCode")]
+        HibcLicQRCode = 103,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPasQRCode")]
+        HibcPasQRCode = 104,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLicPDF417")]
+        HibcLicPDF417 = 105,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPasPDF417")]
+        HibcPasPDF417 = 106,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLicMPDF417")]
+        HibcLicMPDF417 = 107,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPasMPDF417")]
+        HibcPasMPDF417 = 108,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLicCODABLOCK_F")]
+        HibcLicCODABLOCK_F = 109,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPasCODABLOCK_F")]
+        HibcPasCODABLOCK_F = 110,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"qrcode2005")]
+        Qrcode2005 = 111,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"pzn8")]
+        Pzn8 = 112,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"dotCode")]
+        DotCode = 113,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hanXin")]
+        HanXin = 114,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"uSPSIMPackage")]
+        USPSIMPackage = 115,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"swedishPostalShipmentId")]
+        SwedishPostalShipmentId = 116,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mailmark_2D")]
+        Mailmark_2D = 117,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"upuS10")]
+        UpuS10 = 118,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"mailmark_4state")]
+        Mailmark_4state = 119,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcLicAztec")]
+        HibcLicAztec = 120,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"hibcPasAztec")]
+        HibcPasAztec = 121,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ppn")]
+        Ppn = 122,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"ntin")]
+        Ntin = 123,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"swissQrCode")]
+        SwissQrCode = 124,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum AddBarcodeActionAlignX
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"left")]
+        Left = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"center")]
+        Center = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"right")]
+        Right = 2,
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.1.5.0 (Newtonsoft.Json v11.0.0.0)")]
+    public enum AddBarcodeActionAlignY
+    {
+        [System.Runtime.Serialization.EnumMember(Value = @"top")]
+        Top = 0,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"middle")]
+        Middle = 1,
+
+        [System.Runtime.Serialization.EnumMember(Value = @"bottom")]
+        Bottom = 2,
 
     }
 
