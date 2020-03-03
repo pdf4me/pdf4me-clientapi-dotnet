@@ -107,7 +107,7 @@ namespace Pdf4meClient
             {
                 return new JobClient(getApi());
             }
-        }
+        } 
 
         public DocGenerationClient DocGenerationClient
         {
