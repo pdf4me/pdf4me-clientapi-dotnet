@@ -368,7 +368,7 @@ namespace Pdf4meClient
 
         public async Task<FileResponse> TextStampAsync(FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
         {
-            return await TextStampAsync(text, pages, alignX, alignY, jobIdExt, file);
+            return await TextStampAsync(file, text, pages, alignX, alignY, jobIdExt);
         }
 
     }

@@ -33,9 +33,9 @@
     <PackageIconUrl>https://developer.pdf4me.com/wp-content/themes/pdf4me-beaver-child/favicon.ico</PackageIconUrl>
     <PackageProjectUrl>https://portal.pdf4me.com</PackageProjectUrl>
     <Authors>Pdf4me</Authors>
-    <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <FileVersion>1.0.3.0</FileVersion>
-    <Version>1.0.3</Version>
+    <AssemblyVersion>1.0.4.0</AssemblyVersion>
+    <FileVersion>1.0.4.0</FileVersion>
+    <Version>1.0.4</Version>
     <PackageId>Pdf4me.Client</PackageId>
   </PropertyGroup>
 
