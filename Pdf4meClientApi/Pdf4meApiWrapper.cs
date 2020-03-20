@@ -112,7 +112,7 @@ namespace Pdf4meClient
                 new List<string> { "fileName", fileName },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", fileName) },
                 "DocGeneration/MailMerge",
-                _httpClient); 
+                _httpClient);
         }
     }
 
@@ -368,7 +368,9 @@ namespace Pdf4meClient
 
         public async Task<FileResponse> TextStampAsync(FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
         {
-            return await TextStampAsync(file, text, pages, alignX, alignY, jobIdExt);
+            var _alignX = (AlignX2)Enum.Parse(typeof(AlignX2), alignX.ToString(),true);
+            var _alignY = (AlignY2)Enum.Parse(typeof(AlignY2), alignY.ToString(), true);
+            return await TextStampAsync(text, pages, _alignX, _alignY, jobIdExt, file);
         }
 
     }
