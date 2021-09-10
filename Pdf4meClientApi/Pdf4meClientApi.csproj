@@ -19,6 +19,13 @@
     <Reference Include="System.Net.Http" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="icon.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
+  </ItemGroup>
+
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <RuntimeIdentifier>win-x64</RuntimeIdentifier>
@@ -29,14 +36,15 @@
     <Description>Pdf, Ocr, Document SaaS-Api - fast and easy to use expert functionality</Description>
     <PackageTags>PDF PDF/A Expert Pdf4me ClientApi OCR merge split optimize convert document barcode</PackageTags>
     <PackageReleaseNotes>Latest</PackageReleaseNotes>
-    <Copyright>Copyright 2020</Copyright>
-    <PackageIconUrl>https://developer.pdf4me.com/wp-content/themes/pdf4me-beaver-child/favicon.ico</PackageIconUrl>
+    <Copyright>Copyright 2021</Copyright>
+    <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://portal.pdf4me.com</PackageProjectUrl>
     <Authors>Pdf4me</Authors>
-    <AssemblyVersion>1.0.6.0</AssemblyVersion>
-    <FileVersion>1.0.6.0</FileVersion>
-    <Version>1.0.6</Version>
+    <AssemblyVersion>1.0.7.0</AssemblyVersion>
+    <FileVersion>1.0.7.0</FileVersion>
+    <Version>1.0.7</Version>
     <PackageId>Pdf4me.Client</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
 
 </Project>
