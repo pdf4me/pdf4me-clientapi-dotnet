@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2;netcoreapp2.0;net462;net461;net452</TargetFrameworks>
+    <TargetFrameworks>net5.0;netcoreapp3.1;netcoreapp3.0;netcoreapp2.1;netcoreapp2.2;netcoreapp2.0;net462;net461;net452</TargetFrameworks>
     <AssemblyName>Pdf4meClientApi</AssemblyName>
     <RootNamespace>Pdf4me.Client</RootNamespace>
     <ApplicationIcon>pdf4me.ico</ApplicationIcon>
@@ -40,9 +40,9 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://portal.pdf4me.com</PackageProjectUrl>
     <Authors>Pdf4me</Authors>
-    <AssemblyVersion>1.0.7.0</AssemblyVersion>
-    <FileVersion>1.0.7.0</FileVersion>
-    <Version>1.0.7</Version>
+    <AssemblyVersion>1.0.8.0</AssemblyVersion>
+    <FileVersion>1.0.8.0</FileVersion>
+    <Version>1.0.8</Version>
     <PackageId>Pdf4me.Client</PackageId>
     <PackageIcon>icon.png</PackageIcon>
   </PropertyGroup>
