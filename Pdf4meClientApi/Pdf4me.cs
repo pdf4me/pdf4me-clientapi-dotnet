@@ -197,40 +197,18 @@ namespace Pdf4meClient
             }
         }
 
+        public WorkFlowClient WorkFlowClient
+        {
+            get
+            {
+                return new WorkFlowClient(getApi());
+            }
+        }
+
         public HttpClient getApi()
         {
-
-
             HttpClient client;
 
-            //if (!string.IsNullOrEmpty(_clientId) && !string.IsNullOrEmpty(_key))
-            //{
-            //    ClientCredential clientCred = new ClientCredential(_clientId, _key);
-
-            //    AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
-            //    AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
-            //    var token = authenticationResult.AccessToken;
-            //    //txtToken.Text = token;
-
-            //    // Do Stamp
-
-            //    ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-
-            //    client = new HttpClient();
-            //    client.Timeout = new TimeSpan(0, 5, 0);
-            //    client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token);
-            //    //client.SetBearerToken(token);
-
-            //    client.DefaultRequestHeaders.Accept.Clear();
-            //    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //    //client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            //    Uri apiUri = new Uri(_api);
-            //    client.BaseAddress = apiUri;
-
-            //}
-            //else 
             if (!string.IsNullOrEmpty(_basicToken))
             {
 
@@ -256,39 +234,7 @@ namespace Pdf4meClient
             else
                 throw new ApplicationException("Missing token for authentication, please give BasicToken");
 
-
-
             return client;
         }
-
-        //public string getApiToken()
-        //{
-
-        //    //string tenantName = "devynooxlive.onmicrosoft.com";
-        //    //string authString = "https://login.microsoftonline.com/" + tenantName;
-
-        //    // SLApp
-        //    //string clientId = "98a707a7-1860-4bbb-b956-51d95f1f338c";
-        //    //string key = "o6YE76EHPPdnia7h/juHKIdDf7bWYgcu3PbzHuK6qJk=";
-
-
-        //    //string resource = clientId;
-
-
-        //    ClientCredential clientCred = new ClientCredential(_clientId, _key);
-
-        //    string token;
-
-        //    AuthenticationContext authenticationContext = new AuthenticationContext(_authString, false);
-        //    AuthenticationResult authenticationResult = authenticationContext.AcquireTokenAsync(_clientId, clientCred).ConfigureAwait(false).GetAwaiter().GetResult();
-        //    token = authenticationResult.AccessToken;
-        //    //txtToken.Text = token;
-
-
-        //    return token;
-
-        //}
-
-
     }
 }
