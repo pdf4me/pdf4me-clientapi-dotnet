@@ -12240,25 +12240,21 @@ namespace Pdf4meClient
 
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<FileResponse> StartWorkflowAsync(string wfName, string jobIdExt, FileParameter file)
+        public System.Threading.Tasks.Task<StartWfRes> StartWorkflowAsync(string wfName, FileParameter file)
         {
-            return StartWorkflowAsync(wfName, jobIdExt, file, System.Threading.CancellationToken.None);
+            return StartWorkflowAsync(wfName, file, System.Threading.CancellationToken.None);
         }
 
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <returns>Success</returns>
         /// <exception cref="Pdf4meApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<FileResponse> StartWorkflowAsync(string wfName, string jobIdExt, FileParameter file, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<StartWfRes> StartWorkflowAsync(string wfName, FileParameter file, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
             urlBuilder_.Append("WorkFlow/StartWorkflow?");
             if (wfName != null)
             {
                 urlBuilder_.Append(System.Uri.EscapeDataString("wfName") + "=").Append(System.Uri.EscapeDataString(ConvertToString(wfName, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (jobIdExt != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("jobIdExt") + "=").Append(System.Uri.EscapeDataString(ConvertToString(jobIdExt, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
             }
             urlBuilder_.Length--;
 
@@ -12281,7 +12277,7 @@ namespace Pdf4meClient
                     }
                     request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/octet-stream"));
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
 
                     PrepareRequest(client_, request_, urlBuilder_);
 
@@ -12304,12 +12300,14 @@ namespace Pdf4meClient
                         ProcessResponse(client_, response_);
 
                         var status_ = (int)response_.StatusCode;
-                        if (status_ == 200 || status_ == 206)
+                        if (status_ == 200)
                         {
-                            var responseStream_ = response_.Content == null ? System.IO.Stream.Null : await response_.Content.ReadAsStreamAsync().ConfigureAwait(false);
-                            var fileResponse_ = new FileResponse(status_, headers_, responseStream_, null, response_);
-                            disposeClient_ = false; disposeResponse_ = false; // response and client are disposed by FileResponse
-                            return fileResponse_;
+                            var objectResponse_ = await ReadObjectResponseAsync<StartWfRes>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new Pdf4meApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         if (status_ == 401)
@@ -18462,6 +18460,30 @@ namespace Pdf4meClient
         public static GetEmailRes FromJson(string data)
         {
             return Newtonsoft.Json.JsonConvert.DeserializeObject<GetEmailRes>(data, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+    }
+
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v11.0.0.0)")]
+    public partial class StartWfRes
+    {
+        [Newtonsoft.Json.JsonProperty("status", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Status { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("jobId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? JobId { get; set; }
+
+        [Newtonsoft.Json.JsonProperty("traceId", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.Guid? TraceId { get; set; }
+
+        public string ToJson()
+        {
+            return Newtonsoft.Json.JsonConvert.SerializeObject(this, new Newtonsoft.Json.JsonSerializerSettings());
+        }
+
+        public static StartWfRes FromJson(string data)
+        {
+            return Newtonsoft.Json.JsonConvert.DeserializeObject<StartWfRes>(data, new Newtonsoft.Json.JsonSerializerSettings());
         }
 
     }
