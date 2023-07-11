@@ -13,7 +13,7 @@ namespace Pdf4meClient
 {
     public class Pdf4me
     {
-
+        HttpClient httpClient;
         public static readonly Pdf4me Instance = new Pdf4me();
 
         string _api = "https://api.pdf4me.com";
@@ -67,6 +67,11 @@ namespace Pdf4meClient
             {
                 _api = api;
             }
+        }
+
+        public void Init(HttpClient httpClient)
+        {
+            this.httpClient = httpClient;
         }
 
         public ConvertClient ConvertClient
@@ -207,34 +212,32 @@ namespace Pdf4meClient
 
         public HttpClient getApi()
         {
-            HttpClient client;
-
-            if (!string.IsNullOrEmpty(_basicToken))
+            
+            if (!string.IsNullOrEmpty(_basicToken) && httpClient == null)
             {
-
                 ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
 
-                client = new HttpClient();
-                client.Timeout = new TimeSpan(0, 10, 0);
+                httpClient = new HttpClient();
+                httpClient.Timeout = new TimeSpan(0, 10, 0);
 
 
                 //var byteArray = Encoding.ASCII.GetBytes($"{_clientId}:{_key}");
                 //var byteArray = Encoding.ASCII.GetBytes($"{_basicToken}");
                 //var basicToken = Convert.ToBase64String(byteArray);
-                client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", _basicToken);
+                httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", _basicToken);
 
-                client.DefaultRequestHeaders.Accept.Clear();
-                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-                client.DefaultRequestHeaders.UserAgent.Clear();
-                client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("pdf4me-dotnet", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()));
+                httpClient.DefaultRequestHeaders.Accept.Clear();
+                httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                httpClient.DefaultRequestHeaders.UserAgent.Clear();
+                httpClient.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue("pdf4me-dotnet", System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString()));
 
                 Uri apiUri = new Uri(_api);
-                client.BaseAddress = apiUri;
+                httpClient.BaseAddress = apiUri;
             }
-            else
+            else if (httpClient == null) 
                 throw new ApplicationException("Missing token for authentication, please give BasicToken");
 
-            return client;
+            return httpClient;
         }
     }
 }
