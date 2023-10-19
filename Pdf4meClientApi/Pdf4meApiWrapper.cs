@@ -97,7 +97,7 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> ConvertFileToPdfAsync(FileParameter file, string jobIdExt = null)
+        public async Task<Stream> ConvertFileToPdfAsync(FileParameter file, string jobIdExt = null)
         {
             return await ConvertFileToPdfAsync(file.FileName, jobIdExt, file);
         }
@@ -124,27 +124,27 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> ExtractPagesAsync(FileParameter file, string pageNrs, string jobIdExt = null)
-        {
-            return await ExtractPagesAsync(pageNrs, jobIdExt, file);
-        }
+        //public async Task<Stream> ExtractPagesAsync(FileParameter file, string pageNrs, string jobIdExt = null)
+        //{
+        //    return await ExtractPagesAsync(pageNrs, jobIdExt, file);
+        //}
     }
 
     public partial class ImageClient
     {
-        public async Task<byte[]> CreateThumbnailAsync(byte[] file, int width, string pageNr, ImageActionImageExtension imageFormat)
+        public async Task<byte[]> CreateThumbnailAsync(byte[] file, int width, string pageNr, ImageExtension imageFormat)
         {
             return await CustomHttp.postWrapper(
-                new List<string> { "width", width.ToString(), "pageNr", pageNr, "imageFormat", Enum.GetName(typeof(ImageActionImageExtension), imageFormat) },
+                new List<string> { "width", width.ToString(), "pageNr", pageNr, "imageFormat", Enum.GetName(typeof(ImageExtension), imageFormat) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "Image/CreateThumbnail",
                 _httpClient);
         }
 
-        public async Task<List<byte[]>> CreateThumbnailsAsync(byte[] file, int width, string pageNrs, ImageActionImageExtension imageFormat)
+        public async Task<List<byte[]>> CreateThumbnailsAsync(byte[] file, int width, string pageNrs, ImageExtension imageFormat)
         {
             var res = await CustomHttp.postWrapper(
-                new List<string> { "width", width.ToString(), "pageNrs", pageNrs, "imageFormat", Enum.GetName(typeof(ImageActionImageExtension), imageFormat) },
+                new List<string> { "width", width.ToString(), "pageNrs", pageNrs, "imageFormat", Enum.GetName(typeof(ImageExtension), imageFormat) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "Image/CreateThumbnails",
                 _httpClient);
@@ -155,10 +155,10 @@ namespace Pdf4meClient
         }
 
 
-        public async Task<FileResponse> CreateThumbnailAsync(FileParameter file, int width, string pageNr, string imageFormat, string jobIdExt = null)
-        {
-            return await CreateThumbnailAsync(width, pageNr, imageFormat, jobIdExt, file);
-        }
+        //public async Task<Stream> CreateThumbnailAsync(FileParameter file, int width, string pageNr, string imageFormat, string jobIdExt = null)
+        //{
+        //    return await CreateThumbnailAsync(width, pageNr, imageFormat, jobIdExt, file);
+        //}
 
     }
 
@@ -173,7 +173,7 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> Merge2PdfsAsync(FileParameter file1, FileParameter file2, string jobIdExt = null)
+        public async Task<Stream> Merge2PdfsAsync(FileParameter file1, FileParameter file2, string jobIdExt = null)
         {
             return await Merge2PdfsAsync(jobIdExt, file1, file2);
         }
@@ -181,16 +181,16 @@ namespace Pdf4meClient
 
     public partial class OptimizeClient
     {
-        public async Task<byte[]> OptimizeByProfileAsync(byte[] file, OptimizeActionProfile profile)
+        public async Task<byte[]> OptimizeByProfileAsync(byte[] file, PdfOptimizationProfile profile)
         {
             return await CustomHttp.postWrapper(
-                new List<string> { "profile", Enum.GetName(typeof(OptimizeActionProfile), profile) },
+                new List<string> { "profile", Enum.GetName(typeof(PdfOptimizationProfile), profile) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "Optimize/OptimizeByProfile",
                 _httpClient);
         }
 
-        public async Task<FileResponse> OptimizeByProfileAsync(FileParameter file, Profile profile = Profile.Max, string jobIdExt = null)
+        public async Task<Stream> OptimizeByProfileAsync(FileParameter file, PdfOptimizationProfile profile = PdfOptimizationProfile.Max, string jobIdExt = null)
         {
             return await OptimizeByProfileAsync(profile, jobIdExt, file);
         }
@@ -204,25 +204,25 @@ namespace Pdf4meClient
 
     public partial class PdfAClient
     {
-        public async Task<byte[]> RotatePageAsync(byte[] file, string pageNr, PdfRotateRotationType rotate)
+        public async Task<byte[]> RotatePageAsync(byte[] file, string pageNr, RotationType rotate)
         {
             return await CustomHttp.postWrapper(
-                new List<string> { "pageNr", pageNr, "rotate", Enum.GetName(typeof(PdfRotateRotationType), rotate) },
+                new List<string> { "pageNr", pageNr, "rotate", Enum.GetName(typeof(RotationType), rotate) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "PdfA/RotatePage",
                 _httpClient);
         }
 
-        public async Task<byte[]> RotateDocumentAsync(byte[] file, PdfRotateRotationType rotate)
+        public async Task<byte[]> RotateDocumentAsync(byte[] file, RotationType rotate)
         {
             return await CustomHttp.postWrapper(
-                new List<string> { "rotate", Enum.GetName(typeof(PdfRotateRotationType), rotate) },
+                new List<string> { "rotate", Enum.GetName(typeof(RotationType), rotate) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "PdfA/RotateDocument",
                 _httpClient);
         }
 
-        public async Task<FileResponse> RotateDocumentAsync(FileParameter file, Rotate3? rotate, string jobIdExt = null)
+        public async Task<Stream> RotateDocumentAsync(FileParameter file, RotationType? rotate, string jobIdExt = null)
         {
             return await RotateDocumentAsync(rotate, jobIdExt, file);
         }
@@ -236,10 +236,10 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> ProtectDocumentAsync(FileParameter file, string password, string permissions, string jobIdExt = null)
-        {
-            return await ProtectDocumentAsync(password, permissions, jobIdExt, file, System.Threading.CancellationToken.None);
-        }
+        //public async Task<Stream> ProtectDocumentAsync(FileParameter file, string password, string permissions, string jobIdExt = null)
+        //{
+        //    return await ProtectDocumentAsync(password, permissions, jobIdExt, file, System.Threading.CancellationToken.None);
+        //}
 
         public async Task<byte[]> UnlockDocumentAsync(byte[] file, string password)
         {
@@ -250,15 +250,15 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> UnlockDocumentAsync(FileParameter file, string password, string jobIdExt = null)
-        {
-            return await UnlockDocumentAsync(password, jobIdExt, file);
-        }
+        //public async Task<Stream> UnlockDocumentAsync(FileParameter file, string password, string jobIdExt = null)
+        //{
+        //    return await UnlockDocumentAsync(password, jobIdExt, file);
+        //}
 
-        public async Task<ValidateRes> ValidateDocumentAsync(byte[] file, PdfAActionCompliance pdfCompliance)
+        public async Task<ValidateRes> ValidateDocumentAsync(byte[] file, PdfCompliance pdfCompliance)
         {
             byte[] res = await CustomHttp.postWrapper(
-                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfAActionCompliance), pdfCompliance) },
+                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfCompliance), pdfCompliance) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "PdfA/ValidateDocument",
                 _httpClient);
@@ -277,29 +277,29 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> RepairDocumentAsync(FileParameter file, string jobIdExt = null)
+        public async Task<Stream> RepairDocumentAsync(FileParameter file, string jobIdExt = null)
         {
             return await RepairDocumentAsync(jobIdExt, file);
         }
 
-        public async Task<byte[]> CreatePdfAAsync(byte[] file, PdfAActionCompliance pdfCompliance)
+        public async Task<byte[]> CreatePdfAAsync(byte[] file, PdfCompliance pdfCompliance)
         {
             return await CustomHttp.postWrapper(
-                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfAActionCompliance), pdfCompliance) },
+                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfCompliance), pdfCompliance) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "PdfA/CreatePdfA",
                 _httpClient);
         }
 
-        public async Task<FileResponse> CreatePdfAAsync(FileParameter file, PdfCompliance2? pdfCompliance, string jobIdExt = null)
-        {
-            return await CreatePdfAAsync(pdfCompliance, jobIdExt, file);
-        }
+        //public async Task<Stream> CreatePdfAAsync(FileParameter file, PdfCompliance2? pdfCompliance, string jobIdExt = null)
+        //{
+        //    return await CreatePdfAAsync(pdfCompliance, jobIdExt, file);
+        //}
 
         public async Task<byte[]> CreatePdfAAsync(byte[] file)
         {
             return await CustomHttp.postWrapper(
-                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfAActionCompliance), PdfAActionCompliance.PdfA2b) },
+                new List<string> { "pdfCompliance", Enum.GetName(typeof(PdfCompliance), PdfCompliance.PdfA2b) },
                 new List<Tuple<byte[], string, string>> { new Tuple<byte[], string, string>(file, "file", "pdf.pdf") },
                 "PdfA/CreatePdfA",
                 _httpClient);
@@ -322,10 +322,10 @@ namespace Pdf4meClient
             return JsonConvert.DeserializeObject<List<byte[]>>(respJson);
         }
 
-        public async Task<HashSet<byte[]>> SplitByPageNrAsync(FileParameter file, int pageNr, string jobIdExt = null)
-        {
-            return await SplitByPageNrAsync(pageNr, jobIdExt, null, file);
-        }
+        //public async Task<HashSet<byte[]>> SplitByPageNrAsync(FileParameter file, int pageNr, string jobIdExt = null)
+        //{
+        //    return await SplitByPageNrAsync(pageNr, jobIdExt, null, file);
+        //}
 
         public async Task<List<byte[]>> SplitRecurringAsync(byte[] file, int pageNr)
         {
@@ -354,10 +354,10 @@ namespace Pdf4meClient
                 _httpClient);
         }
 
-        public async Task<FileResponse> TextStampAsync(FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
+        public async Task<Stream> TextStampAsync(FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
         {
-            var _alignX = (AlignX2)Enum.Parse(typeof(AlignX2), alignX.ToString(),true);
-            var _alignY = (AlignY2)Enum.Parse(typeof(AlignY2), alignY.ToString(), true);
+            var _alignX = (AlignX)Enum.Parse(typeof(AlignX), alignX.ToString(),true);
+            var _alignY = (AlignY)Enum.Parse(typeof(AlignY), alignY.ToString(), true);
             return await TextStampAsync(text, pages, _alignX, _alignY, jobIdExt, file);
         }
 
@@ -365,7 +365,7 @@ namespace Pdf4meClient
 
     public partial class BarcodeClient
     {
-        public async Task<ReadBarcodesRes> ReadBarcodesByTypeAsync(byte[] file, BarcodeType barcodeType)
+        public async Task<ReadBarcodesRes> ReadBarcodesByTypeAsync(byte[] file, BarcodeReadType barcodeType)
         {
             byte[] res = await CustomHttp.postWrapper(
                 new List<string> { "barcodeType", barcodeType.ToString() },
@@ -378,7 +378,7 @@ namespace Pdf4meClient
             return JsonConvert.DeserializeObject<ReadBarcodesRes>(respJson);
         }
 
-        public async Task<ReadBarcodesRes> ReadBarcodesByTypeAsync(FileParameter file, BarcodeType barcodeType, string jobIdExt = null)
+        public async Task<ReadBarcodesRes> ReadBarcodesByTypeAsync(FileParameter file, BarcodeReadType barcodeType, string jobIdExt = null)
         {
             return await ReadBarcodesByTypeAsync(barcodeType, jobIdExt, file);
         }
