@@ -103,7 +103,7 @@ namespace Pdf4meClient
         }
 
     }
-    
+
     public partial class ExtractClient
     {
         public async Task<byte[]> ExtractPagesAsync(byte[] file, string pageNrs)
@@ -192,7 +192,7 @@ namespace Pdf4meClient
 
         public async Task<Stream> OptimizeByProfileAsync(FileParameter file, PdfOptimizationProfile profile = PdfOptimizationProfile.Max, string jobIdExt = null)
         {
-            return await OptimizeByProfileAsync(profile, jobIdExt, file);
+            return await OptimizeByProfileAsync(profile, file);
         }
 
     }
@@ -224,7 +224,7 @@ namespace Pdf4meClient
 
         public async Task<Stream> RotateDocumentAsync(FileParameter file, RotationType? rotate, string jobIdExt = null)
         {
-            return await RotateDocumentAsync(rotate, jobIdExt, file);
+            return await RotateDocumentAsync(rotate, file);
         }
 
         public async Task<byte[]> ProtectDocumentAsync(byte[] file, string password, string permissions)
@@ -356,7 +356,7 @@ namespace Pdf4meClient
 
         public async Task<Stream> TextStampAsync(FileParameter file, string text, string pages, AlignX alignX, AlignY alignY, string jobIdExt = null)
         {
-            var _alignX = (AlignX)Enum.Parse(typeof(AlignX), alignX.ToString(),true);
+            var _alignX = (AlignX)Enum.Parse(typeof(AlignX), alignX.ToString(), true);
             var _alignY = (AlignY)Enum.Parse(typeof(AlignY), alignY.ToString(), true);
             return await TextStampAsync(text, pages, _alignX, _alignY, jobIdExt, file);
         }
