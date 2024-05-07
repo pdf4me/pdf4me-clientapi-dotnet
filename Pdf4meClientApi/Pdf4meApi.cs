@@ -1973,6 +1973,16 @@ namespace Pdf4meClient
                             return objectResponse_.Object;
                         }
                         else
+                        if (status_ == 202)
+                        {
+                            var objectResponse_ = await ReadObjectResponseAsync<ConvertFromPdfRes>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new Pdf4meApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
+                        }
+                        else
                         if (status_ == 401)
                         {
                             var objectResponse_ = await ReadObjectResponseAsync<Pdf4meException>(response_, headers_, cancellationToken).ConfigureAwait(false);
@@ -16985,8 +16995,6 @@ namespace Pdf4meClient
         }
 
     }
-
-
 
     [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "13.20.0.0 (NJsonSchema v10.9.0.0 (Newtonsoft.Json v11.0.0.0))")]
     public enum EpcCharacterSet
