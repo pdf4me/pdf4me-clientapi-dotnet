@@ -199,7 +199,33 @@ namespace Pdf4meClient
 
     public partial class DocumentClient
     {
+        public async Task<UploadFileInfo> GetUploadFileUrl(byte[] docData)
+        {
+            var uploadUrlInfo = await this.CreateUploadUrlAsync();
 
+            using (var stream = new MemoryStream(docData))
+            {
+                using (var content = new StreamContent(stream))
+                {
+                    using (var requestMessage = new HttpRequestMessage(HttpMethod.Put, uploadUrlInfo.UploadUrl))
+                    {
+                        requestMessage.Headers.Add("x-ms-blob-type", "BlockBlob");
+                        //requestMessage.Headers.Add("Content-Type", "application/octet-stream");
+                        requestMessage.Content = content;
+
+                        using (var docHttpClient = new HttpClient())
+                        {
+                            docHttpClient.Timeout = new TimeSpan(0, 10, 0);
+                            using (var httpResponse = await docHttpClient.SendAsync(requestMessage).ConfigureAwait(false))
+                            {
+                                var resString = await httpResponse.Content.ReadAsStringAsync().ConfigureAwait(false);
+                            }
+                        }
+                    }
+                }
+            }
+            return uploadUrlInfo;
+        }
     }
 
     public partial class PdfAClient
