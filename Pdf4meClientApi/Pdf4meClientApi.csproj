@@ -40,11 +40,11 @@
     <PackageIconUrl></PackageIconUrl>
     <PackageProjectUrl>https://dev.pdf4me.com</PackageProjectUrl>
     <Authors>PDF4me</Authors>
-    <Version>1.0.20</Version>
+    <Version>1.1.0</Version>
     <PackageId>Pdf4me.Client</PackageId>
     <PackageIcon>icon.png</PackageIcon>
-    <AssemblyVersion>1.0.0</AssemblyVersion>
-    <FileVersion>1.0.0</FileVersion>
+    <AssemblyVersion>1.1.0</AssemblyVersion>
+    <FileVersion>1.1.0</FileVersion>
   </PropertyGroup>
 
 </Project>
